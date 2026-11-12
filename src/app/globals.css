@@ -1,0 +1,504 @@
+@config "../../tailwind.config.ts";
+@import "tailwindcss";
+ 
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+ 
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+ 
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+ 
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+ 
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+ 
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+ 
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+ 
+    --radius: 0.5rem;
+  }
+ 
+  .dark {
+    --background: 222.2 47.4% 11.2%;
+    --foreground: 210 40% 98%;
+ 
+    --card: 222.2 47.4% 11.2%;
+    --card-foreground: 210 40% 98%;
+ 
+    --popover: 222.2 47.4% 11.2%;
+    --popover-foreground: 210 40% 98%;
+ 
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+ 
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+ 
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+ 
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+    --primary: 220.9 39.3% 11%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 224 71.4% 4.1%;
+    --radius: 0.5rem;
+    --chart-1: 243.7 54.5% 41.4%;
+    --chart-2: 215 13.8% 34.1%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 224 71.4% 4.1%;
+    --foreground: 210 20% 98%;
+    --card: 224 71.4% 4.1%;
+    --card-foreground: 210 20% 98%;
+    --popover: 224 71.4% 4.1%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 210 20% 98%;
+    --primary-foreground: 220.9 39.3% 11%;
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+    --accent: 215 27.9% 16.9%;
+    --accent-foreground: 210 20% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 216 12.2% 83.9%;
+    --chart-1: 234.5 89.5% 73.9%;
+    --chart-2: 217.9 10.6% 64.9%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@font-face {
+  font-family: Inter;
+  src: url("../../public/font/Inter-VariableFont_opsz\,wght.ttf");
+  font-weight: inherit;
+  font-style: inherit;
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url("../../public/font/Montserrat-VariableFont_wght.ttf");
+  font-weight: inherit;
+  font-style: inherit;
+}
+
+@font-face {
+  font-family: OpenSans;
+  src: url("../../public/font/OpenSans-VariableFont_wdth\,wght.ttf");
+  font-weight: inherit;
+  font-style: inherit;
+}
+
+@font-face {
+  font-family: Poppins;
+  src: url("../../public/font/Poppins-Regular.ttf");
+  font-weight: inherit;
+  font-style: inherit;
+}
+
+@font-face {
+  font-family: Ubuntu;
+  src: url("../../public/font/Ubuntu-Regular.ttf");
+  font-weight: inherit;
+  font-style: inherit;
+}
+
+@font-face {
+  font-family: Lato;
+  src: url("../../public/font/Lato-Regular.ttf");
+  font-weight: inherit;
+  font-style: inherit;
+}
+
+@font-face {
+  font-family: Nunito;
+  src: url("../../public/font/Nunito-VariableFont_wght.ttf");
+  font-weight: inherit;
+  font-style: inherit;
+}
+@font-face {
+  font-family: Moderustic;
+  src: url("../../public/font/Moderustic-VariableFont_wght.ttf");
+  font-weight: inherit;
+  font-style: inherit;
+}
+@font-face {
+  font-family: Manrope;
+  src: url("../../public/font/Manrope-VariableFont_wght.ttf");
+  font-weight: inherit;
+  font-style: inherit;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* .clip-arrow {
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%);
+}
+.clip-arrow:last-child {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 10
+
+  /* Disable password field icons in all browsers */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+input[type="password"]::-webkit-credentials-auto-fill-button,
+input[type="password"]::-webkit-clear-button {
+  display: none;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px rgb(243 244 246 / 0.9) inset !important;
+  box-shadow: 0 0 0px 1000px inherit inset !important;
+  -webkit-text-fill-color: #000 !important; /* Optional: sets text color */
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Landing (marketing) design tokens                                          */
+/* Scoped to the (landing) route group via the `lnd-*` Tailwind palette.      */
+/* The rest of the app keeps using the default shadcn tokens.                 */
+/* -------------------------------------------------------------------------- */
+
+@layer base {
+  :root {
+    /* light */
+    --lnd-bg: 245 247 244;
+    --lnd-surface: 255 255 255;
+    --lnd-surface-2: 234 239 233;
+    --lnd-border: 228 233 227;
+    --lnd-accent: 62 155 47;
+    --lnd-accent-fill: 126 217 87;
+    --lnd-accent-fg: 10 14 12;
+    --lnd-fg: 17 24 20;
+    --lnd-fg-muted: 92 102 94;
+  }
+
+  .dark {
+    /* dark — matches the reference */
+    --lnd-bg: 10 14 12;
+    --lnd-surface: 18 26 22;
+    --lnd-surface-2: 24 35 29;
+    --lnd-border: 34 46 39;
+    --lnd-accent: 160 234 130;
+    --lnd-accent-fill: 160 234 130;
+    --lnd-accent-fg: 10 14 12;
+    --lnd-fg: 244 246 245;
+    --lnd-fg-muted: 152 162 155;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Dashboard theme scope                                                      */
+/* Activated only on account/overview routes so shared shadcn primitives and  */
+/* portalled dialogs inherit Verdstamp tokens without touching auth/landing.  */
+/* -------------------------------------------------------------------------- */
+
+@layer base {
+  body.dashboard-root {
+    --background: 100 16% 96%;
+    --foreground: 127 17% 8%;
+    --card: 0 0% 100%;
+    --card-foreground: 127 17% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 127 17% 8%;
+    --primary: 100 63% 60%;
+    --primary-foreground: 150 17% 5%;
+    --secondary: 110 16% 93%;
+    --secondary-foreground: 127 17% 8%;
+    --muted: 110 16% 93%;
+    --muted-foreground: 130 7% 38%;
+    --accent: 110 16% 93%;
+    --accent-foreground: 127 17% 8%;
+    --destructive: 0 70% 45%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 112 12% 90%;
+    --input: 112 12% 90%;
+    --ring: 110 43% 40%;
+    --radius: 0.75rem;
+    --chart-1: 110 43% 40%;
+    --chart-2: 100 63% 60%;
+    --chart-3: 127 17% 8%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    font-family: Manrope, sans-serif;
+    background-color: rgb(var(--lnd-bg)) !important;
+    color: rgb(var(--lnd-fg));
+  }
+
+  html.dark body.dashboard-root {
+    --background: 150 17% 5%;
+    --foreground: 120 10% 96%;
+    --card: 150 19% 9%;
+    --card-foreground: 120 10% 96%;
+    --popover: 150 19% 9%;
+    --popover-foreground: 120 10% 96%;
+    --primary: 102 66% 71%;
+    --primary-foreground: 150 17% 5%;
+    --secondary: 149 19% 12%;
+    --secondary-foreground: 120 10% 96%;
+    --muted: 149 19% 12%;
+    --muted-foreground: 138 4% 62%;
+    --accent: 149 19% 12%;
+    --accent-foreground: 120 10% 96%;
+    --destructive: 0 63% 35%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 145 15% 16%;
+    --input: 145 15% 16%;
+    --ring: 102 66% 71%;
+    --chart-1: 102 66% 71%;
+    --chart-2: 110 43% 40%;
+    --chart-3: 120 10% 96%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+}
+
+@layer components {
+  .db-card {
+    background-color: rgb(var(--lnd-surface));
+    border: 1px solid rgb(var(--lnd-border));
+    border-radius: 1.25rem;
+  }
+
+  .db-card-soft {
+    background-color: rgb(var(--lnd-surface-2));
+    border: 1px solid rgb(var(--lnd-border));
+    border-radius: 1rem;
+  }
+
+  .db-title {
+    color: rgb(var(--lnd-fg));
+    font-family: Manrope, sans-serif;
+    font-size: clamp(1.35rem, 1.1rem + 0.65vw, 1.7rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+
+  .db-section-title {
+    color: rgb(var(--lnd-fg));
+    font-family: Manrope, sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .db-eyebrow {
+    color: rgb(var(--lnd-accent));
+    font-family: Manrope, sans-serif;
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .db-icon-tile {
+    align-items: center;
+    background-color: rgb(var(--lnd-accent) / 0.1);
+    border: 1px solid rgb(var(--lnd-accent) / 0.16);
+    border-radius: 0.9rem;
+    color: rgb(var(--lnd-accent));
+    display: inline-flex;
+    flex-shrink: 0;
+    height: 2.5rem;
+    justify-content: center;
+    width: 2.5rem;
+  }
+
+  .db-muted {
+    color: rgb(var(--lnd-fg-muted));
+  }
+
+  .db-divider {
+    border-color: rgb(var(--lnd-border));
+  }
+
+  .dashboard-root .bg-blend-overlay,
+  .dashboard-root .bg-blend-darken {
+    background-blend-mode: normal;
+  }
+
+  /* Frosted header/overlay background */
+  .lnd-blur {
+    background-color: rgb(var(--lnd-bg) / 0.82);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+
+  /* Subtle dotted matrix background (hero, sections) */
+  .lnd-dot-grid {
+    background-image: radial-gradient(
+      rgb(var(--lnd-fg) / 0.09) 1px,
+      transparent 1px
+    );
+    background-size: 22px 22px;
+  }
+
+  /* Soft green radial glow (hero chart, accents) */
+  .lnd-glow {
+    background: radial-gradient(
+      closest-side,
+      rgb(var(--lnd-accent) / 0.16),
+      transparent 72%
+    );
+  }
+
+  /* Standard landing card */
+  .lnd-card {
+    background-color: rgb(var(--lnd-surface));
+    border: 1px solid rgb(var(--lnd-border));
+    border-radius: 1.25rem;
+  }
+
+  /* Pill button — primary (bright green, dark text) */
+  .lnd-btn-accent {
+    background-color: rgb(var(--lnd-accent-fill));
+    color: rgb(var(--lnd-accent-fg));
+    border-radius: 9999px;
+    font-weight: 600;
+    transition: filter 0.15s ease, transform 0.15s ease;
+  }
+  .lnd-btn-accent:hover {
+    filter: brightness(0.94);
+  }
+
+  /* Pill button — ghost (transparent, bordered) */
+  .lnd-btn-ghost {
+    background-color: transparent;
+    color: rgb(var(--lnd-fg));
+    border: 1px solid rgb(var(--lnd-border));
+    border-radius: 9999px;
+    font-weight: 500;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+  .lnd-btn-ghost:hover {
+    background-color: rgb(var(--lnd-surface-2));
+  }
+
+  /* Hero chart line-draw animation */
+  .lnd-chart-line {
+    stroke-dasharray: 1600;
+    stroke-dashoffset: 1600;
+    animation: lnd-draw 2.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.15s forwards;
+  }
+
+  /* Breaking-news live dot */
+  .lnd-live-dot {
+    animation: lnd-live 1.8s ease-in-out infinite;
+  }
+}
+
+@keyframes lnd-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes lnd-live {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}

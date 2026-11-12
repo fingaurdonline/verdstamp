@@ -1,0 +1,335 @@
+"use client"
+
+import Image from "next/image"
+import Link from "next/link"
+import { useRouter } from "nextjs-toploader/app"
+import { useQuery } from "convex/react"
+import { api } from "@convex/_generated/api"
+import { signOut, useSession } from "@/lib/auth-client"
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover"
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { HiBadgeCheck } from "react-icons/hi"
+import {
+    BadgeCheck,
+    CandlestickChart,
+    ChevronRight,
+    Landmark,
+    LayoutDashboard,
+    LineChart,
+    LogOut,
+    MessageSquare,
+    Scale,
+    ShieldCheck,
+    SlidersHorizontal,
+    Ticket,
+    UserCircle,
+    Wallet,
+    X,
+} from "lucide-react"
+import { useState } from "react"
+import LandingBrand from "@/app/(landing)/components/LandingBrand"
+import { ACCOUNT_LINKS } from "@/app/(landing)/components/landingNav"
+
+const PORTFOLIO = [
+    {
+        value: "spot",
+        label: "Spot",
+        icon: Wallet,
+        links: [
+            { label: "Assets", href: "/overview/spot/assets" },
+            { label: "Deposit", href: "/overview/spot/deposit" },
+            { label: "Withdraw", href: "/overview/spot/withdraw" },
+            { label: "Transfer History", href: "/overview/spot/records" },
+        ],
+    },
+    {
+        value: "margin",
+        label: "Margin",
+        icon: Scale,
+        links: [
+            { label: "Assets", href: "/overview/margin/assets" },
+            { label: "Borrow Records", href: "/overview/margin/records" },
+        ],
+    },
+    {
+        value: "loan",
+        label: "Loan",
+        icon: Landmark,
+        links: [
+            { label: "Assets", href: "/overview/loan/assets" },
+            { label: "Borrowing Records", href: "/overview/loan/loan_records" },
+        ],
+    },
+    {
+        value: "history",
+        label: "History",
+        icon: LineChart,
+        links: [
+            { label: "Spot", href: "/overview/history/spot" },
+            { label: "Margin", href: "/overview/history/margin" },
+            { label: "Futures", href: "/overview/history/futures" },
+            { label: "Loan", href: "/overview/history/loan" },
+        ],
+    },
+]
+
+const ACCOUNT_ICONS = [
+    LayoutDashboard,
+    ShieldCheck,
+    BadgeCheck,
+    SlidersHorizontal,
+    MessageSquare,
+    Ticket,
+]
+
+function maskEmail(input: string | undefined) {
+    try {
+        if (!input || input.length <= 11) return input ?? ""
+        return `${input.slice(0, 5)}***${input.slice(-5)}`
+    } catch {
+        return input ?? ""
+    }
+}
+
+export default function DropDownAccountMobile() {
+    const { data: session } = useSession()
+    const user = useQuery(api.user.user)
+    const auth = useQuery(api.auth.getCurrentUser)
+    const allMessages = useQuery(api.messages.view_messages)
+    const spotAccounts = useQuery(api.accounts.view_all_spot_accounts)
+    const futuresAccount = useQuery(api.accounts.view_all_futures_accounts)
+    const marginAccount = useQuery(api.accounts.view_all_margin_accounts)
+    const router = useRouter()
+    const [openPopover, setOpenPopover] = useState(false)
+
+    const userId = session?.user?.id
+    const userMessages = allMessages?.filter((message: any) => message?.userId === userId) ?? []
+    const unreadCount = userMessages.filter((message: any) => message?.read === false).length
+
+    const spot = (spotAccounts?.find((acc: any) => acc?.user === user?.userId)?.total_asset ?? 0) as number
+    const futures = (futuresAccount?.find((acc: any) => acc?.user === user?.userId)?.total_asset ?? 0) as number
+    const margin = (marginAccount?.find((acc: any) => acc?.user === user?.userId)?.total_asset ?? 0) as number
+    const total = spot + futures + margin
+
+    const close = () => setOpenPopover(false)
+    const logout = async () => {
+        await signOut()
+        close()
+        router.push("/")
+        router.refresh()
+    }
+
+    return (
+        <Popover open={openPopover} onOpenChange={setOpenPopover}>
+            {!userId ? (
+                <button
+                    onClick={() => router.push("/auth/login")}
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-lnd-border text-lnd-fg lg:hidden"
+                    aria-label="Log in"
+                >
+                    <UserCircle className="h-5 w-5" />
+                </button>
+            ) : (
+                <PopoverTrigger asChild>
+                    <button
+                        onClick={() => setOpenPopover(true)}
+                        className="flex h-9 w-9 items-center justify-center rounded-full border border-lnd-border bg-lnd-surface-2 lg:hidden"
+                        aria-label="Open account menu"
+                    >
+                        <Image
+                            src="/assets/userlogo.svg"
+                            alt="Account"
+                            width={100}
+                            height={100}
+                            className="h-6 w-6"
+                        />
+                    </button>
+                </PopoverTrigger>
+            )}
+
+            <PopoverContent
+                side="bottom"
+                align="end"
+                className="h-[100dvh]! w-screen! max-w-none! rounded-none! border-0! bg-lnd-bg! p-0! text-lnd-fg! shadow-none!"
+            >
+                <div className="flex h-16 shrink-0 items-center justify-between border-b border-lnd-border px-4">
+                    <LandingBrand />
+                    <button
+                        onClick={close}
+                        aria-label="Close account menu"
+                        className="flex h-9 w-9 items-center justify-center rounded-full border border-lnd-border text-lnd-fg transition-colors hover:bg-lnd-surface-2"
+                    >
+                        <X className="h-5 w-5" />
+                    </button>
+                </div>
+
+                <ScrollArea className="h-[calc(100dvh-4rem)]">
+                    <div className="flex flex-col gap-5 px-4 py-5">
+                        <div className="db-card p-4">
+                            <div className="flex items-center gap-3">
+                                <Image
+                                    src="/assets/userlogo.svg"
+                                    alt="Avatar"
+                                    width={100}
+                                    height={100}
+                                    className="h-12 w-12"
+                                />
+                                <div className="flex min-w-0 flex-col gap-1.5">
+                                    <span className="truncate font-Manrope text-base font-bold text-lnd-fg">
+                                        {maskEmail(user?.username ?? session?.user?.email)}
+                                    </span>
+                                    <span className="flex items-center gap-2">
+                                        <span className="rounded-full border border-lnd-border px-2 py-px text-[0.66rem] font-medium text-lnd-fg-muted">
+                                            VIP {user?.vip_status ?? 0}
+                                        </span>
+                                        <span
+                                            className={`flex items-center gap-1 rounded-full px-2 py-px text-[0.66rem] font-medium ${
+                                                auth?.emailVerified
+                                                    ? "bg-lnd-accent/15 text-lnd-accent"
+                                                    : "bg-lnd-surface-2 text-lnd-fg-muted"
+                                            }`}
+                                        >
+                                            <HiBadgeCheck />
+                                            {auth?.emailVerified ? "Verified" : "Unverified"}
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div className="mt-4 rounded-xl bg-lnd-surface-2 p-3.5">
+                                <p className="text-[0.65rem] uppercase tracking-[0.16em] text-lnd-fg-muted">
+                                    Total Balance
+                                </p>
+                                <p className="mt-1 flex items-baseline gap-1.5">
+                                    <span className="font-Manrope text-2xl font-extrabold text-lnd-fg">
+                                        {Math.round(total * 100) / 100}
+                                    </span>
+                                    <span className="text-xs font-medium text-lnd-fg-muted">
+                                        {user?.currency ?? "USD"}
+                                    </span>
+                                </p>
+                                <div className="mt-3 flex gap-2">
+                                    <Link
+                                        href="/overview/spot/deposit"
+                                        onClick={close}
+                                        className="lnd-btn-accent flex-1 py-2 text-center text-[0.8rem]"
+                                    >
+                                        Deposit
+                                    </Link>
+                                    <Link
+                                        href="/overview/spot/withdraw"
+                                        onClick={close}
+                                        className="lnd-btn-ghost flex-1 py-2 text-center text-[0.8rem]"
+                                    >
+                                        Withdraw
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="flex flex-col gap-2">
+                            <p className="db-eyebrow px-1">Portfolio</p>
+                            <Accordion
+                                type="multiple"
+                                defaultValue={["spot"]}
+                                className="db-card px-2 py-1"
+                            >
+                                {PORTFOLIO.map((section) => {
+                                    const Icon = section.icon
+                                    return (
+                                        <AccordionItem
+                                            key={section.value}
+                                            value={section.value}
+                                            className="border-b-0"
+                                        >
+                                            <AccordionTrigger className="py-3 text-[0.9rem] font-Manrope font-medium text-lnd-fg hover:no-underline [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-lnd-fg-muted">
+                                                <span className="flex items-center gap-3">
+                                                    <Icon className="h-4 w-4 text-lnd-fg-muted" strokeWidth={1.7} />
+                                                    {section.label}
+                                                </span>
+                                            </AccordionTrigger>
+                                            <AccordionContent className="pb-2">
+                                                {section.links.map((link) => (
+                                                    <Link
+                                                        key={link.href}
+                                                        href={link.href}
+                                                        onClick={close}
+                                                        className="flex items-center justify-between rounded-lg py-2 pl-7 pr-3 text-sm text-lnd-fg-muted transition-colors hover:bg-lnd-surface-2 hover:text-lnd-fg"
+                                                    >
+                                                        {link.label}
+                                                        <ChevronRight className="h-3.5 w-3.5" />
+                                                    </Link>
+                                                ))}
+                                            </AccordionContent>
+                                        </AccordionItem>
+                                    )
+                                })}
+                                <Link
+                                    href="/overview/trade/spot/BTC/USDT"
+                                    onClick={close}
+                                    className="flex items-center gap-3 rounded-xl px-3.5 py-3 text-[0.9rem] font-Manrope font-medium text-lnd-fg-muted transition-colors hover:bg-lnd-surface-2 hover:text-lnd-fg"
+                                >
+                                    <CandlestickChart className="h-4 w-4" strokeWidth={1.7} />
+                                    Trade
+                                </Link>
+                                <Link
+                                    href="/overview/futures"
+                                    onClick={close}
+                                    className="flex items-center gap-3 rounded-xl px-3.5 py-3 text-[0.9rem] font-Manrope font-medium text-lnd-fg-muted transition-colors hover:bg-lnd-surface-2 hover:text-lnd-fg"
+                                >
+                                    <LineChart className="h-4 w-4" strokeWidth={1.7} />
+                                    Futures
+                                </Link>
+                            </Accordion>
+                        </div>
+
+                        <div className="flex flex-col gap-2">
+                            <p className="db-eyebrow px-1">Account</p>
+                            <div className="db-card flex flex-col gap-0.5 p-2">
+                                {ACCOUNT_LINKS.map((item, index) => {
+                                    const Icon = ACCOUNT_ICONS[index] ?? LayoutDashboard
+                                    return (
+                                        <Link
+                                            key={item.href}
+                                            href={item.href}
+                                            onClick={close}
+                                            className="flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-[0.85rem] font-Manrope font-medium text-lnd-fg-muted transition-colors hover:bg-lnd-surface-2 hover:text-lnd-fg"
+                                        >
+                                            <Icon className="h-[1.05rem] w-[1.05rem]" strokeWidth={1.7} />
+                                            <span className="flex-1">{item.title}</span>
+                                            {item.href === "/account/messages" && unreadCount > 0 && (
+                                                <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-lnd-accent px-1.5 text-[0.65rem] font-bold text-lnd-accent-fg">
+                                                    {unreadCount}
+                                                </span>
+                                            )}
+                                            <ChevronRight className="h-3.5 w-3.5 text-lnd-fg-muted" />
+                                        </Link>
+                                    )
+                                })}
+                            </div>
+                        </div>
+
+                        <button
+                            onClick={logout}
+                            className="flex w-full items-center justify-center gap-2 rounded-full border border-lnd-border px-4 py-3 text-sm font-medium text-lnd-fg-muted transition-colors hover:bg-lnd-surface-2 hover:text-lnd-fg"
+                        >
+                            <LogOut className="h-4 w-4" />
+                            Log Out
+                        </button>
+                    </div>
+                    <div className="h-8" />
+                </ScrollArea>
+            </PopoverContent>
+        </Popover>
+    )
+}
