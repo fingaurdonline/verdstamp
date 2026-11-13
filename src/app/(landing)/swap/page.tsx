@@ -346,7 +346,7 @@ export default function Swap() {
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent
                                         align="start"
-                                        className="w-[300px] border-lnd-border bg-lnd-surface p-2 text-lnd-fg"
+                                        className="w-[calc(100vw-2rem)] max-w-[300px] border-lnd-border bg-lnd-surface p-2 text-lnd-fg"
                                     >
                                         <ScrollArea
                                             className="h-56"
@@ -474,7 +474,7 @@ export default function Swap() {
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent
                                         align="start"
-                                        className="w-[300px] border-lnd-border bg-lnd-surface p-2 text-lnd-fg"
+                                        className="w-[calc(100vw-2rem)] max-w-[300px] border-lnd-border bg-lnd-surface p-2 text-lnd-fg"
                                     >
                                         <ScrollArea
                                             className="h-56"

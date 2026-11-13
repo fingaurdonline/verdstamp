@@ -59,7 +59,7 @@ export default function CancelPlanDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="w-[calc(100vw-2rem)] max-w-[440px] rounded-2xl border-lnd-border bg-lnd-surface p-0">
+      <DialogContent className="max-h-[calc(100dvh-2rem)] w-[calc(100vw-2rem)] max-w-[440px] overflow-y-auto overscroll-contain rounded-2xl border-lnd-border bg-lnd-surface p-0">
         <DialogHeader className="border-b border-lnd-border p-5 pb-4">
           <DialogTitle className="font-Manrope text-lg font-bold text-lnd-fg">
             Cancel this plan?

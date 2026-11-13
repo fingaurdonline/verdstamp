@@ -54,7 +54,7 @@ export default function SecuritySettings() {
                                 </div>
                             </div>
                             <Link
-                                className="flex shrink-0 items-center lg:px-6 lg:py-1 text-[0.8rem] rounded-sm text-lnd-accent lg:text-lnd-fg-muted font-medium lg:hover:text-lnd-fg lg:bg-lnd-surface-2/70 lg:hover:bg-lnd-surface-2 transition-all duration-150 dark:text-lnd-accent dark:lg:text-lnd-fg-muted dark:lg:bg-lnd-surface-2 dark:lg:hover:bg-lnd-surface-2"
+                                className="flex min-h-9 shrink-0 items-center justify-center rounded-sm px-2 py-1 text-[0.8rem] font-medium text-lnd-accent transition-all duration-150 dark:text-lnd-accent lg:bg-lnd-surface-2/70 lg:px-6 lg:py-1 lg:text-lnd-fg-muted dark:lg:bg-lnd-surface-2 dark:lg:text-lnd-fg-muted lg:hover:bg-lnd-surface-2 lg:hover:text-lnd-fg dark:lg:hover:bg-lnd-surface-2"
                                 href={"#"}>Change
                             </Link>
                         </div>
@@ -67,7 +67,7 @@ export default function SecuritySettings() {
                                 </div>
                             </div>
                             <Link
-                                className="flex shrink-0 items-center lg:px-6 lg:py-1 text-[0.8rem] rounded-sm text-lnd-accent lg:text-lnd-fg-muted font-medium lg:hover:text-lnd-fg lg:bg-lnd-surface-2/70 lg:hover:bg-lnd-surface-2 transition-all duration-150 dark:text-lnd-accent dark:lg:text-lnd-fg-muted dark:lg:bg-lnd-surface-2 dark:lg:hover:bg-lnd-surface-2"
+                                className="flex min-h-9 shrink-0 items-center justify-center rounded-sm px-2 py-1 text-[0.8rem] font-medium text-lnd-accent transition-all duration-150 dark:text-lnd-accent lg:bg-lnd-surface-2/70 lg:px-6 lg:py-1 lg:text-lnd-fg-muted dark:lg:bg-lnd-surface-2 dark:lg:text-lnd-fg-muted lg:hover:bg-lnd-surface-2 lg:hover:text-lnd-fg dark:lg:hover:bg-lnd-surface-2"
                                 href={"#"}>Change
                             </Link>
                         </div>
@@ -80,7 +80,7 @@ export default function SecuritySettings() {
                     <div className="w-full h-auto flex flex-col bg-lnd-surface rounded-2xl dark:bg-lnd-surface">
                         <div className="w-full h-auto flex flex-col lg:flex-row lg:items-center lg:justify-between border-b border-lnd-border px-4 sm:px-7 py-4 space-y-2 lg:space-y-0 lg:space-x-3.5 dark:border-lnd-border">
                             <div className="flex items-center space-x-3.5">
-                                <PassKey className="w-[1.9rem] h-[1.9rem]" />
+                                <PassKey className="h-[1.9rem] w-[1.9rem] shrink-0" />
                                 <div className="min-w-0 flex-1 space-y-1 font-Manrope pl-1">
                                     <h1 className="text-[.89rem] text-lnd-fg font-bold dark:text-lnd-fg">Passkey</h1>
                                     <p className="text-[.78rem] text-lnd-fg-muted dark:text-lnd-fg-muted">Use a security device to protect your account.</p>
@@ -94,14 +94,14 @@ export default function SecuritySettings() {
                                 </div>
                                 <div>
                                     <Link
-                                        className="flex w-24 items-center justify-center py-1 text-[0.8rem] rounded-sm text-lnd-fg-muted font-medium hover:text-lnd-fg bg-lnd-surface-2/70 hover:bg-lnd-surface-2 transition-all duration-150 dark:text-lnd-fg-muted dark:bg-lnd-surface-2 dark:hover:bg-lnd-surface-2"
+                                        className="flex h-9 w-24 items-center justify-center rounded-sm py-1 text-[0.8rem] font-medium text-lnd-fg-muted transition-all duration-150 hover:bg-lnd-surface-2 hover:text-lnd-fg dark:bg-lnd-surface-2 dark:text-lnd-fg-muted dark:hover:bg-lnd-surface-2"
                                         href={"#"}>Manage</Link>
                                 </div>
                             </div>
                         </div>
                         <div className="w-full h-auto flex flex-col lg:flex-row lg:items-center lg:justify-between px-4 sm:px-7 py-4 space-y-2 lg:space-y-0 lg:space-x-3.5">
                             <div className="flex items-center space-x-3.5">
-                                <TOTP className="w-[1.9rem] h-[1.9rem]" />
+                                <TOTP className="h-[1.9rem] w-[1.9rem] shrink-0" />
                                 <div className="min-w-0 flex-1 space-y-1 font-Manrope pl-1">
                                     <h1 className="text-[.89rem] text-lnd-fg font-bold dark:text-lnd-fg">TOTP Verification</h1>
                                     <p className="text-[.78rem] text-lnd-fg-muted dark:text-lnd-fg-muted">Use TOTP authenticator to protect your account.</p>
@@ -115,7 +115,7 @@ export default function SecuritySettings() {
                                 </div>
                                 <div>
                                     <Link
-                                        className="flex w-24 items-center justify-center  px-6 py-1 text-[0.8rem] rounded-sm text-lnd-fg-muted font-medium hover:text-lnd-fg bg-lnd-surface-2/70 hover:bg-lnd-surface-2 transition-all duration-150 dark:text-lnd-fg-muted dark:bg-lnd-surface-2 dark:hover:bg-lnd-surface-2"
+                                        className="flex h-9 w-24 items-center justify-center rounded-sm py-1 text-[0.8rem] font-medium text-lnd-fg-muted transition-all duration-150 hover:bg-lnd-surface-2 hover:text-lnd-fg dark:bg-lnd-surface-2 dark:text-lnd-fg-muted dark:hover:bg-lnd-surface-2"
                                         href={"#"}>Set</Link>
                                 </div>
                             </div>
@@ -129,7 +129,7 @@ export default function SecuritySettings() {
                     <div className="w-full h-auto flex flex-col bg-lnd-surface rounded-2xl dark:bg-lnd-surface">
                         <div className="w-full h-auto flex flex-col lg:flex-row lg:items-center lg:justify-between border-b border-lnd-border px-4 sm:px-7 py-4 space-y-2 lg:space-y-0 lg:space-x-3.5 dark:border-lnd-border">
                             <div className="flex items-center lg:space-x-3.5">
-                                <WithdrawPassword className="w-[1.9rem] h-[1.9rem]" />
+                                <WithdrawPassword className="h-[1.9rem] w-[1.9rem] shrink-0" />
                                 <div className="min-w-0 flex-1 space-y-1 font-Manrope pl-1">
                                     <h1 className="text-[.89rem] text-lnd-fg font-bold dark:text-lnd-fg">Withdrawal Password</h1>
                                     <p className="text-[.78rem] text-lnd-fg-muted dark:text-lnd-fg-muted">Set withdrawal password to protect your assets</p>
@@ -154,7 +154,7 @@ export default function SecuritySettings() {
                                         onClick={async () => {
                                             await updateEnableOtp({ enableOtp: !(user?.is2FAEnabled ?? false) })
                                         }}
-                                        className="flex w-24 items-center justify-center py-1 text-[0.8rem] rounded-sm text-lnd-fg-muted font-medium hover:text-lnd-fg bg-lnd-surface-2/70 hover:bg-lnd-surface-2 transition-all duration-150 dark:text-lnd-fg-muted dark:bg-lnd-surface-2 dark:hover:bg-lnd-surface-2">
+                                        className="flex h-9 w-24 items-center justify-center rounded-sm py-1 text-[0.8rem] font-medium text-lnd-fg-muted transition-all duration-150 hover:bg-lnd-surface-2 hover:text-lnd-fg dark:bg-lnd-surface-2 dark:text-lnd-fg-muted dark:hover:bg-lnd-surface-2">
                                         Set
                                     </button>
                                 </div>
@@ -162,7 +162,7 @@ export default function SecuritySettings() {
                         </div>
                         <div className="w-full h-auto flex flex-col lg:flex-row lg:items-center lg:justify-between border-b border-lnd-border px-4 sm:px-7 py-4 space-y-2 lg:space-y-0 lg:space-x-3.5 dark:border-lnd-border">
                             <div className="flex items-center lg:space-x-3.5">
-                                <TradePassword className="w-[1.9rem] h-[1.9rem]" />
+                                <TradePassword className="h-[1.9rem] w-[1.9rem] shrink-0" />
                                 <div className="min-w-0 flex-1 space-y-1 font-Manrope pl-1">
                                     <h1 className="text-[.89rem] text-lnd-fg font-bold dark:text-lnd-fg">Trading Password</h1>
                                     <p className="text-[.78rem] text-lnd-fg-muted dark:text-lnd-fg-muted">Set trading password to secure your transactions</p>
@@ -176,14 +176,14 @@ export default function SecuritySettings() {
                                 </div>
                                 <div>
                                     <Link
-                                        className="flex w-24 items-center justify-center py-1 text-[0.8rem] rounded-sm text-lnd-fg-muted font-medium hover:text-lnd-fg bg-lnd-surface-2/70 hover:bg-lnd-surface-2 transition-all duration-150 dark:text-lnd-fg-muted dark:bg-lnd-surface-2 dark:hover:bg-lnd-surface-2"
+                                        className="flex h-9 w-24 items-center justify-center rounded-sm py-1 text-[0.8rem] font-medium text-lnd-fg-muted transition-all duration-150 hover:bg-lnd-surface-2 hover:text-lnd-fg dark:bg-lnd-surface-2 dark:text-lnd-fg-muted dark:hover:bg-lnd-surface-2"
                                         href={"#"}>Set</Link>
                                 </div>
                             </div>
                         </div>
                         <div className="w-full h-auto flex flex-col lg:flex-row lg:items-center lg:justify-between px-4 sm:px-7 py-4 space-y-2 lg:space-y-0 lg:space-x-3.5">
                             <div className="flex items-center lg:space-x-3.5">
-                                <SecuritySettingsIcon className="w-[1.9rem] h-[1.9rem]" />
+                                <SecuritySettingsIcon className="h-[1.9rem] w-[1.9rem] shrink-0" />
                                 <div className="min-w-0 flex-1 space-y-1 font-Manrope pl-1">
                                     <h1 className="text-[.89rem] text-lnd-fg font-bold dark:text-lnd-fg">Anti-Phishing Code</h1>
                                     <p className="text-[.78rem] text-lnd-fg-muted dark:text-lnd-fg-muted">For verifying official emails from Verdstamp</p>
@@ -197,7 +197,7 @@ export default function SecuritySettings() {
                                 </div>
                                 <div>
                                     <Link
-                                        className="flex w-24 items-center justify-center py-1 text-[0.8rem] rounded-sm text-lnd-fg-muted font-medium hover:text-lnd-fg bg-lnd-surface-2/70 hover:bg-lnd-surface-2 transition-all duration-150 dark:text-lnd-fg-muted dark:bg-lnd-surface-2 dark:hover:bg-lnd-surface-2"
+                                        className="flex h-9 w-24 items-center justify-center rounded-sm py-1 text-[0.8rem] font-medium text-lnd-fg-muted transition-all duration-150 hover:bg-lnd-surface-2 hover:text-lnd-fg dark:bg-lnd-surface-2 dark:text-lnd-fg-muted dark:hover:bg-lnd-surface-2"
                                         href={"#"}>Set</Link>
                                 </div>
                             </div>
@@ -205,7 +205,7 @@ export default function SecuritySettings() {
                     </div>
                     <div className="w-full h-auto flex flex-col lg:flex-row lg:items-center lg:justify-between px-4 sm:px-7 py-4 space-y-2 lg:space-y-0 lg:space-x-3.5 bg-lnd-surface mt-3 dark:bg-lnd-surface">
                         <div className="flex items-center lg:space-x-3.5">
-                            <AccountManagement className="w-[1.9rem] h-[1.9rem]" />
+                            <AccountManagement className="h-[1.9rem] w-[1.9rem] shrink-0" />
                             <div className="min-w-0 flex-1 space-y-1 font-Manrope pl-1">
                                 <h1 className="text-[.89rem] text-lnd-fg font-bold dark:text-lnd-fg">Account Management</h1>
                                 <p className="text-[.78rem] text-lnd-fg-muted dark:text-lnd-fg-muted">Freeze or delete account</p>
@@ -213,12 +213,12 @@ export default function SecuritySettings() {
                         </div>
                         <div className="w-auto h-auto flex items-center justify-end space-x-5">
                             <button
-                                className="flex w-24 items-center justify-center py-1 text-[0.8rem] rounded-sm text-lnd-fg-muted font-medium hover:text-lnd-fg bg-lnd-surface-2/70 hover:bg-lnd-surface-2 transition-all duration-150 dark:text-lnd-fg-muted dark:bg-lnd-surface-2 dark:hover:bg-lnd-surface-2"
+                                className="flex h-9 w-24 items-center justify-center rounded-sm py-1 text-[0.8rem] font-medium text-lnd-fg-muted transition-all duration-150 hover:bg-lnd-surface-2 hover:text-lnd-fg dark:bg-lnd-surface-2 dark:text-lnd-fg-muted dark:hover:bg-lnd-surface-2"
                             >
                                 Freeze
                             </button>
                             <button
-                                className="flex w-24 items-center justify-center py-1 text-[0.8rem] rounded-sm text-lnd-fg-muted font-medium hover:text-lnd-fg bg-lnd-surface-2/70 hover:bg-lnd-surface-2 transition-all duration-150"
+                                className="flex h-9 w-24 items-center justify-center rounded-sm py-1 text-[0.8rem] font-medium text-lnd-fg-muted transition-all duration-150 hover:bg-lnd-surface-2 hover:text-lnd-fg dark:bg-lnd-surface-2 dark:text-lnd-fg-muted dark:hover:bg-lnd-surface-2"
                             >
                                 Delete
                             </button>

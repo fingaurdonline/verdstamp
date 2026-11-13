@@ -98,34 +98,24 @@ export default function IDVerificationPage() {
         id_back: idBackId as any,
         selfie: selfieId as any,
       });
-      toast.custom(
-        (id) => (
-          <div className="w-80 lg:w-140 h-8 flex items-center justify-center space-x-2 text-red-900 bg-red-100">
-            <span>Verification materials submitted successfully!</span>
-          </div>
-        ))
+      toast.success("Verification materials submitted successfully!");
       // Support optionally redirecting out or closing modal based on system architecture later.
     } catch (e) {
       console.error(e);
-      toast.custom(
-        (id) => (
-          <div className="w-80 lg:w-140 h-8 flex items-center justify-center space-x-2 text-red-900 bg-red-100">
-            <span>Failed to submit verification materials. Check your connection.</span>
-          </div>
-        ))
+      toast.error("Failed to submit verification materials. Check your connection.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="min-h-screen lg:py-8 px-2  lg:px-8 bg-lnd-surface dark:bg-lnd-surface">
-      <div className="w-full mx-auto">
+    <div className="w-full bg-lnd-surface px-1 py-4 dark:bg-lnd-surface sm:px-2 lg:px-8 lg:py-8">
+      <div className="mx-auto w-full max-w-3xl">
         {/* Header */}
-        <div className="text-center mb-8">
+        <div className="mb-6 text-center sm:mb-8">
           <div className="flex items-center justify-center gap-2">
-            <BsPersonVcardFill className='w-7 h-7 text-lnd-accent dark:text-lnd-accent' />
-            <h1 className="text-2xl font-bold text-lnd-fg dark:text-lnd-fg">ID Verification</h1>
+            <BsPersonVcardFill className='h-6 w-6 shrink-0 text-lnd-accent dark:text-lnd-accent sm:h-7 sm:w-7' />
+            <h1 className="text-xl font-bold text-lnd-fg dark:text-lnd-fg sm:text-2xl">ID Verification</h1>
           </div>
         </div>
 
@@ -133,19 +123,19 @@ export default function IDVerificationPage() {
         <StepIndicator steps={STEPS} currentStep={currentStep} />
 
         {/* Form */}
-        <form onSubmit={form.handleSubmit(onSubmit)} className="bg-lnd-surface dark:bg-lnd-surface rounded-xl shadow-lg p-4 lg:p-8 mt-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="mt-6 rounded-xl bg-lnd-surface p-3 shadow-lg dark:bg-lnd-surface sm:p-4 lg:mt-8 lg:p-8">
           {currentStep === 1 && <BasicInformation form={form} />}
           {currentStep === 2 && <UploadID form={form} />}
           {currentStep === 3 && <FaceRecognition form={form} />}
 
           {/* Navigation Buttons */}
-          <div className="flex gap-4 justify-between mt-8 pt-8 border-t border-lnd-border dark:border-lnd-border">
+          <div className="mt-6 flex gap-3 border-t border-lnd-border pt-6 dark:border-lnd-border sm:mt-8 sm:gap-4 sm:pt-8">
             <Button
               type="button"
               variant="outline"
               onClick={() => setCurrentStep(currentStep - 1)}
               disabled={currentStep === 1}
-              className="flex-1"
+              className="h-11 min-w-0 flex-1 border-lnd-border text-sm dark:border-lnd-border dark:bg-transparent dark:text-lnd-fg"
             >
               Previous
             </Button>
@@ -153,7 +143,7 @@ export default function IDVerificationPage() {
               <Button
                 type="button"
                 onClick={() => validateAndAdvance()}
-                className="flex-1 bg-lnd-accent hover:bg-lnd-accent/90 dark:bg-lnd-accent dark:hover:bg-lnd-accent/90 text-lnd-accent-fg"
+                className="h-11 min-w-0 flex-1 bg-lnd-accent text-sm text-lnd-accent-fg hover:bg-lnd-accent/90 dark:bg-lnd-accent dark:text-lnd-accent-fg dark:hover:bg-lnd-accent/90"
               >
                 Next
               </Button>
@@ -161,7 +151,7 @@ export default function IDVerificationPage() {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex-1 bg-lnd-accent hover:bg-lnd-accent/90 dark:bg-lnd-accent dark:hover:bg-lnd-accent/90 text-lnd-accent-fg disabled:opacity-50"
+                className="h-11 min-w-0 flex-1 bg-lnd-accent text-sm text-lnd-accent-fg hover:bg-lnd-accent/90 disabled:opacity-50 dark:bg-lnd-accent dark:text-lnd-accent-fg dark:hover:bg-lnd-accent/90"
               >
                 {isSubmitting ? "Submitting..." : "Submit"}
               </Button>
@@ -170,7 +160,7 @@ export default function IDVerificationPage() {
         </form>
 
         {/* Progress Text */}
-        <p className="text-center text-lnd-fg-muted dark:text-lnd-fg-muted text-sm mt-6">
+        <p className="mt-4 text-center text-sm text-lnd-fg-muted dark:text-lnd-fg-muted sm:mt-6">
           Step {currentStep} of {STEPS.length}
         </p>
       </div>

@@ -19,8 +19,10 @@ export default function TotalAsset(
         ? Object.values(spotAccount.assets as spotAssetType).find((coin) => coin?.coin === targetCoinName)
         : undefined
 
-    const roundToTwoDecimalPlaces = (num: number): number => {
-        return Math.round(num * 100) / 100;
+    const roundToTwoDecimalPlaces = (num: number | undefined | null): number => {
+        const value = Number(num);
+        if (!Number.isFinite(value)) return 0;
+        return Math.round(value * 100) / 100;
     };
 
     return (

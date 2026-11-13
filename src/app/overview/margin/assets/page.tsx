@@ -374,11 +374,11 @@ export default function Assets() {
             </div>
             <div className="w-full h-auto">
                 <div className="w-full lg:w-auto h-auto py-5 px-5 flex flex-col bg-lnd-surface dark:bg-lnd-surface rounded-[1.25rem] space-y-4">
-                    <div className="w-full lg:w-auto h-auto flex flex-row justify-between space-y-0 lg:gap-70 pt-1">
-                        <div className="w-auto h-auto flex flex-col gap-1.5">
-                            <div className="w-auto h-auto flex space-x-2.5">
-                                <span>
-                                    <span className="font-Manrope text-[0.88rem] text-lnd-fg dark:text-lnd-fg mr-1.5 border-b border-lnd-border dark:border-lnd-border border-dashed border-spacing-[-10px]">
+                    <div className="flex w-full flex-wrap items-start justify-between gap-3 pt-1 lg:w-auto lg:flex-nowrap lg:gap-70">
+                        <div className="flex h-auto min-w-0 flex-1 flex-col gap-1.5">
+                            <div className="flex min-w-0 flex-wrap items-center gap-x-2.5 gap-y-1">
+                                <span className="min-w-0 break-words">
+                                    <span className="mr-1.5 border-b border-dashed border-lnd-border font-Manrope text-[0.88rem] text-lnd-fg dark:border-lnd-border dark:text-lnd-fg">
                                         Account Income
                                     </span>
                                     <span className="font-Manrope text-[0.88rem] text-lnd-fg dark:text-lnd-fg">

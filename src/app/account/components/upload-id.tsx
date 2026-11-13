@@ -36,13 +36,13 @@ export default function UploadID({ form }: UploadIDProps) {
       {/* ID Front */}
       <div>
         <label className="block text-lnd-fg-muted dark:text-lnd-fg-muted font-medium mb-3">Upload ID Front</label>
-        <div className="relative border-2 border-dashed border-lnd-accent/25 dark:border-lnd-accent/55 rounded-lg p-8 text-center hover:border-lnd-accent/55 dark:hover:border-lnd-accent/55 transition-colors cursor-pointer">
+        <div className="relative cursor-pointer rounded-lg border-2 border-dashed border-lnd-accent/25 p-5 text-center transition-colors hover:border-lnd-accent/55 dark:border-lnd-accent/55 dark:hover:border-lnd-accent/55 sm:p-8">
           <input
             type="file"
             {...register('idFront')}
             onChange={(e) => handleFileChange('idFront', e)}
             accept="image/*"
-            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+            className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
           />
           {idFrontPreview ? (
             <Image src={idFrontPreview || "/placeholder.svg"} alt="ID Front Preview" width={1000} height={1000} className="max-h-32 mx-auto" />
@@ -63,13 +63,13 @@ export default function UploadID({ form }: UploadIDProps) {
       {/* ID Back */}
       <div>
         <label className="block text-lnd-fg-muted dark:text-lnd-fg-muted font-medium mb-3">Upload ID Back</label>
-        <div className="relative border-2 border-dashed border-lnd-accent/25 dark:border-lnd-accent/55 rounded-lg p-8 text-center hover:border-lnd-accent/55 dark:hover:border-lnd-accent/55 transition-colors cursor-pointer">
+        <div className="relative cursor-pointer rounded-lg border-2 border-dashed border-lnd-accent/25 p-5 text-center transition-colors hover:border-lnd-accent/55 dark:border-lnd-accent/55 dark:hover:border-lnd-accent/55 sm:p-8">
           <input
             type="file"
             {...register('idBack')}
             onChange={(e) => handleFileChange('idBack', e)}
             accept="image/*"
-            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+            className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
           />
           {idBackPreview ? (
             <Image src={idBackPreview || "/placeholder.svg"} alt="ID Back Preview" width={1000} height={1000} className="max-h-32 mx-auto" />

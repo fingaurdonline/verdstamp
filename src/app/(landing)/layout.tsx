@@ -27,8 +27,8 @@ export default function LandingLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <ScrollArea className="w-full h-full">
-            <div className="w-full h-full bg-lnd-bg text-lnd-fg font-Inter selection:bg-lnd-accent/30">
+        <ScrollArea className="h-dvh w-full">
+            <div className="min-h-full w-full bg-lnd-bg font-Inter text-lnd-fg selection:bg-lnd-accent/30">
                 <LandingHeader />
                 <Toaster className="relative top-3.5" position="top-center"/>
                 <main className="w-full h-full grid grid-cols-1 lg:grid-cols-none [&>*]:min-w-0">

@@ -27,7 +27,7 @@ export function SelectStatus({
 }) {
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger className="h-9 w-[150px] border-lnd-border bg-lnd-surface text-[0.74rem] transition-colors hover:border-lnd-accent/55">
+      <SelectTrigger className="h-9 w-full border-lnd-border bg-lnd-surface text-[0.74rem] transition-colors hover:border-lnd-accent/55 sm:w-[150px]">
         <SelectValue placeholder="All statuses" />
       </SelectTrigger>
       <SelectContent>

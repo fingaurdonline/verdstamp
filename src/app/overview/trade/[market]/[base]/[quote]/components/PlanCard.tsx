@@ -219,7 +219,7 @@ export default function PlanCard({ plan, now, onCancel }: PlanCardProps) {
           <div>
             <div className="flex items-center justify-between text-[0.66rem] text-lnd-fg-muted">
               <span>7-day progress</span>
-              <span>
+              <span className="text-right">
                 {plan.status === "active"
                   ? `Ends ${formatDate(plan.ends_at)}`
                   : plan.completed_at
@@ -229,7 +229,7 @@ export default function PlanCard({ plan, now, onCancel }: PlanCardProps) {
                       : ""}
               </span>
             </div>
-            <div className="mt-2 grid grid-cols-7 gap-1.5">
+            <div className="mt-2 grid grid-cols-7 gap-1 sm:gap-1.5">
               {dayStats.map((day) => {
                 const isPast = day.day < currentDay || plan.status !== "active";
                 const isCurrent = day.day === currentDay && plan.status === "active";
@@ -237,13 +237,13 @@ export default function PlanCard({ plan, now, onCancel }: PlanCardProps) {
                   <div
                     key={day.day}
                     className={cn(
-                      "rounded-lg border px-1.5 py-2 text-center transition-colors",
+                      "min-w-0 rounded-lg border px-0.5 py-2 text-center transition-colors sm:px-1.5",
                       isCurrent
                         ? "border-lnd-accent/40 bg-lnd-accent/5"
                         : "border-lnd-border bg-lnd-surface-2/40",
                     )}
                   >
-                    <p className="text-[0.58rem] font-semibold uppercase tracking-wide text-lnd-fg-muted">
+                    <p className="text-[0.54rem] font-semibold uppercase tracking-wide text-lnd-fg-muted sm:text-[0.58rem]">
                       D{day.day}
                     </p>
                     <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-lnd-border">
@@ -261,7 +261,7 @@ export default function PlanCard({ plan, now, onCancel }: PlanCardProps) {
                         style={{ width: `${Math.max(day.progress * 100, day.trades.length ? 4 : 0)}%` }}
                       />
                     </div>
-                    <p className="mt-1.5 font-mono text-[0.58rem] font-semibold text-lnd-fg">
+                    <p className="mt-1.5 font-mono text-[0.54rem] font-semibold text-lnd-fg sm:text-[0.58rem]">
                       {(day.rate * 100).toFixed(1)}%
                     </p>
                   </div>

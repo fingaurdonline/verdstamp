@@ -32,13 +32,13 @@ export default function FaceRecognition({ form }: FaceRecognitionProps) {
         {/* Upload Selfie */}
         <div>
           <label className="block text-lnd-fg-muted dark:text-lnd-fg-muted font-medium mb-3">Upload Selfie</label>
-          <div className="relative border-2 border-dashed border-lnd-accent/25 dark:border-lnd-accent/55 rounded-lg p-8 text-center hover:border-lnd-accent/55 dark:hover:border-lnd-accent/55 transition-colors cursor-pointer">
+          <div className="relative cursor-pointer rounded-lg border-2 border-dashed border-lnd-accent/25 p-5 text-center transition-colors hover:border-lnd-accent/55 dark:border-lnd-accent/55 dark:hover:border-lnd-accent/55 sm:p-8">
             <input
               type="file"
               {...register('selfie')}
               onChange={handleFileChange}
               accept="image/*"
-              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+              className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
             />
             {selfiePreview ? (
               <Image src={selfiePreview || "/placeholder.svg"} alt="Selfie Preview" width={1000} height={1000} className="max-h-40 mx-auto rounded" />
@@ -59,9 +59,9 @@ export default function FaceRecognition({ form }: FaceRecognitionProps) {
         {/* Selfie Example */}
         <div>
           <label className="block text-lnd-fg-muted dark:text-lnd-fg-muted font-medium mb-3">Selfie Example</label>
-          <div className="bg-lnd-surface-2 dark:bg-lnd-surface rounded-lg p-8 flex items-center justify-center h-56">
+          <div className="flex h-56 items-center justify-center rounded-lg bg-lnd-surface-2 p-5 dark:bg-lnd-surface sm:p-8">
             <div className="text-center">
-              <svg className="w-20 h-20 text-lnd-fg-muted dark:text-lnd-fg-muted mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="mx-auto mb-2 h-20 w-20 text-lnd-fg-muted dark:text-lnd-fg-muted" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
               </svg>
               <p className="text-lnd-fg-muted dark:text-lnd-fg-muted text-sm">Example of good selfie</p>
@@ -73,9 +73,9 @@ export default function FaceRecognition({ form }: FaceRecognitionProps) {
       {/* Reject Examples */}
       <div>
         <p className="text-lnd-fg-muted dark:text-lnd-fg-muted font-medium mb-3">Reject Examples:</p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
           {['Face Covered', 'Too Far From Camera', 'Wearing Glasses', 'Dark/Side'].map((reason) => (
-            <div key={reason} className="bg-lnd-surface-2 dark:bg-lnd-surface rounded-lg p-4 text-center">
+            <div key={reason} className="rounded-lg bg-lnd-surface-2 p-3 text-center dark:bg-lnd-surface sm:p-4">
               <svg className="w-8 h-8 text-red-600 dark:text-red-500 mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
               </svg>

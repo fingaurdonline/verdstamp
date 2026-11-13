@@ -275,16 +275,16 @@ export default function TradeChart({
 
   return (
     <div className={cn("flex min-h-0 flex-col", className)}>
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-lnd-border px-4 py-3 sm:px-5">
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="flex items-center gap-1 rounded-full bg-lnd-surface-2 p-0.5">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-lnd-border px-3 py-2.5 sm:gap-3 sm:px-5 sm:py-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-0.5 rounded-full bg-lnd-surface-2 p-0.5 sm:gap-1">
             {INTERVALS.map((value) => (
               <button
                 key={value}
                 type="button"
                 onClick={() => onIntervalChange(value)}
                 className={cn(
-                  "rounded-full px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-wide transition-colors",
+                  "min-h-7 rounded-full px-2 py-1 text-[0.62rem] font-semibold uppercase tracking-wide transition-colors sm:px-2.5 sm:text-[0.68rem]",
                   interval === value
                     ? "bg-lnd-accent/15 text-lnd-accent"
                     : "text-lnd-fg-muted hover:text-lnd-fg",
@@ -294,13 +294,13 @@ export default function TradeChart({
               </button>
             ))}
           </div>
-          <span className="flex items-center gap-1.5 text-[0.66rem] font-medium uppercase tracking-[0.14em] text-lnd-fg-muted">
+          <span className="flex items-center gap-1.5 text-[0.6rem] font-medium uppercase tracking-[0.12em] text-lnd-fg-muted sm:text-[0.66rem] sm:tracking-[0.14em]">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
             Real OHLC · CoinGecko
           </span>
         </div>
         {activeCandle ? (
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[0.68rem] text-lnd-fg-muted">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[0.62rem] text-lnd-fg-muted sm:text-[0.68rem]">
             <span>
               O <span className="text-lnd-fg">{formatPrice(activeCandle.open, precision)}</span>
             </span>
@@ -320,7 +320,7 @@ export default function TradeChart({
         ) : null}
       </div>
 
-      <div className="relative min-h-[300px] flex-1">
+      <div className="relative min-h-0 flex-1">
         <div
           ref={containerRef}
           className="absolute inset-0 h-full w-full"
@@ -362,7 +362,7 @@ export default function TradeChart({
         ) : null}
 
         {error && candles.length > 0 ? (
-          <div className="absolute inset-x-3 bottom-3 flex items-center justify-between gap-3 rounded-xl border border-amber-500/25 bg-amber-500/10 px-3 py-2 text-[0.72rem] text-amber-700 dark:text-amber-300">
+          <div className="absolute inset-x-3 bottom-3 flex flex-wrap items-center justify-between gap-2 rounded-xl border border-amber-500/25 bg-amber-500/10 px-3 py-2 text-[0.72rem] text-amber-700 dark:text-amber-300">
             <span>{error} Showing the last real candles.</span>
             <button type="button" onClick={onRetry} className="font-semibold underline">
               Retry

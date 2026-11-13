@@ -172,14 +172,14 @@ export default function OrderPanel({
 
   return (
     <section className="db-card flex flex-col gap-4 p-4 sm:p-5">
-      <div className="flex items-start justify-between gap-3">
-        <div>
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div className="min-w-0">
           <p className="db-eyebrow">Trade</p>
           <h2 className="db-section-title mt-1">Start a 7-day plan</h2>
         </div>
-        <span className="flex items-center gap-1.5 rounded-full bg-lnd-surface-2 px-2.5 py-1 text-[0.66rem] font-semibold text-lnd-fg-muted">
-          <Wallet className="h-3.5 w-3.5" />
-          ${money(available)} available
+        <span className="flex max-w-full items-center gap-1.5 rounded-full bg-lnd-surface-2 px-2.5 py-1 text-[0.62rem] font-semibold text-lnd-fg-muted sm:text-[0.66rem]">
+          <Wallet className="h-3.5 w-3.5 shrink-0" />
+          <span className="truncate">${money(available)} available</span>
         </span>
       </div>
 
@@ -217,7 +217,7 @@ export default function OrderPanel({
         })}
       </div>
 
-      <div className="flex items-center justify-between rounded-xl border border-lnd-border px-3 py-2.5">
+      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-lnd-border px-3 py-2.5">
         <span className="text-[0.7rem] font-medium uppercase tracking-[0.12em] text-lnd-fg-muted">
           Order type
         </span>
@@ -437,9 +437,9 @@ export default function OrderPanel({
           </div>
         ) : null}
         <div className="h-px bg-lnd-border" />
-        <div className="flex items-center justify-between text-[0.74rem]">
+        <div className="flex flex-wrap items-start justify-between gap-3 text-[0.74rem]">
           <span className="font-semibold text-lnd-fg">Projected payout</span>
-          <span className="font-mono font-bold text-lnd-fg">
+          <span className="max-w-full break-words text-right font-mono font-bold text-lnd-fg">
             ${money(principal + weeklyMin + estimatedSavings)} – $
             {money(principal + weeklyMax + estimatedSavings)}
           </span>

@@ -186,14 +186,14 @@ export default function FeesStandard() {
 
                 <div className="mt-14">
                     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                        <div className="inline-flex self-start rounded-full border border-lnd-border bg-lnd-surface p-1">
+                        <div className="grid w-full grid-cols-2 self-start rounded-full border border-lnd-border bg-lnd-surface p-1 sm:inline-flex sm:w-auto">
                             {(["spot", "futures"] as const).map((option) => (
                                 <button
                                     key={option}
                                     type="button"
                                     onClick={() => setTab(option)}
                                     aria-pressed={tab === option}
-                                    className={`rounded-full px-5 py-2 text-sm font-semibold capitalize transition-colors ${
+                                    className={`min-h-9 rounded-full px-3 py-2 text-xs font-semibold capitalize transition-colors sm:px-5 sm:text-sm ${
                                         tab === option
                                             ? "bg-lnd-accent-fill text-lnd-accent-fg"
                                             : "text-lnd-fg-muted hover:text-lnd-fg"

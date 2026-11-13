@@ -54,6 +54,9 @@ export default function PlanHistoryTable({ plans }: PlanHistoryTableProps) {
         <h2 className="db-section-title mt-1">Plan history</h2>
       </div>
       <div className="overflow-x-auto">
+        <p className="px-4 pb-2 text-[0.62rem] text-lnd-fg-muted lg:hidden">
+          Swipe sideways on the table to see every column →
+        </p>
         <Table className="min-w-[900px]">
           <TableHeader>
             <TableRow className="border-lnd-border hover:bg-transparent">

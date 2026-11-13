@@ -385,10 +385,10 @@ export default function Assets() {
             <div className="w-full h-auto dark:text-lnd-fg">
                 <div className="w-full lg:w-auto h-auto py-5 px-5 flex flex-col bg-lnd-surface rounded-[1.25rem] space-y-4 dark:bg-lnd-surface">
                     <div className="w-full lg:w-auto h-auto flex flex-col lg:flex-row  lg:justify-between space-y-4 lg:space-y-0 lg:gap-70 pt-1 dark:text-lnd-fg">
-                        <div className="w-auto h-auto flex flex-col gap-1.5 dark:text-lnd-fg">
-                            <div className="w-auto h-auto flex space-x-2.5 dark:text-lnd-fg">
-                                <span>
-                                    <span className="font-Manrope text-[0.88rem] text-lnd-fg mr-1.5 border-b border-lnd-border border-dashed border-spacing-[-10px] dark:text-lnd-fg-muted dark:border-lnd-border">
+                        <div className="flex h-auto min-w-0 flex-col gap-1.5 dark:text-lnd-fg">
+                            <div className="flex min-w-0 flex-wrap items-center gap-x-2.5 gap-y-1 dark:text-lnd-fg">
+                                <span className="min-w-0 break-words">
+                                    <span className="mr-1.5 border-b border-dashed border-lnd-border font-Manrope text-[0.88rem] text-lnd-fg dark:border-lnd-border dark:text-lnd-fg-muted">
                                         Equity
                                     </span>
                                     <span className="font-Manrope text-[0.88rem] text-lnd-fg dark:text-lnd-fg">

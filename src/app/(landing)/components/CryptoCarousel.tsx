@@ -56,16 +56,16 @@ function TickerCoin({ coin }: { coin: CryptoCurrency }) {
 
 function TickerSlide({ coins }: { coins: CryptoCurrency[] }) {
     return (
-        <div className="flex h-[92px] items-center justify-center gap-6 py-4 sm:gap-10 lg:gap-14">
+        <div className="flex h-[92px] items-center justify-center gap-4 py-4 sm:gap-10 lg:gap-14">
             {coins.map((coin, index) => (
                 <div
                     key={coin.id}
                     className={`${
                         index >= 2 ? "hidden sm:flex" : "flex"
-                    } items-center gap-6 sm:gap-10 lg:gap-14`}
+                    } items-center gap-3 sm:gap-6 lg:gap-14`}
                 >
                     <TickerCoin coin={coin} />
-                    <span className="h-10 w-px bg-lnd-border" aria-hidden />
+                    <span className="hidden h-10 w-px bg-lnd-border sm:block" aria-hidden />
                 </div>
             ))}
         </div>

@@ -14,15 +14,26 @@ import { CryptoCurrency } from "@/lib/types";
 import useCryptoList from "@/hooks/useCryptoData";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import cryptoNetworks, { CryptoNetwork } from "@/lib/cryptoNetworks"
-import { Copy, QrCode } from "lucide-react";
+import { Check, Copy, QrCode } from "lucide-react";
 import { useQuery } from "convex/react";
 import { api } from "@convex/_generated/api";
+import { toast } from "sonner";
+import QRCode from "react-qr-code";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog";
 
 export default function Deposit() {
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState("Bitcoin")
     const [checked, setChecked] = React.useState(false)
     const [showAddress, setShowAddress] = React.useState(false)
+    const [qrOpen, setQrOpen] = React.useState(false)
+    const [copied, setCopied] = React.useState(false)
     const { data: cryptoData } = useCryptoList()
     const crypto = cryptoData?.data?.data?.find((crypto: CryptoCurrency) => crypto?.name === value) as CryptoCurrency
     const btc = useQuery(api.wallet.myWalletAddressByChain, { chain: "bitcoin" })
@@ -130,8 +141,16 @@ export default function Deposit() {
             if (cryptoName) break;
         }
     }
-    const handleCopy = (address: string | undefined) => {
-        navigator.clipboard.writeText(address as string);
+    const handleCopy = async (address: string | undefined) => {
+        if (!address) return;
+        try {
+            await navigator.clipboard.writeText(address);
+            setCopied(true);
+            toast.success("Deposit address copied");
+            window.setTimeout(() => setCopied(false), 2000);
+        } catch {
+            toast.error("Could not copy the address. Select it manually.");
+        }
     }
     const [network, setNetwork] = React.useState<string | undefined>('');
     const [address, setAddress] = React.useState<string | undefined>('');
@@ -148,174 +167,174 @@ const minimal_deposit = crypto?.quote?.USD?.price && crypto.quote.USD.price > 0
         : 0;
 
     return (
-        <div className="w-full lg:w-auto h-auto flex flex-col gap-4">
-            <div className="w-auto h-auto flex items-center space-x-2.5 mb-1">
-                <span className="w-fit h-6 bg-blend-darken">
-                    <Icon icon="icon-park-solid:hexagon-one" className="w-4 h-4 text-lnd-fg-muted/50 relative left-3.5 top-3 z-10" />
-                    <Icon icon="mdi:stop-circle" className="w-6 h-6 text-lnd-accent/30 rotate-45 relative  -top-4 z-50" />
+        <div className="flex w-full flex-col gap-4">
+            <div className="mb-1 flex items-center gap-2.5">
+                <span className="relative flex h-6 w-fit items-center bg-blend-darken">
+                    <Icon icon="icon-park-solid:hexagon-one" className="relative left-3.5 top-3 z-10 h-4 w-4 text-lnd-fg-muted/50" />
+                    <Icon icon="mdi:stop-circle" className="relative -top-4 z-50 h-6 w-6 rotate-45 text-lnd-accent/30" />
                 </span>
-                <span className="db-title">
-                    Deposit
-                </span>
+                <span className="db-title">Deposit</span>
             </div>
-            <div className="w-full h-auto py-6 px-6 pb-8 flex flex-col lg:flex-row lg:justify-between bg-lnd-surface dark:bg-lnd-surface rounded-[1.25rem]">
-                <div className="w-full lg:w-[57%] h-auto flex space-x-3">
-                    <div className="hidden lg:flex flex-col items-center space-y-1">
-                        <span className="flex w-5 h-5 justify-center items-center bg-lnd-accent text-lnd-accent-fg text-[.85rem] rounded-full">
+
+            <div className="flex w-full flex-col gap-6 rounded-[1.25rem] bg-lnd-surface px-4 py-5 pb-8 sm:p-6 lg:flex-row lg:justify-between lg:gap-8 lg:px-8">
+                <div className="flex w-full min-w-0 gap-3 lg:w-[57%]">
+                    <div className="hidden shrink-0 flex-col items-center lg:flex">
+                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-lnd-accent text-[.85rem] text-lnd-accent-fg">
                             1
                         </span>
-                        <div className="flex flex-col items-center justify-center space-y-[1.5px]">
-                            <span className="w-px h-[3px] bg-lnd-surface-2/90 dark:bg-lnd-surface-2" />
-                            <span className="w-px h-[3px] bg-lnd-surface-2/90 dark:bg-lnd-surface-2" />
-                            <span className="w-px h-[3px] bg-lnd-surface-2/90 dark:bg-lnd-surface-2" />
-                            <span className="w-px h-[3px] bg-lnd-surface-2/90 dark:bg-lnd-surface-2" />
-                            <span className="w-px h-[3px] bg-lnd-surface-2/90 dark:bg-lnd-surface-2" />
-                            <span className="w-px h-[3px] bg-lnd-surface-2/90 dark:bg-lnd-surface-2" />
-                            <span className="w-px h-[3px] bg-lnd-surface-2/90 dark:bg-lnd-surface-2" />
-                            <span className="w-px h-[3px] bg-lnd-surface-2/90 dark:bg-lnd-surface-2" />
-                            <span className="w-px h-[3px] bg-lnd-surface-2/90 dark:bg-lnd-surface-2" />
-                            <span className="w-px h-[3px] bg-lnd-surface-2/90 dark:bg-lnd-surface-2" />
-                            <span className="w-px h-[3px] bg-lnd-surface-2/90 dark:bg-lnd-surface-2" />
-                            <span className="w-px h-[3px] bg-lnd-surface-2/90 dark:bg-lnd-surface-2" />
-                            <span className="w-px h-[3px] bg-lnd-surface-2/90 dark:bg-lnd-surface-2" />
-                            <span className="w-px h-[3px] bg-lnd-surface-2/90 dark:bg-lnd-surface-2" />
-                            <span className="w-px h-[3px] bg-lnd-surface-2/90 dark:bg-lnd-surface-2" />
-                            <span className="w-px h-[3px] bg-lnd-surface-2/90 dark:bg-lnd-surface-2" />
-                            <span className="w-px h-[3px] bg-lnd-surface-2/90 dark:bg-lnd-surface-2" />
-                        </div>
-                        <span className="flex w-5 h-5 justify-center items-center bg-lnd-accent text-lnd-accent-fg text-[.85rem] rounded-full">
+                        <span className="my-1 h-24 border-l border-dashed border-lnd-border" aria-hidden="true" />
+                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-lnd-accent text-[.85rem] text-lnd-accent-fg">
                             2
                         </span>
                     </div>
-                    <div className="flex flex-col w-full h-auto justify-start gap-[2.27rem]">
+
+                    <div className="flex min-w-0 flex-1 flex-col justify-start gap-6">
                         <CryptoSelector
                             value={value}
                             setValue={setValue}
                             open={open}
                             setOpen={setOpen}
                         />
-                        <div className="w-auto h-auto flex flex-col gap-3">
-                            <Label className="text-[.87rem] flex lg:block space-x-2 lg:space-x-0 items-center font-bold font-Manrope dark:text-lnd-fg">
-                                <span className="flex lg:hidden w-5 h-5 justify-center items-center bg-lnd-accent text-lnd-accent-fg text-[.85rem] rounded-full">
+
+                        <div className="flex min-w-0 flex-col gap-3">
+                            <Label className="flex items-center gap-2 font-Manrope text-[.87rem] font-bold text-lnd-fg lg:gap-0">
+                                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-lnd-accent text-[.85rem] text-lnd-accent-fg lg:hidden">
                                     2
                                 </span>
                                 Generate Deposit Address
                             </Label>
-                            <div className="flex items-center space-x-2">
-                                <span className="text-[.89rem] font-Manrope dark:text-lnd-fg-muted">
+                            <div className="flex items-center gap-1.5">
+                                <span className="font-Manrope text-[.89rem] text-lnd-fg-muted">
                                     Select Network
                                 </span>
-                                <PiWarningCircleThin className="w-5 h-5 mt-[2px]" />
+                                <PiWarningCircleThin className="mt-[2px] h-4 w-4 shrink-0 text-lnd-fg-muted" />
                             </div>
-                            <RadioGroup defaultValue={network} className="grid grid-cols-1 lg:grid-cols-2 lg:gap-3">
+                            <RadioGroup
+                                value={network}
+                                onValueChange={(name) => {
+                                    setNetwork(name);
+                                    const selected = selectedNetwork.find((item) => item.name === name);
+                                    setAddress(selected?.contract_address);
+                                }}
+                                className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                                 {selectedNetwork?.map((network: CryptoNetwork) => (
-                                    <Label key={network.name} className="flex items-center justify-start space-x-2.5 rounded-sm border border-muted dark:border-lnd-border bg-lnd-surface-2 dark:bg-lnd-surface py-2.5 px-3.5 text-sm font-semibold hover:border-lnd-accent/55 dark:hover:border-lnd-accent/55 hover:bg-lnd-accent/10 dark:hover:bg-lnd-accent/15 [&:has([data-state=checked])]:bg-lnd-accent/10 dark:[&:has([data-state=checked])]:bg-lnd-accent/20 [&:has([data-state=checked])]:border-lnd-accent/55 dark:[&:has([data-state=checked])]:border-lnd-accent/55 transition-all duration-300 dark:text-lnd-fg">
-                                        <RadioGroupItem onClick={() => { setNetwork(network.name), setAddress(network?.contract_address) }} value={network.name} className="sr-only" />
-                                        <span>
+                                    <Label key={network.name} className="flex min-w-0 cursor-pointer items-center gap-2.5 rounded-md border border-muted bg-lnd-surface-2 px-3 py-2.5 text-sm font-semibold transition-all duration-300 hover:border-lnd-accent/55 hover:bg-lnd-accent/10 dark:border-lnd-border dark:bg-lnd-surface dark:text-lnd-fg dark:hover:border-lnd-accent/55 dark:hover:bg-lnd-accent/15 [&:has([data-state=checked])]:border-lnd-accent/55 [&:has([data-state=checked])]:bg-lnd-accent/10 dark:[&:has([data-state=checked])]:border-lnd-accent/55 dark:[&:has([data-state=checked])]:bg-lnd-accent/20">
+                                        <RadioGroupItem value={network.name} className="sr-only" />
+                                        <span className="min-w-0 break-words">
                                             {network.name}
                                         </span>
                                         {network?.token_standard !== "" &&
-                                            <span>
+                                            <span className="text-lnd-fg-muted">
                                                 ({network?.token_standard})
                                             </span>}
                                     </Label>
                                 ))}
                             </RadioGroup>
                         </div>
-                        <div className="w-full h-auto -mt-6 space-y-4">
+
+                        <div className="w-full min-w-0 space-y-4">
                             {
                                 showAddress === false ? (
                                     <>
-                                        <div className="flex flex-col w-full h-auto px-5 py-5 border border-dashed dark:border-lnd-border items-center space-y-3 rounded-sm dark:bg-lnd-surface">
-                                            <h3 className="text-[.96rem] font-bold dark:text-lnd-fg">
+                                        <div className="flex w-full flex-col items-center gap-3 rounded-md border border-dashed border-lnd-border px-4 py-4 dark:bg-lnd-surface sm:px-5 sm:py-5">
+                                            <h3 className="text-center text-[.96rem] font-bold dark:text-lnd-fg">
                                                 <span className="text-amber-600 dark:text-amber-400">{crypto?.symbol}-{crypto?.name}</span> Risk Reminder
                                             </h3>
-                                            <p className="text-center text-[.78rem] text-lnd-fg-muted dark:text-lnd-fg-muted pb-3">
+                                            <p className="pb-1 text-center text-[.78rem] leading-relaxed text-lnd-fg-muted dark:text-lnd-fg-muted">
                                                 * The address is ONLY available for <span className="text-amber-500 dark:text-amber-400">{crypto?.symbol}-{crypto?.name}</span> deposit. Deposit of other assets will lead to permanent asset loss.
                                             </p>
-                                            <span className="text-center text-[.782rem] flex items-center space-x-1 dark:text-lnd-fg-muted">
+                                            <span className="flex max-w-full items-start gap-1.5 text-left text-[.782rem] dark:text-lnd-fg-muted">
                                                 <Checkbox
                                                     checked={checked}
                                                     onCheckedChange={checked => setChecked(checked === true)}
-                                                    className="flex items-center justify-center w-3.5 h-3.5 border border-lnd-border dark:border-lnd-border hover:border-lnd-accent/55 dark:hover:border-lnd-accent/55"
+                                                    className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center border border-lnd-border hover:border-lnd-accent/55 dark:border-lnd-border dark:hover:border-lnd-accent/55"
                                                 />
-                                                <span>I&apos;m aware of the risk and would like to proceed</span>
+                                                <span className="min-w-0">I&apos;m aware of the risk and would like to proceed</span>
                                             </span>
                                         </div>
-                                        <Button onClick={() => setShowAddress(true)} className={checked === true ? "h-auto w-full py-2.5 text-base font-normal bg-lnd-accent hover:bg-lnd-accent/90 text-lnd-accent-fg rounded-[1.25rem] -mt-3" : "h-auto w-full py-2.5 text-base font-normal bg-lnd-surface-2 hover:bg-lnd-surface-2 text-lnd-fg-muted rounded-[1.25rem] -mt-3 dark:bg-lnd-surface-2 dark:text-lnd-fg-muted dark:hover:bg-lnd-surface-2"} disabled={checked === false}>
+                                        <Button onClick={() => setShowAddress(true)} className={checked === true ? "h-auto w-full rounded-[1.25rem] bg-lnd-accent py-3 text-base font-normal text-lnd-accent-fg hover:bg-lnd-accent/90" : "h-auto w-full rounded-[1.25rem] bg-lnd-surface-2 py-3 text-base font-normal text-lnd-fg-muted hover:bg-lnd-surface-2 dark:bg-lnd-surface-2 dark:text-lnd-fg-muted dark:hover:bg-lnd-surface-2"} disabled={checked === false}>
                                             Confirm
                                         </Button>
                                     </>
                                 ) : (
-
-                                    <>
-                                        <div className="mb-2">
-                                            <span className="text-sm font-medium dark:text-lnd-fg">Deposit To</span>
-                                        </div><div className="flex justify-between mb-2">
-                                            <div className="flex items-center w-full bg-lnd-surface-2 dark:bg-lnd-surface rounded-md p-3">
-                                                <div className="w-20 lg:w-auto flex-1 text-sm lg:text-base font-medium text-lnd-fg-muted mr-2 overflow-hidden text-ellipsis dark:text-lnd-fg">{address}</div>
-                                                  <div className="flex space-x-2">
-                                                      <Button onClick={() => handleCopy(address)} className="w-auto h-auto p-2 rounded-md bg-lnd-surface-2 dark:bg-lnd-surface-2 hover:bg-lnd-surface-2 dark:hover:bg-lnd-surface-2 text-lnd-fg-muted dark:text-lnd-fg-muted">
-                                                          <Copy className="w-4 h-4" />
-                                                      </Button>
-                                                      <Button onClick={() => setShowAddress(false)} className="w-auto h-auto p-2 rounded-md bg-lnd-surface-2 dark:bg-lnd-surface-2 hover:bg-lnd-surface-2 dark:hover:bg-lnd-surface-2 text-lnd-fg-muted dark:text-lnd-fg-muted">
-                                                          <QrCode className="w-4 h-4" />
-                                                      </Button>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                          <div className="w-full h-auto flex flex-col lg:flex-row items-center justify-between gap-3">
-                                              <div className="w-full lg:w-1/2 h-auto flex items-center space-x-2">
-                                                  <PiWarningCircleThin className="w-5 h-5 text-amber-500" />
-                                                  <span className="text-[.78rem] text-lnd-fg-muted dark:text-lnd-fg-muted">
-                                                      Only send {crypto?.symbol} to this address.
-                                                  </span>
-                                              </div>
-                                              <a href="#deposit-records" className="w-full lg:w-1/2 h-auto flex items-center justify-end space-x-1 text-lnd-accent dark:text-lnd-accent hover:text-lnd-accent dark:hover:text-lnd-accent text-[.78rem]">
-                                                  <span>Deposit History</span>
-                                                  <BiChevronRight className="w-4 h-4" />
-                                              </a>
-                                          </div>
-                                      </>
-                                  )
-                              }
+                                    <div className="space-y-3">
+                                        <span className="text-sm font-medium dark:text-lnd-fg">Deposit To</span>
+                                        <div className="w-full rounded-xl bg-lnd-surface-2 p-3 dark:bg-lnd-surface">
+                                            <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+                                                <p className="min-w-0 flex-1 select-all break-all font-mono text-[0.72rem] leading-relaxed text-lnd-fg-muted dark:text-lnd-fg sm:text-[0.82rem]">
+                                                    {address}
+                                                </p>
+                                                <div className="flex shrink-0 items-center gap-1 self-end sm:self-auto">
+                                                    <Button
+                                                        onClick={() => handleCopy(address)}
+                                                        aria-label="Copy deposit address"
+                                                        className="h-auto w-auto rounded-md bg-lnd-surface-2 p-2 text-lnd-fg-muted hover:bg-lnd-surface-2 dark:bg-lnd-surface-2 dark:text-lnd-fg-muted dark:hover:bg-lnd-surface-2"
+                                                    >
+                                                        {copied ? <Check className="h-4 w-4 text-emerald-500" /> : <Copy className="h-4 w-4" />}
+                                                    </Button>
+                                                    <Button
+                                                        onClick={() => setQrOpen(true)}
+                                                        aria-label="Show deposit address QR code"
+                                                        className="h-auto w-auto rounded-md bg-lnd-surface-2 p-2 text-lnd-fg-muted hover:bg-lnd-surface-2 dark:bg-lnd-surface-2 dark:text-lnd-fg-muted dark:hover:bg-lnd-surface-2"
+                                                    >
+                                                        <QrCode className="h-4 w-4" />
+                                                    </Button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="flex w-full flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
+                                            <div className="flex min-w-0 items-start gap-2 sm:w-1/2">
+                                                <PiWarningCircleThin className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
+                                                <span className="text-[.78rem] leading-relaxed text-lnd-fg-muted dark:text-lnd-fg-muted">
+                                                    Only send {crypto?.symbol} to this address.
+                                                </span>
+                                            </div>
+                                            <a href="#deposit-records" className="flex items-center gap-1 self-start text-[.78rem] text-lnd-accent hover:text-lnd-accent sm:self-auto">
+                                                <span>Deposit History</span>
+                                                <BiChevronRight className="h-4 w-4" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
                 </div>
-                <div className="w-full lg:w-[40%] h-auto flex flex-col gap-3">
+
+                <div className="flex w-full flex-col gap-4 lg:w-[40%]">
                     <TotalAsset value={value} />
-                    <div className="w-full h-auto flex flex-col gap-3">
-                        <span className="text-[.92rem] font-bold font-Manrope text-lnd-fg dark:text-lnd-fg">
+                    <div className="flex w-full flex-col gap-3">
+                        <span className="font-Manrope text-[.92rem] font-bold text-lnd-fg dark:text-lnd-fg">
                             Deposit Instructions
                         </span>
-                        <div className="w-full h-auto flex flex-col gap-2">
-                            <div className="w-full h-auto flex items-center space-x-2">
-                                <BsQuestionCircleFill className="w-4 h-4 text-lnd-accent dark:text-lnd-accent" />
-                                <span className="text-[.82rem] text-lnd-fg-muted dark:text-lnd-fg-muted">
+                        <div className="flex w-full flex-col gap-2.5">
+                            <div className="flex w-full items-start gap-2">
+                                <BsQuestionCircleFill className="mt-0.5 h-4 w-4 shrink-0 text-lnd-accent dark:text-lnd-accent" />
+                                <span className="min-w-0 text-[.82rem] leading-relaxed text-lnd-fg-muted dark:text-lnd-fg-muted">
                                     Minimum deposit: {minimal_deposit} {crypto?.symbol}
                                 </span>
                             </div>
-                            <div className="w-full h-auto flex items-center space-x-2">
-                                <BsQuestionCircleFill className="w-4 h-4 text-lnd-accent dark:text-lnd-accent" />
-                                <span className="text-[.82rem] text-lnd-fg-muted dark:text-lnd-fg-muted">
+                            <div className="flex w-full items-start gap-2">
+                                <BsQuestionCircleFill className="mt-0.5 h-4 w-4 shrink-0 text-lnd-accent dark:text-lnd-accent" />
+                                <span className="min-w-0 text-[.82rem] leading-relaxed text-lnd-fg-muted dark:text-lnd-fg-muted">
                                     Deposits below the minimum will not be credited.
                                 </span>
                             </div>
-                            <div className="w-full h-auto flex items-center space-x-2">
-                                <BsQuestionCircleFill className="w-4 h-4 text-lnd-accent dark:text-lnd-accent" />
-                                <span className="text-[.82rem] text-lnd-fg-muted dark:text-lnd-fg-muted">
+                            <div className="flex w-full items-start gap-2">
+                                <BsQuestionCircleFill className="mt-0.5 h-4 w-4 shrink-0 text-lnd-accent dark:text-lnd-accent" />
+                                <span className="min-w-0 text-[.82rem] leading-relaxed text-lnd-fg-muted dark:text-lnd-fg-muted">
                                     Only deposit {crypto?.name} to this address.
                                 </span>
                             </div>
-                            <div className="w-full h-auto flex items-center space-x-2">
-                                <BsQuestionCircleFill className="w-4 h-4 text-lnd-accent dark:text-lnd-accent" />
-                                <span className="text-[.82rem] text-lnd-fg-muted dark:text-lnd-fg-muted">
+                            <div className="flex w-full items-start gap-2">
+                                <BsQuestionCircleFill className="mt-0.5 h-4 w-4 shrink-0 text-lnd-accent dark:text-lnd-accent" />
+                                <span className="min-w-0 text-[.82rem] leading-relaxed text-lnd-fg-muted dark:text-lnd-fg-muted">
                                     Deposits require 1 network confirmation.
                                 </span>
                             </div>
-                            <div className="w-full h-auto flex items-center space-x-2">
-                                <BsQuestionCircleFill className="w-4 h-4 text-lnd-accent dark:text-lnd-accent" />
-                                <span className="text-[.82rem] text-lnd-fg-muted dark:text-lnd-fg-muted">
+                            <div className="flex w-full items-start gap-2">
+                                <BsQuestionCircleFill className="mt-0.5 h-4 w-4 shrink-0 text-lnd-accent dark:text-lnd-accent" />
+                                <span className="min-w-0 text-[.82rem] leading-relaxed text-lnd-fg-muted dark:text-lnd-fg-muted">
                                     Please ensure your deposit address is correct.
                                 </span>
                             </div>
@@ -323,7 +342,36 @@ const minimal_deposit = crypto?.quote?.USD?.price && crypto.quote.USD.price > 0
                     </div>
                 </div>
             </div>
+
             <DepositTable />
+
+            <Dialog open={qrOpen} onOpenChange={setQrOpen}>
+                <DialogContent className="w-[calc(100vw-2rem)] max-w-sm rounded-2xl border-lnd-border bg-lnd-surface p-0">
+                    <DialogHeader className="px-5 pb-0 pt-5">
+                        <DialogTitle className="font-Manrope text-lg font-bold text-lnd-fg">
+                            {crypto?.symbol} deposit address
+                        </DialogTitle>
+                        <DialogDescription className="text-[.78rem] leading-relaxed text-lnd-fg-muted">
+                            Scan or copy this address to deposit {crypto?.name}
+                            {network ? ` on ${network}` : ""}. Only send {crypto?.symbol} to it.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="flex flex-col items-center gap-4 px-5 pb-6 pt-4">
+                        <div className="rounded-2xl bg-white p-3">
+                            <QRCode value={address ?? ""} size={176} />
+                        </div>
+                        <code className="w-full select-all break-all rounded-lg bg-lnd-surface-2 px-3 py-2 text-center font-mono text-[0.7rem] leading-relaxed text-lnd-fg">
+                            {address}
+                        </code>
+                        <Button
+                            onClick={() => handleCopy(address)}
+                            className="h-auto w-full rounded-xl bg-lnd-accent py-2.5 text-sm font-semibold text-lnd-accent-fg hover:bg-lnd-accent/90"
+                        >
+                            {copied ? "Copied" : "Copy address"}
+                        </Button>
+                    </div>
+                </DialogContent>
+            </Dialog>
         </div>
     )
 }

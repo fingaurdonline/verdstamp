@@ -31,7 +31,6 @@ import { FaMoneyBill } from "react-icons/fa6";
 import { IoIosSquare } from "react-icons/io";
 import { FaClone } from "react-icons/fa";
 import { toast } from "sonner";
-import { PiThumbsUpFill } from "react-icons/pi";
 import { useRouter } from "nextjs-toploader/app";
 import {
     DropdownMenu,
@@ -177,17 +176,11 @@ export default function Assets() {
 
         const transferAmount = parseFloat(amount);
         if (isNaN(transferAmount) || transferAmount <= 0) {
-            toast.custom((id) => (<div className="w-80 lg:w-140 h-8 flex items-center justify-center space-x-2 text-rose-900 bg-rose-100 dark:text-rose-100 dark:bg-rose-900">
-                <PiThumbsUpFill className="w-3 h-3" />
-                <span>Please enter a valid amount.</span>
-            </div>));
+            toast.error("Please enter a valid amount.");
             return;
         }
         if (!tether || tether.amount < transferAmount) {
-            toast.custom((id) => (<div className="w-80 lg:w-140 h-8 flex items-center justify-center space-x-2 text-rose-900 bg-rose-100 dark:text-rose-100 dark:bg-rose-900">
-                <PiThumbsUpFill className="w-3 h-3" />
-                <span>Insufficient USDT balance.</span>
-            </div>));
+            toast.error("Insufficient USDT balance.");
             return;
         }
         if (fromAccount == "Spot" && toAccount == "Futures") {
@@ -196,18 +189,12 @@ export default function Assets() {
                 // Find the futures account for the user
                 const futures = futuresAccount?.find((acc: any) => acc?.user === userId);
                 if (!futures) {
-                    toast.custom((id) => (<div className="w-80 lg:w-140 h-8 flex items-center justify-center space-x-2 text-rose-900 bg-rose-100 dark:text-rose-100 dark:bg-rose-900">
-                        <PiThumbsUpFill className="w-3 h-3" />
-                        <span>Futures account not found.</span>
-                    </div>));
+                    toast.error("Futures account not found.");
                     return;
                 }
                 const spot = spotAccounts?.find((acc: any) => acc?.user === userId);
                 if (!spot) {
-                    toast.custom((id) => (<div className="w-80 lg:w-140 h-8 flex items-center justify-center space-x-2 text-rose-900 bg-rose-100 dark:text-rose-100 dark:bg-rose-900">
-                        <PiThumbsUpFill className="w-3 h-3" />
-                        <span>Spot account not found.</span>
-                    </div>));
+                    toast.error("Spot account not found.");
                     return;
                 }
                 const spotAssets = [...(spot.assets as any[])];
@@ -245,16 +232,10 @@ export default function Assets() {
                 await updateFuturesAsset({ asset: futuresAssets, id: futures?.id as string });
                 await updateSpotAsset({ asset: spotAssets, id: spotAccount?.id as string });
                 await updateSpotAccount({ amount: (spotAccount?.total_asset as number - (transferAmount * (usdValue(coin.toLocaleLowerCase()) ?? 0) as number)), spotID: spotAccount?.id as string });
-                toast.custom((id) => (<div className="w-80 lg:w-140 h-8 flex items-center justify-center space-x-2 text-green-900 bg-green-100 dark:text-green-100 dark:bg-green-900">
-                    <PiThumbsUpFill className="w-3 h-3" />
-                    <span>Transfer was successful.</span>
-                </div>));
+                toast.success("Transfer was successful.");
             } catch (e) {
                 console.error(e);
-                toast.custom((id) => (<div className="w-80 lg:w-140 h-8 flex items-center justify-center space-x-2 text-rose-900 bg-rose-100 dark:text-rose-100 dark:bg-rose-900">
-                    <PiThumbsUpFill className="w-3 h-3" />
-                    <span>Failed to update accounts.</span>
-                </div>));
+                toast.error("Failed to update accounts.");
                 return;
             }
         }
@@ -264,18 +245,12 @@ export default function Assets() {
                 // Find the futures account for the user
                 const futures = futuresAccount?.find((acc: any) => acc?.user === userId);
                 if (!futures) {
-                    toast.custom((id) => (<div className="w-80 lg:w-140 h-8 flex items-center justify-center space-x-2 text-rose-900 bg-rose-100">
-                        <PiThumbsUpFill className="w-3 h-3" />
-                        <span>Futures account not found.</span>
-                    </div>));
+                    toast.error("Futures account not found.");
                     return;
                 }
                 const spot = spotAccounts?.find((acc: any) => acc?.user === userId);
                 if (!spot) {
-                    toast.custom((id) => (<div className="w-80 lg:w-140 h-8 flex items-center justify-center space-x-2 text-rose-900 bg-rose-100 dark:text-rose-100 dark:bg-rose-900">
-                        <PiThumbsUpFill className="w-3 h-3" />
-                        <span>Spot account not found.</span>
-                    </div>));
+                    toast.error("Spot account not found.");
                     return;
                 }
                 const spotAssets = [...(spot.assets as any[])];
@@ -310,16 +285,10 @@ export default function Assets() {
                 await updateFuturesAsset({ asset: futuresAssets, id: futures?.id as string });
                 await updateSpotAsset({ asset: spotAssets, id: spotAccount?.id as string });
                 await updateSpotAccount({ amount: (spotAccount?.total_asset as number) + (transferAmount * (usdValue(coin.toLocaleLowerCase()) ?? 0) as number), spotID: spotAccount?.id as string });
-                toast.custom((id) => (<div className="w-80 lg:w-140 h-8 flex items-center justify-center space-x-2 text-green-900 bg-green-100 dark:text-green-100 dark:bg-green-900">
-                    <PiThumbsUpFill className="w-3 h-3" />
-                    <span>Transfer was successful</span>
-                </div>));
+                toast.success("Transfer was successful");
             } catch (e) {
                 console.error(e);
-                toast.custom((id) => (<div className="w-80 lg:w-140 h-8 flex items-center justify-center space-x-2 text-rose-900 bg-rose-100 dark:text-rose-100 dark:bg-rose-900">
-                    <PiThumbsUpFill className="w-3 h-3" />
-                    <span>Failed to update accounts.</span>
-                </div>));
+                toast.error("Failed to update accounts.");
                 return;
             }
         }
@@ -327,17 +296,11 @@ export default function Assets() {
     const handleMarginAccountTransfer = async () => {
         const transferAmount = parseFloat(amount);
         if (isNaN(transferAmount) || transferAmount <= 0) {
-            toast.custom((id) => (<div className="w-80 lg:w-140 h-8 flex items-center justify-center space-x-2 text-rose-900 bg-rose-100 dark:text-rose-100 dark:bg-rose-900">
-                <PiThumbsUpFill className="w-3 h-3" />
-                <span>Please enter a valid amount.</span>
-            </div>));
+            toast.error("Please enter a valid amount.");
             return;
         }
         if (!tether || tether.amount < transferAmount) {
-            toast.custom((id) => (<div className="w-80 lg:w-140 h-8 flex items-center justify-center space-x-2 text-rose-900 bg-rose-100 dark:text-rose-100 dark:bg-rose-900">
-                <PiThumbsUpFill className="w-3 h-3" />
-                <span>Insufficient USDT balance.</span>
-            </div>));
+            toast.error("Insufficient USDT balance.");
             return;
         }
         if (fromAccount == "Spot" && toAccount == "Margin") {
@@ -346,18 +309,12 @@ export default function Assets() {
                 // Find the margin account for the user
                 const margin = marginAccount?.find((acc: any) => acc?.user === userId);
                 if (!margin) {
-                    toast.custom((id) => (<div className="w-80 lg:w-140 h-8 flex items-center justify-center space-x-2 text-rose-900 bg-rose-100 dark:text-rose-100 dark:bg-rose-900">
-                        <PiThumbsUpFill className="w-3 h-3" />
-                        <span>Margin account not found.</span>
-                    </div>));
+                    toast.error("Margin account not found.");
                     return;
                 }
                 const spot = spotAccounts?.find((acc: any) => acc?.user === userId);
                 if (!spot) {
-                    toast.custom((id) => (<div className="w-80 lg:w-140 h-8 flex items-center justify-center space-x-2 text-rose-900 bg-rose-100">
-                        <PiThumbsUpFill className="w-3 h-3" />
-                        <span>Spot account not found.</span>
-                    </div>));
+                    toast.error("Spot account not found.");
                     return;
                 }
                 const spotAssets = [...(spot.assets as any[])];
@@ -392,16 +349,10 @@ export default function Assets() {
                 await updateSpotAsset({ asset: spotAssets, id: spotAccount?.id as string });
                 await updateMarginAccount({ amount: (margin?.total_asset as number + transferAmount), marginID: margin?.id as string })
                 await updateSpotAccount({ amount: (spotAccount?.total_asset as number) - transferAmount, spotID: spotAccount?.id as string });
-                toast.custom((id) => (<div className="w-80 lg:w-140 h-8 flex items-center justify-center space-x-2 text-green-900 bg-green-100 dark:text-green-100 dark:bg-green-900">
-                    <PiThumbsUpFill className="w-3 h-3" />
-                    <span>Transfer was successful</span>
-                </div>));
+                toast.success("Transfer was successful");
             } catch (e) {
                 console.error(e);
-                toast.custom((id) => (<div className="w-80 lg:w-140 h-8 flex items-center justify-center space-x-2 text-rose-900 bg-rose-100 dark:text-rose-100 dark:bg-rose-900">
-                    <PiThumbsUpFill className="w-3 h-3" />
-                    <span>Failed to update accounts.</span>
-                </div>));
+                toast.error("Failed to update accounts.");
                 return;
             }
         }
@@ -411,18 +362,12 @@ export default function Assets() {
                 // Find the margin account for the user
                 const margin = marginAccount?.find((acc: any) => acc?.user === userId);
                 if (!margin) {
-                    toast.custom((id) => (<div className="w-80 lg:w-140 h-8 flex items-center justify-center space-x-2 text-rose-900 bg-rose-100">
-                        <PiThumbsUpFill className="w-3 h-3" />
-                        <span>Margin account not found.</span>
-                    </div>));
+                    toast.error("Margin account not found.");
                     return;
                 }
                 const spot = spotAccounts?.find((acc: any) => acc?.user === userId);
                 if (!spot) {
-                    toast.custom((id) => (<div className="w-80 lg:w-140 h-8 flex items-center justify-center space-x-2 text-rose-900 bg-rose-100">
-                        <PiThumbsUpFill className="w-3 h-3" />
-                        <span>Spot account not found.</span>
-                    </div>));
+                    toast.error("Spot account not found.");
                     return;
                 }
                 const spotAssets = [...(spot.assets as any[])];
@@ -457,16 +402,10 @@ export default function Assets() {
                 await updateMarginAsset({ asset: marginAssets, id: margin?.id as string });
                 await updateSpotAsset({ asset: spotAssets, id: spotAccount?.id as string });
                 await updateSpotAccount({ amount: (spotAccount?.total_asset as number) + transferAmount, spotID: spotAccount?.id as string });
-                toast.custom((id) => (<div className="w-80 lg:w-140 h-8 flex items-center justify-center space-x-2 text-green-900 bg-green-100 dark:text-green-100 dark:bg-green-900">
-                    <PiThumbsUpFill className="w-3 h-3" />
-                    <span>Transfer was successful.</span>
-                </div>));
+                toast.success("Transfer was successful.");
             } catch (e) {
                 console.error(e);
-                toast.custom((id) => (<div className="w-80 lg:w-140 h-8 flex items-center justify-center space-x-2 text-rose-900 bg-rose-100 dark:text-rose-100 dark:bg-rose-900">
-                    <PiThumbsUpFill className="w-3 h-3" />
-                    <span>Failed to update accounts.</span>
-                </div>));
+                toast.error("Failed to update accounts.");
                 return;
             }
         }
@@ -634,8 +573,8 @@ export default function Assets() {
                 <div className="w-full lg:w-auto h-auto py-5 pb-10 px-5 flex flex-col bg-lnd-surface dark:bg-lnd-surface rounded-[1.25rem] space-y-6 lg:space-y-4">
                     <div className="w-full h-auto flex flex-col lg:flex-row lg:justify-between space-y-4 lg:space-y-0 lg:justify-between lg:gap-8 pt-1">
                         <div className="w-full h-auto flex flex-col gap-1.5">
-                            <div className="w-auto h-auto flex space-x-2.5">
-                                <span className="font-Manrope text-[0.88rem] text-lnd-fg dark:text-lnd-fg">
+                            <div className="flex min-w-0 flex-wrap items-center gap-x-2.5 gap-y-1">
+                                <span className="min-w-0 break-words font-Manrope text-[0.88rem] text-lnd-fg dark:text-lnd-fg">
                                     Est. Total Assets ({user?.crypto === "tether usdt" ? "USDT" : user?.crypto === "bitcoin" ? "BTC" : "ETH"})
                                 </span>
                                 {
@@ -704,7 +643,7 @@ export default function Assets() {
                                 </span>
                             </Button>
                             <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                                <DialogContent className="w-[calc(100vw-2rem)] max-w-[500px] lg:w-[500px] p-0 gap-0 rounded-2xl">
+                                <DialogContent className="max-h-[calc(100dvh-2rem)] w-[calc(100vw-2rem)] max-w-[500px] gap-0 overflow-y-auto rounded-2xl p-0 lg:w-[500px]">
                                     <DialogHeader className="p-6 pb-4">
                                         <div className="flex items-center justify-between">
                                             <DialogTitle className="text-lg font-semibold font-Manrope">From/To</DialogTitle>

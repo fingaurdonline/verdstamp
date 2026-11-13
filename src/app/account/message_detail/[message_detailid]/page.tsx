@@ -29,7 +29,7 @@ export default function MessageDetail() {
     }
 
     return (
-        <div className="w-full h-full">
+        <div className="h-full w-full px-3 pb-6 sm:px-0">
             {
                 message.header === "deposit Notice" ?
                     <div className="flex justify-center min-h-fit bg-lnd-surface-2 dark:bg-lnd-surface">
@@ -39,36 +39,36 @@ export default function MessageDetail() {
                             </CardHeader>
                             <CardContent>
                                 <div className="space-y-4">
-                                    <div className="flex justify-between py-2 border-b border-lnd-border dark:border-lnd-border">
+                                    <div className="flex flex-wrap items-start justify-between gap-2 border-b border-lnd-border py-2 dark:border-lnd-border sm:flex-nowrap">
                                         <span className="text-lnd-fg-muted dark:text-lnd-fg-muted">Account</span>
-                                        <span className="font-medium dark:text-lnd-fg">spot</span>
+                                        <span className="min-w-0 break-words text-right font-medium dark:text-lnd-fg">spot</span>
                                     </div>
-                                    <div className="flex justify-between py-2 border-b border-lnd-border dark:border-lnd-border">
+                                    <div className="flex flex-wrap items-start justify-between gap-2 border-b border-lnd-border py-2 dark:border-lnd-border sm:flex-nowrap">
                                         <span className="text-lnd-fg-muted dark:text-lnd-fg-muted">Submitted At</span>
-                                        <span className="font-medium dark:text-lnd-fg">
+                                        <span className="min-w-0 break-words text-right font-medium dark:text-lnd-fg">
                                             {transaction?.createdAt ? new Date(transaction.createdAt).toLocaleString() : '-'}
                                         </span>
                                     </div>
 
-                                    <div className="flex justify-between py-2 border-b border-lnd-border dark:border-lnd-border">
+                                    <div className="flex flex-wrap items-start justify-between gap-2 border-b border-lnd-border py-2 dark:border-lnd-border sm:flex-nowrap">
                                         <span className="text-lnd-fg-muted dark:text-lnd-fg-muted">Actual Received</span>
-                                        <span className="font-medium dark:text-lnd-fg">{transaction?.amount} {transaction?.asset}</span>
+                                        <span className="min-w-0 break-words text-right font-medium dark:text-lnd-fg">{transaction?.amount} {transaction?.asset}</span>
                                     </div>
 
-                                    <div className="flex justify-between py-2 border-b border-lnd-border dark:border-lnd-border">
+                                    <div className="flex flex-wrap items-start justify-between gap-2 border-b border-lnd-border py-2 dark:border-lnd-border sm:flex-nowrap">
                                         <span className="text-lnd-fg-muted dark:text-lnd-fg-muted">Fee</span>
-                                        <span className="font-medium dark:text-lnd-fg">0.00 {transaction?.asset}</span>
+                                        <span className="min-w-0 break-words text-right font-medium dark:text-lnd-fg">0.00 {transaction?.asset}</span>
                                     </div>
 
-                                    <div className="flex justify-between py-2 border-b border-lnd-border dark:border-lnd-border">
+                                    <div className="flex flex-wrap items-start justify-between gap-2 border-b border-lnd-border py-2 dark:border-lnd-border sm:flex-nowrap">
                                         <span className="text-lnd-fg-muted dark:text-lnd-fg-muted">Public Chain</span>
-                                        <span className="font-medium dark:text-lnd-fg">{transaction?.asset}</span>
+                                        <span className="min-w-0 break-words text-right font-medium dark:text-lnd-fg">{transaction?.asset}</span>
                                     </div>
 
-                                    <div className="w-full flex justify-between space-x-10 py-2 border-b border-lnd-border dark:border-lnd-border">
-                                        <span className="text-lnd-fg-muted dark:text-lnd-fg-muted">sender Address</span>
-                                        <div className="text-right">
-                                            <p className="font-medium break-all dark:text-lnd-fg">{transaction?.sender}</p>
+                                    <div className="flex w-full flex-wrap items-start justify-between gap-3 border-b border-lnd-border py-2 dark:border-lnd-border">
+                                        <span className="shrink-0 text-lnd-fg-muted dark:text-lnd-fg-muted">sender Address</span>
+                                        <div className="min-w-0 flex-1 text-right">
+                                            <p className="break-all font-medium dark:text-lnd-fg">{transaction?.sender}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -83,37 +83,37 @@ export default function MessageDetail() {
                                 </CardHeader>
                                 <CardContent>
                                     <div className="space-y-4">
-                                        <div className="flex justify-between py-2 border-b border-lnd-border dark:border-lnd-border">
+                                        <div className="flex flex-wrap items-start justify-between gap-2 border-b border-lnd-border py-2 dark:border-lnd-border sm:flex-nowrap">
                                             <span className="text-lnd-fg-muted dark:text-lnd-fg-muted">Account</span>
-                                            <span className="font-medium dark:text-lnd-fg">spot</span>
+                                            <span className="min-w-0 break-words text-right font-medium dark:text-lnd-fg">spot</span>
                                         </div>
 
-                                        <div className="flex justify-between py-2 border-b border-lnd-border dark:border-lnd-border">
+                                        <div className="flex flex-wrap items-start justify-between gap-2 border-b border-lnd-border py-2 dark:border-lnd-border sm:flex-nowrap">
                                             <span className="text-lnd-fg-muted dark:text-lnd-fg-muted">Submitted At</span>
-                                            <span className="font-medium dark:text-lnd-fg">
+                                            <span className="min-w-0 break-words text-right font-medium dark:text-lnd-fg">
                                                 {transaction?.createdAt ? new Date(transaction.createdAt).toLocaleString() : '-'}
                                             </span>
                                         </div>
 
-                                        <div className="flex justify-between py-2 border-b border-lnd-border dark:border-lnd-border">
+                                        <div className="flex flex-wrap items-start justify-between gap-2 border-b border-lnd-border py-2 dark:border-lnd-border sm:flex-nowrap">
                                             <span className="text-lnd-fg-muted dark:text-lnd-fg-muted">Actual Received</span>
-                                            <span className="font-medium dark:text-lnd-fg">{transaction?.amount} {transaction?.asset}</span>
+                                            <span className="min-w-0 break-words text-right font-medium dark:text-lnd-fg">{transaction?.amount} {transaction?.asset}</span>
                                         </div>
 
-                                        <div className="flex justify-between py-2 border-b border-lnd-border dark:border-lnd-border">
+                                        <div className="flex flex-wrap items-start justify-between gap-2 border-b border-lnd-border py-2 dark:border-lnd-border sm:flex-nowrap">
                                             <span className="text-lnd-fg-muted dark:text-lnd-fg-muted">Fee</span>
-                                            <span className="font-medium dark:text-lnd-fg">0.00 {transaction?.asset}</span>
+                                            <span className="min-w-0 break-words text-right font-medium dark:text-lnd-fg">0.00 {transaction?.asset}</span>
                                         </div>
 
-                                        <div className="flex justify-between py-2 border-b border-lnd-border dark:border-lnd-border">
+                                        <div className="flex flex-wrap items-start justify-between gap-2 border-b border-lnd-border py-2 dark:border-lnd-border sm:flex-nowrap">
                                             <span className="text-lnd-fg-muted dark:text-lnd-fg-muted">Public Chain</span>
-                                            <span className="font-medium dark:text-lnd-fg">{transaction?.asset}</span>
+                                            <span className="min-w-0 break-words text-right font-medium dark:text-lnd-fg">{transaction?.asset}</span>
                                         </div>
 
-                                        <div className="w-full flex justify-between space-x-10 py-2 border-b border-lnd-border dark:border-lnd-border">
-                                            <span className="text-lnd-fg-muted dark:text-lnd-fg-muted">Withdrawal Address</span>
-                                            <div className="text-right">
-                                                <span className="font-medium break-all dark:text-lnd-fg">{transaction?.receiver}</span>
+                                        <div className="flex w-full flex-wrap items-start justify-between gap-3 border-b border-lnd-border py-2 dark:border-lnd-border">
+                                            <span className="shrink-0 text-lnd-fg-muted dark:text-lnd-fg-muted">Withdrawal Address</span>
+                                            <div className="min-w-0 flex-1 text-right">
+                                                <span className="break-all font-medium dark:text-lnd-fg">{transaction?.receiver}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -128,33 +128,33 @@ export default function MessageDetail() {
                                     </CardHeader>
                                     <CardContent>
                                         <div className="space-y-4">
-                                            <div className="flex justify-between py-2 border-b border-lnd-border dark:border-lnd-border">
+                                            <div className="flex flex-wrap items-start justify-between gap-2 border-b border-lnd-border py-2 dark:border-lnd-border sm:flex-nowrap">
                                                 <span className="text-lnd-fg-muted dark:text-lnd-fg-muted">Assigned Algo Trader</span>
-                                                <span className="font-medium dark:text-lnd-fg">{message.description?.match(/Trader:\s*(.+)/)?.[1]?.trim() || "-"}</span>
+                                                <span className="min-w-0 break-words text-right font-medium dark:text-lnd-fg">{message.description?.match(/Trader:\s*(.+)/)?.[1]?.trim() || "-"}</span>
                                             </div>
 
-                                            <div className="flex justify-between py-2 border-b border-lnd-border dark:border-lnd-border">
+                                            <div className="flex flex-wrap items-start justify-between gap-2 border-b border-lnd-border py-2 dark:border-lnd-border sm:flex-nowrap">
                                                 <span className="text-lnd-fg-muted dark:text-lnd-fg-muted">Strategy Style</span>
-                                                <span className="font-medium dark:text-lnd-fg">{message.description?.match(/Strategy Style:\s*(.+)/)?.[1]?.trim() || "-"}</span>
+                                                <span className="min-w-0 break-words text-right font-medium dark:text-lnd-fg">{message.description?.match(/Strategy Style:\s*(.+)/)?.[1]?.trim() || "-"}</span>
                                             </div>
 
-                                            <div className="flex justify-between py-2 border-b border-lnd-border dark:border-lnd-border">
+                                            <div className="flex flex-wrap items-start justify-between gap-2 border-b border-lnd-border py-2 dark:border-lnd-border sm:flex-nowrap">
                                                 <span className="text-lnd-fg-muted dark:text-lnd-fg-muted">Risk Profile</span>
-                                                <span className="font-medium dark:text-lnd-fg">{message.description?.match(/Risk Profile:\s*(.+)/)?.[1]?.trim() || "-"}</span>
+                                                <span className="min-w-0 break-words text-right font-medium dark:text-lnd-fg">{message.description?.match(/Risk Profile:\s*(.+)/)?.[1]?.trim() || "-"}</span>
                                             </div>
 
-                                            <div className="flex justify-between py-2 border-b border-lnd-border dark:border-lnd-border">
+                                            <div className="flex flex-wrap items-start justify-between gap-2 border-b border-lnd-border py-2 dark:border-lnd-border sm:flex-nowrap">
                                                 <span className="text-lnd-fg-muted dark:text-lnd-fg-muted">Ideal Client</span>
-                                                <span className="font-medium dark:text-lnd-fg">{message.description?.match(/Ideal Client:\s*(.+)/)?.[1]?.trim() || "-"}</span>
+                                                <span className="min-w-0 break-words text-right font-medium dark:text-lnd-fg">{message.description?.match(/Ideal Client:\s*(.+)/)?.[1]?.trim() || "-"}</span>
                                             </div>
 
-                                            <div className="flex justify-between py-2 border-b border-lnd-border dark:border-lnd-border">
+                                            <div className="flex flex-wrap items-start justify-between gap-2 border-b border-lnd-border py-2 dark:border-lnd-border sm:flex-nowrap">
                                                 <span className="text-lnd-fg-muted dark:text-lnd-fg-muted">Telegram</span>
                                                 <a
                                                     href={message.description?.match(/Telegram:\s*(.+)/)?.[1]?.trim() || "#"}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="font-medium text-lnd-accent hover:text-lnd-accent dark:text-lnd-accent"
+                                                    className="min-w-0 break-all text-right font-medium text-lnd-accent hover:text-lnd-accent dark:text-lnd-accent"
                                                 >
                                                     {message.description?.match(/Telegram:\s*(.+)/)?.[1]?.trim() || "-"}
                                                 </a>
@@ -198,9 +198,9 @@ export default function MessageDetail() {
                                                     </p>
                                                 </div>
 
-                                                <div className="flex justify-between py-2 border-t border-lnd-border dark:border-lnd-border mt-4">
+                                                <div className="mt-4 flex flex-wrap items-start justify-between gap-2 border-t border-lnd-border py-2 dark:border-lnd-border">
                                                     <span className="text-xs text-lnd-fg-muted dark:text-lnd-fg-muted">Date</span>
-                                                    <span className="text-xs font-medium dark:text-lnd-fg-muted">
+                                                    <span className="min-w-0 break-words text-right text-xs font-medium dark:text-lnd-fg-muted">
                                                         {message._creationTime ? new Date(message._creationTime).toLocaleString() : ''}
                                                     </span>
                                                 </div>

@@ -30,6 +30,41 @@ type Props = {
     onLogout: () => void
 }
 
+const PORTFOLIO = [
+    {
+        label: "Spot",
+        links: [
+            { label: "Assets", href: "/overview/spot/assets" },
+            { label: "Deposit", href: "/overview/spot/deposit" },
+            { label: "Withdraw", href: "/overview/spot/withdraw" },
+            { label: "Transfer History", href: "/overview/spot/records" },
+        ],
+    },
+    {
+        label: "Margin",
+        links: [
+            { label: "Assets", href: "/overview/margin/assets" },
+            { label: "Borrow Records", href: "/overview/margin/records" },
+        ],
+    },
+    {
+        label: "Loan",
+        links: [
+            { label: "Assets", href: "/overview/loan/assets" },
+            { label: "Borrowing Records", href: "/overview/loan/loan_records" },
+        ],
+    },
+    {
+        label: "History",
+        links: [
+            { label: "Spot", href: "/overview/history/spot" },
+            { label: "Margin", href: "/overview/history/margin" },
+            { label: "Futures", href: "/overview/history/futures" },
+            { label: "Loan", href: "/overview/history/loan" },
+        ],
+    },
+]
+
 export default function LandingMobileMenu({
     open,
     onOpenChange,
@@ -131,6 +166,56 @@ export default function LandingMobileMenu({
                                                 className="lnd-btn-ghost flex-1 py-2 text-center text-[0.8rem]"
                                             >
                                                 Withdraw
+                                            </Link>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* portfolio (logged in) */}
+                                {loggedIn && (
+                                    <div className="flex flex-col gap-2">
+                                        <p className="px-1 text-[0.7rem] uppercase tracking-wider text-lnd-fg-muted">
+                                            Portfolio
+                                        </p>
+                                        <Accordion type="multiple" className="w-full border-t border-lnd-border">
+                                            {PORTFOLIO.map((section, i) => (
+                                                <AccordionItem
+                                                    key={section.label}
+                                                    value={`portfolio-${i}`}
+                                                    className="border-b border-lnd-border"
+                                                >
+                                                    <AccordionTrigger className="text-[0.95rem] font-Manrope font-medium hover:no-underline">
+                                                        {section.label}
+                                                    </AccordionTrigger>
+                                                    <AccordionContent className="flex flex-col gap-1 pb-3 pl-2">
+                                                        {section.links.map((item) => (
+                                                            <Link
+                                                                key={item.href}
+                                                                href={item.href}
+                                                                onClick={close}
+                                                                className="rounded-lg px-3 py-2 text-sm text-lnd-fg-muted transition-colors hover:bg-lnd-surface-2 hover:text-lnd-fg"
+                                                            >
+                                                                {item.label}
+                                                            </Link>
+                                                        ))}
+                                                    </AccordionContent>
+                                                </AccordionItem>
+                                            ))}
+                                        </Accordion>
+                                        <div className="flex flex-col gap-1">
+                                            <Link
+                                                href="/overview/trade/spot/BTC/USDT"
+                                                onClick={close}
+                                                className="rounded-lg px-3 py-2.5 text-[0.95rem] text-lnd-fg transition-colors hover:bg-lnd-surface-2"
+                                            >
+                                                Trade
+                                            </Link>
+                                            <Link
+                                                href="/overview/futures"
+                                                onClick={close}
+                                                className="rounded-lg px-3 py-2.5 text-[0.95rem] text-lnd-fg transition-colors hover:bg-lnd-surface-2"
+                                            >
+                                                Futures
                                             </Link>
                                         </div>
                                     </div>

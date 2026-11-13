@@ -160,23 +160,59 @@ export default function TradeTerminalPage() {
         marketCap={baseCoin?.quote?.USD?.market_cap}
       />
 
-      <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_370px]">
-        <div className="flex min-w-0 flex-col gap-5">
-          <section className="db-card overflow-hidden">
-            <TradeChart
-              candles={candles}
-              interval={chartInterval}
-              onIntervalChange={setChartInterval}
-              loading={candlesLoading}
-              refreshing={refreshing}
-              error={candlesError}
-              onRetry={retryCandles}
-              priceLines={priceLines}
-              className="h-[360px] sm:h-[440px]"
-            />
-          </section>
+      <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_310px] lg:items-start xl:grid-cols-[minmax(0,1fr)_370px]">
+        <section className="db-card min-w-0 self-start overflow-hidden lg:col-start-1 lg:row-start-1">
+          <TradeChart
+            candles={candles}
+            interval={chartInterval}
+            onIntervalChange={setChartInterval}
+            loading={candlesLoading}
+            refreshing={refreshing}
+            error={candlesError}
+            onRetry={retryCandles}
+            priceLines={priceLines}
+            className="h-[clamp(260px,42dvh,440px)]"
+          />
+        </section>
 
-          <section id="active-plans" className="scroll-mt-4 space-y-4">
+        <div className="min-w-0 self-start lg:col-start-2 lg:row-span-2 lg:row-start-1">
+          <div className="lg:sticky lg:top-20">
+            {STABLE_QUOTES.has(quote) ? (
+              <OrderPanel
+                market={market}
+                base={base}
+                quote={quote}
+                price={price}
+                available={terminal?.available ?? 0}
+                onCreated={scrollToPlans}
+              />
+            ) : (
+              <section className="db-card space-y-4 p-5">
+                <div>
+                  <p className="db-eyebrow">Trade</p>
+                  <h2 className="db-section-title mt-1">Stablecoin settlement</h2>
+                </div>
+                <p className="text-[0.78rem] leading-relaxed text-lnd-fg-muted">
+                  This cross pair uses {quote} as its quote currency. Trading
+                  plans are settled in USDT or USDC, so the terminal can show the{" "}
+                  {base}/{quote} chart but cannot start a plan on it.
+                </p>
+                <Link
+                  href={`/overview/trade/${market}/${base}/USDT`}
+                  className="lnd-btn-accent inline-flex items-center gap-1.5 px-4 py-2.5 text-[0.76rem]"
+                >
+                  Trade {base}/USDT
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </section>
+            )}
+          </div>
+        </div>
+
+        <section
+          id="active-plans"
+          className="min-w-0 scroll-mt-4 space-y-4 self-start lg:col-start-1 lg:row-start-2"
+        >
             <div className="flex flex-wrap items-end justify-between gap-3">
               <div>
                 <p className="db-eyebrow">Active plans</p>
@@ -234,41 +270,6 @@ export default function TradeTerminalPage() {
               </div>
             )}
           </section>
-        </div>
-
-        <div className="min-w-0">
-          <div className="xl:sticky xl:top-4">
-            {STABLE_QUOTES.has(quote) ? (
-              <OrderPanel
-                market={market}
-                base={base}
-                quote={quote}
-                price={price}
-                available={terminal?.available ?? 0}
-                onCreated={scrollToPlans}
-              />
-            ) : (
-              <section className="db-card space-y-4 p-5">
-                <div>
-                  <p className="db-eyebrow">Trade</p>
-                  <h2 className="db-section-title mt-1">Stablecoin settlement</h2>
-                </div>
-                <p className="text-[0.78rem] leading-relaxed text-lnd-fg-muted">
-                  This cross pair uses {quote} as its quote currency. Trading
-                  plans are settled in USDT or USDC, so the terminal can show the{" "}
-                  {base}/{quote} chart but cannot start a plan on it.
-                </p>
-                <Link
-                  href={`/overview/trade/${market}/${base}/USDT`}
-                  className="lnd-btn-accent inline-flex items-center gap-1.5 px-4 py-2.5 text-[0.76rem]"
-                >
-                  Trade {base}/USDT
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </Link>
-              </section>
-            )}
-          </div>
-        </div>
       </div>
 
       <PositionsTables plans={plans} now={now} />

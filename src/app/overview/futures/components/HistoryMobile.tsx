@@ -67,11 +67,11 @@ export default function HistoryMobile() {
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground mb-1 dark:text-lnd-fg-muted">Income</p>
-                      <p className="font-semibold text-foreground dark:text-lnd-fg">{trade.income}</p>
+                      <p className="min-w-0 break-all font-semibold text-foreground dark:text-lnd-fg">{Number(trade.income ?? 0).toLocaleString(undefined, { maximumFractionDigits: 8 })}</p>
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground mb-1 dark:text-lnd-fg-muted">Rate</p>
-                      <p className="font-semibold text-foreground dark:text-lnd-fg">{trade.rate}</p>
+                      <p className="min-w-0 break-all font-semibold text-foreground dark:text-lnd-fg">{Number(trade.rate ?? 0).toLocaleString(undefined, { maximumFractionDigits: 8 })}</p>
                     </div>
                   </div>
                   <div className="space-y-2 text-sm">
@@ -88,100 +88,26 @@ export default function HistoryMobile() {
               )
             })}
 
-            <div className="w-full flex items-center justify-between lg:hidden bg-card py-3 rounded dark:bg-lnd-surface">
-              <div className="w-full flex items-center justify-between space-x-3">
+            <div className="flex w-full items-center justify-between gap-2 py-3 lg:hidden">
                 <button
-                  onClick={() => setPage((p) => Math.max(1, p - 1))}
-                  disabled={currentPage === 1}
-                  className="px-3 py-1 border rounded text-sm text-lnd-accent border-lnd-accent/25 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-lnd-accent/10 dark:text-lnd-accent dark:border-lnd-accent/55 dark:hover:bg-lnd-accent/15"
-                  aria-disabled={currentPage === 1}
+                    onClick={() => setPage((p) => Math.max(1, p - 1))}
+                    disabled={currentPage === 1}
+                    className="min-h-9 rounded border border-lnd-accent/25 px-3 py-1 text-sm text-lnd-accent hover:bg-lnd-accent/10 disabled:cursor-not-allowed disabled:opacity-50 dark:border-lnd-accent/55 dark:bg-lnd-surface dark:text-lnd-accent dark:hover:bg-lnd-accent/15"
+                    aria-disabled={currentPage === 1}
                 >
-                  Prev
+                    Prev
                 </button>
-
-                <div className="flex items-center space-x-2">
-                  {totalPages > 4 ? (
-                    (() => {
-                      const start = Math.min(currentPage, totalPages - 2) // ensure room for "last"
-                      const first = start
-                      const second = start + 1
-                      const pages: number[] = [first, second].filter((p) => p >= 1 && p <= totalPages)
-
-                      return (
-                        <>
-                          {pages.map((p) => {
-                            const isActive = p === currentPage
-                            return (
-                              <button
-                                key={p}
-                                onClick={() => setPage(p)}
-                                className={
-                                  "px-3 py-1 rounded text-sm " +
-                                  (isActive
-                                    ? "bg-lnd-accent text-lnd-accent-fg dark:bg-lnd-accent dark:text-lnd-accent-fg"
-                                    : "border border-lnd-accent/25 text-lnd-accent hover:bg-lnd-accent/10 dark:border-lnd-accent/55 dark:text-lnd-accent dark:hover:bg-lnd-accent/15")
-                                }
-                                aria-current={isActive ? "page" : undefined}
-                              >
-                                {p}
-                              </button>
-                            )
-                          })}
-
-                          {pages[pages.length - 1] < totalPages - 1 && (
-                            <span className="px-3 py-1 text-sm text-lnd-fg-muted dark:text-lnd-fg-muted">…</span>
-                          )}
-
-                          {pages[pages.length - 1] < totalPages && (
-                            <button
-                              key={totalPages}
-                              onClick={() => setPage(totalPages)}
-                              className={
-                                "px-3 py-1 rounded text-sm " +
-                                (currentPage === totalPages
-                                  ? "bg-lnd-accent text-lnd-accent-fg dark:bg-lnd-accent dark:text-lnd-accent-fg"
-                                  : "border border-lnd-accent/25 text-lnd-accent hover:bg-lnd-accent/10 dark:border-lnd-accent/55 dark:text-lnd-accent dark:hover:bg-lnd-accent/15")
-                              }
-                              aria-current={currentPage === totalPages ? "page" : undefined}
-                            >
-                              {totalPages}
-                            </button>
-                          )}
-                        </>
-                      )
-                    })()
-                  ) : (
-                    Array.from({ length: totalPages }, (_, i) => {
-                      const p = i + 1
-                      const isActive = p === currentPage
-                      return (
-                        <button
-                          key={p}
-                          onClick={() => setPage(p)}
-                          className={
-                            "px-3 py-1 rounded text-sm " +
-                            (isActive
-                              ? "bg-lnd-accent text-lnd-accent-fg dark:bg-lnd-accent dark:text-lnd-accent-fg"
-                              : "border border-lnd-accent/25 text-lnd-accent hover:bg-lnd-accent/10 dark:border-lnd-accent/55 dark:text-lnd-accent dark:hover:bg-lnd-accent/15")
-                          }
-                          aria-current={isActive ? "page" : undefined}
-                        >
-                          {p}
-                        </button>
-                      )
-                    })
-                  )}
-                </div>
-
+                <span className="shrink-0 text-center text-xs text-lnd-fg-muted dark:text-lnd-fg-muted">
+                    Page {currentPage} of {totalPages}
+                </span>
                 <button
-                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                  disabled={currentPage === totalPages}
-                  className="px-3 py-1 rounded bg-lnd-accent text-lnd-accent-fg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-lnd-accent/90 dark:bg-lnd-accent dark:hover:bg-lnd-accent/90"
-                  aria-disabled={currentPage === totalPages}
+                    onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                    disabled={currentPage === totalPages}
+                    className="min-h-9 rounded bg-lnd-accent px-3 py-1 text-sm text-lnd-accent-fg hover:bg-lnd-accent/90 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-lnd-accent dark:text-lnd-accent-fg dark:hover:bg-lnd-accent/90"
+                    aria-disabled={currentPage === totalPages}
                 >
-                  Next
+                    Next
                 </button>
-              </div>
             </div>
           </>
         ) : (

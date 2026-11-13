@@ -241,7 +241,7 @@ export default function Hero() {
                         <ArrowUpRight className="h-3.5 w-3.5 text-lnd-accent" />
                     </span>
 
-                    <h1 className="mt-6 max-w-5xl font-Manrope text-[2.6rem] font-extrabold leading-[1.05] tracking-tight text-lnd-fg sm:text-6xl lg:text-[4.25rem]">
+                    <h1 className="mt-6 max-w-5xl font-Manrope text-[2.05rem] font-extrabold leading-[1.05] tracking-tight text-lnd-fg sm:text-6xl lg:text-[4.25rem]">
                         <span className="block lg:inline">The global</span>{" "}
                         <span className="block lg:inline">crypto currency</span>
                         <span className="mt-1 block text-lnd-fg-muted">traders broker</span>

@@ -51,7 +51,7 @@ export default function Preferences() {
             <div className="w-full h-auto flex flex-col bg-lnd-surface rounded-[1.25rem] dark:bg-lnd-surface">
                 <div className="w-full h-auto flex items-center px-4 sm:px-7 py-4 space-x-3.5">
                     <div className="w-full h-auto flex items-center space-x-3.5">
-                        <OrderComfirmation className="w-[1.9rem] h-[1.9rem]" />
+                        <OrderComfirmation className="h-[1.9rem] w-[1.9rem] shrink-0" />
                         <div className="flex-1 min-w-0 lg:w-auto h-auto space-y-1 font-Manrope pl-1">
                             <h1 className="text-[.89rem] text-lnd-fg font-bold dark:text-lnd-fg">Order Confirmation</h1>
                             <p className="text-[.76rem] text-lnd-fg-muted dark:text-lnd-fg-muted">Enable to receive a pop-up Order Confirmation with order details when you place orders.</p>
@@ -88,7 +88,7 @@ export default function Preferences() {
             <div className="w-full h-auto flex flex-col bg-lnd-surface rounded-[1.25rem] mt-6! dark:bg-lnd-surface">
                 <div className="w-full h-auto flex items-center justify-between border-b border-lnd-border px-4 sm:px-7 py-4 space-x-3.5 dark:border-lnd-border">
                     <div className="flex min-w-0 flex-1 items-center space-x-3.5">
-                        <Discount className="w-[1.9rem] h-[1.9rem]" />
+                        <Discount className="h-[1.9rem] w-[1.9rem] shrink-0" />
                         <div className="flex-1 min-w-0 lg:w-auto  h-auto space-y-1 font-Manrope pl-1">
                             <h1 className="text-[.89rem] text-lnd-fg font-bold dark:text-lnd-fg">Use USDT as Fees</h1>
                             <p className="text-[.78rem] text-lnd-fg-muted dark:text-lnd-fg-muted">By activating &quot;Use USDT as Fees&quot;, USDT will be applied to pay trading fee per transaction (20%).</p>
@@ -100,9 +100,9 @@ export default function Preferences() {
                         className="w-9 h-5 shrink-0" 
                     />
                 </div>
-                <div className="w-full h-auto flex items-center justify-between border-b border-lnd-border px-4 sm:px-7 py-4 space-x-3.5 dark:border-lnd-border">
+                <div className="flex w-full flex-col gap-3 border-b border-lnd-border px-4 py-4 dark:border-lnd-border sm:flex-row sm:items-center sm:justify-between sm:space-x-3.5 sm:px-7">
                     <div className="flex min-w-0 flex-1 items-center space-x-3.5">
-                        <Fee className="w-[1.9rem] h-[1.9rem]" />
+                        <Fee className="h-[1.9rem] w-[1.9rem] shrink-0" />
                         <div className="flex-1 min-w-0 lg:w-auto  h-auto space-y-1 font-Manrope pl-1">
                             <h1 className="text-[.89rem] text-lnd-fg font-bold dark:text-lnd-fg">Pay Withdrawal Fee</h1>
                             <p className="text-[.78rem] text-lnd-fg-muted dark:text-lnd-fg-muted">Choose the asset used for withdrawal fees.</p>
@@ -112,7 +112,7 @@ export default function Preferences() {
                 </div>
                 <div className="w-full h-auto flex items-center justify-between border-b border-lnd-border px-4 sm:px-7 py-4 space-x-3.5 dark:border-lnd-border">
                     <div className="flex min-w-0 flex-1 items-center space-x-3.5">
-                        <CurrencyIcon className="w-[1.9rem] h-[1.9rem]" />
+                        <CurrencyIcon className="h-[1.9rem] w-[1.9rem] shrink-0" />
                         <div className="w-auto h-auto space-y-1 font-Manrope pl-1">
                             <h1 className="text-[.89rem] text-lnd-fg font-bold dark:text-lnd-fg">Currency</h1>
                         </div>
@@ -121,7 +121,7 @@ export default function Preferences() {
                 </div>
                 <div className="w-full h-auto flex items-center justify-between border-b border-lnd-border px-4 sm:px-7 py-4 space-x-3.5 dark:border-lnd-border">
                     <div className="flex min-w-0 flex-1 items-center space-x-3.5">
-                        <LanguageIcon className="w-[1.9rem] h-[1.9rem]" />
+                        <LanguageIcon className="h-[1.9rem] w-[1.9rem] shrink-0" />
                         <div className="w-auto h-auto space-y-1 font-Manrope pl-1">
                             <h1 className="text-[.89rem] text-lnd-fg font-bold dark:text-lnd-fg">Language</h1>
                         </div>
@@ -130,7 +130,7 @@ export default function Preferences() {
                 </div>
                 <div className="w-full h-auto flex items-center justify-between px-4 sm:px-7 py-4 space-x-3.5">
                     <div className="flex min-w-0 flex-1 items-center space-x-3.5">
-                        <DarkMode className="w-[1.9rem] h-[1.9rem]" />
+                        <DarkMode className="h-[1.9rem] w-[1.9rem] shrink-0" />
                         <div className="w-auto h-auto space-y-1 font-Manrope pl-1">
                             <h1 className="text-[.89rem] text-lnd-fg font-bold dark:text-lnd-fg">Dark Mode</h1>
                         </div>

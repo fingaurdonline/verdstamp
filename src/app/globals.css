@@ -211,8 +211,31 @@
   * {
     @apply border-border;
   }
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .lnd-scroll-x {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-color: rgb(var(--lnd-border)) transparent;
+    scrollbar-width: thin;
+  }
+  .lnd-safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
   }
 }
 

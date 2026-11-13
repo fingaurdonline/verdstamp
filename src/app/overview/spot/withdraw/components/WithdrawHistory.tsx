@@ -66,17 +66,22 @@ export default function WithdrawTable() {
 
     return (
         <>
-            <div className="w-full h-fit pb-8 flex flex-col bg-lnd-surface rounded-[1.4rem] dark:bg-lnd-surface">
-                <div className="flex  flex-col lg:flex-row items-start w-full h-auto pt-6 pb-3 px-6 space-y-3 lg:space-y-0 lg:justify-between lg:items-center">
-                    <div className="flex items-center space-x-3 lg:space-x-1 text-[.95rem] dark:text-lnd-fg">
-                        <span>Last 6 Deposit Records</span>
-                        <BiRefresh className="w-[1.4rem] h-[1.4rem] text-lnd-accent mt-1 dark:text-lnd-accent" />
+            <div className="flex h-fit w-full flex-col rounded-[1.4rem] bg-lnd-surface pb-8 dark:bg-lnd-surface">
+                <div className="flex h-auto w-full flex-col items-start gap-3 px-4 pb-3 pt-6 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:gap-0">
+                    <div className="flex flex-wrap items-center gap-2 text-[.95rem] dark:text-lnd-fg sm:gap-3">
+                        <span>Last 6 Withdrawal Records</span>
+                        <BiRefresh className="mt-0.5 h-[1.4rem] w-[1.4rem] text-lnd-accent dark:text-lnd-accent" />
                     </div>
-                    <span className="w-fit h-fit py-[.16rem] px-7 text-[.75rem] font-normal font-Manrope text-lnd-accent bg-lnd-surface border border-lnd-accent/55 hover:text-lnd-accent-fg hover:bg-lnd-accent/90 transition-all duration-300 rounded-full dark:bg-lnd-surface dark:text-lnd-accent dark:border-lnd-accent/55 dark:hover:bg-lnd-accent/15 dark:hover:text-lnd-accent">
+                    <span className="h-fit w-fit rounded-full border border-lnd-accent/55 bg-lnd-surface px-6 py-[.16rem] font-Manrope text-[.75rem] font-normal text-lnd-accent transition-all duration-300 hover:bg-lnd-accent/90 hover:text-lnd-accent-fg dark:border-lnd-accent/55 dark:bg-lnd-surface dark:text-lnd-accent dark:hover:bg-lnd-accent/15 dark:hover:text-lnd-accent">
                         All Records
                     </span>
                 </div>
-                <div className="w-full h-fit flex flex-col space-y-10 py-4 lg:hidden px-4">
+                <div className="flex h-fit w-full flex-col gap-4 px-4 py-4 lg:hidden">
+                    {paginated.length === 0 ? (
+                        <p className="rounded-2xl border border-dashed border-lnd-border px-4 py-8 text-center text-sm text-lnd-fg-muted">
+                            No withdrawals to display
+                        </p>
+                    ) : null}
                     {
                         paginated.map((deposit: any) => {
                             const crypto = cryptoData?.data?.data?.find((c: CryptoCurrency) => c?.name?.toLocaleLowerCase() === deposit?.coin_type?.toLocaleLowerCase()) as CryptoCurrency | undefined;
@@ -94,7 +99,7 @@ export default function WithdrawTable() {
                                             <Badge className="text-white bg-orange-600">Pending</Badge>
                                         ) : deposit?.status === "failed" ? (
                                             <Badge className="text-white bg-red-600">Failed</Badge>
-                                        ) : deposit?.status === "failed" ? (
+                                        ) : deposit?.status === "completed" ? (
                                             <Badge className="text-white bg-green-600">Completed</Badge>
                                         ) : (
                                             <Badge className="text-lnd-fg bg-lnd-surface-2">—</Badge>
@@ -123,7 +128,7 @@ export default function WithdrawTable() {
                                     <div>
                                         <p className="text-xs text-muted-foreground mb-1.5 dark:text-lnd-fg-muted">Sender Address</p>
                                         <div className="flex items-center justify-between gap-2">
-                                            <code className="text-sm font-mono text-card-foreground dark:text-lnd-fg">{maskAddress(deposit.sender)}</code>
+                                            <code className="min-w-0 flex-1 break-all font-mono text-sm text-card-foreground dark:text-lnd-fg">{maskAddress(deposit.sender)}</code>
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
@@ -137,7 +142,7 @@ export default function WithdrawTable() {
                                     <div>
                                         <p className="text-xs text-muted-foreground mb-1.5 dark:text-lnd-fg-muted">Transaction ID</p>
                                         <div className="flex items-center justify-between gap-2">
-                                            <code className="text-sm font-mono text-card-foreground dark:text-lnd-fg">{maskAddress(deposit._id)}</code>
+                                            <code className="min-w-0 flex-1 break-all font-mono text-sm text-card-foreground dark:text-lnd-fg">{maskAddress(deposit._id)}</code>
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
@@ -213,100 +218,28 @@ export default function WithdrawTable() {
             {/* Pagination controls */}
             <div className="w-full mt-3">
                 {/* Mobile pagination (shown on small screens) */}
-                <div className="flex items-center justify-between lg:hidden bg-lnd-surface px-4 py-3 rounded-lg shadow-sm">
-                    <div className="w-full flex items-center justify-between">
-                        <button
-                            onClick={() => setPage((p) => Math.max(1, p - 1))}
-                            disabled={currentPage === 1}
-                            className="px-3 py-1 border rounded text-sm text-lnd-accent border-lnd-accent/25 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-lnd-accent/10 dark:text-lnd-accent dark:border-lnd-accent/55 dark:hover:bg-lnd-accent/15 dark:bg-lnd-surface"
-                            aria-disabled={currentPage === 1}
-                        >
-                            Prev
-                        </button>
+                <div className="flex items-center justify-between gap-2 rounded-lg bg-lnd-surface px-3 py-3 shadow-sm dark:bg-lnd-surface lg:hidden">
+                    <button
+                        onClick={() => setPage((p) => Math.max(1, p - 1))}
+                        disabled={currentPage === 1}
+                        className="min-h-9 rounded border border-lnd-accent/25 px-3 py-1 text-sm text-lnd-accent hover:bg-lnd-accent/10 disabled:cursor-not-allowed disabled:opacity-50 dark:border-lnd-accent/55 dark:bg-lnd-surface dark:text-lnd-accent dark:hover:bg-lnd-accent/15"
+                        aria-disabled={currentPage === 1}
+                    >
+                        Prev
+                    </button>
 
-                        <div className="flex items-center space-x-2">
-                            {totalPages > 4 ? (
-                                (() => {
-                                    const start = Math.min(currentPage, totalPages - 2) // ensure room for "last"
-                                    const first = start
-                                    const second = start + 1
-                                    const pages: number[] = [first, second].filter((p) => p >= 1 && p <= totalPages)
+                    <span className="shrink-0 text-center text-xs text-lnd-fg-muted dark:text-lnd-fg-muted">
+                        Page {currentPage} of {totalPages}
+                    </span>
 
-                                    return (
-                                        <>
-                                            {pages.map((p) => {
-                                                const isActive = p === currentPage
-                                                return (
-                                                    <button
-                                                        key={p}
-                                                        onClick={() => setPage(p)}
-                                                        className={
-                                                            "px-3 py-1 rounded text-sm " +
-                                                            (isActive
-                                                                ? "bg-lnd-accent text-lnd-accent-fg dark:bg-lnd-accent dark:text-lnd-accent-fg"
-                                                                : "border border-lnd-accent/25 text-lnd-accent hover:bg-lnd-accent/10 dark:border-lnd-accent/55 dark:text-lnd-accent dark:hover:bg-lnd-accent/15 dark:bg-lnd-surface")
-                                                        }
-                                                        aria-current={isActive ? "page" : undefined}
-                                                    >
-                                                        {p}
-                                                    </button>
-                                                )
-                                            })}
-
-                                            {pages[pages.length - 1] < totalPages - 1 && (
-                                                <span className="px-3 py-1 text-sm text-lnd-fg-muted dark:text-lnd-fg-muted">…</span>
-                                            )}
-
-                                            {pages[pages.length - 1] < totalPages && (
-                                                <button
-                                                    key={totalPages}
-                                                    onClick={() => setPage(totalPages)}
-                                                    className={
-                                                        "px-3 py-1 rounded text-sm " +
-                                                        (currentPage === totalPages
-                                                            ? "bg-lnd-accent text-lnd-accent-fg dark:bg-lnd-accent dark:text-lnd-accent-fg"
-                                                            : "border border-lnd-accent/25 text-lnd-accent hover:bg-lnd-accent/10 dark:border-lnd-accent/55 dark:text-lnd-accent dark:hover:bg-lnd-accent/15 dark:bg-lnd-surface")
-                                                    }
-                                                    aria-current={currentPage === totalPages ? "page" : undefined}
-                                                >
-                                                    {totalPages}
-                                                </button>
-                                            )}
-                                        </>
-                                    )
-                                })()
-                            ) : (
-                                Array.from({ length: totalPages }, (_, i) => {
-                                    const p = i + 1
-                                    const isActive = p === currentPage
-                                    return (
-                                        <button
-                                            key={p}
-                                            onClick={() => setPage(p)}
-                                            className={
-                                                "px-3 py-1 rounded text-sm " +
-                                                (isActive
-                                                    ? "bg-lnd-accent text-lnd-accent-fg"
-                                                    : "border border-lnd-accent/25 text-lnd-accent hover:bg-lnd-accent/10")
-                                            }
-                                            aria-current={isActive ? "page" : undefined}
-                                        >
-                                            {p}
-                                        </button>
-                                    )
-                                })
-                            )}
-                        </div>
-
-                        <button
-                            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                            disabled={currentPage === totalPages}
-                            className="px-3 py-1 rounded bg-lnd-accent text-lnd-accent-fg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-lnd-accent/90 dark:bg-lnd-accent dark:hover:bg-lnd-accent/90 dark:text-lnd-accent-fg"
-                            aria-disabled={currentPage === totalPages}
-                        >
-                            Next
-                        </button>
-                    </div>
+                    <button
+                        onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                        disabled={currentPage === totalPages}
+                        className="min-h-9 rounded bg-lnd-accent px-3 py-1 text-sm text-lnd-accent-fg hover:bg-lnd-accent/90 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-lnd-accent dark:text-lnd-accent-fg dark:hover:bg-lnd-accent/90"
+                        aria-disabled={currentPage === totalPages}
+                    >
+                        Next
+                    </button>
                 </div>
 
                 {/* Desktop pagination (shown on lg and up) */}

@@ -5,6 +5,7 @@ import { useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import AuthHeader from "./components/AuthHeader";
+import AuthLoadingSkeleton from "@/components/AuthLoadingSkeleton";
 
 export default function AuthLayout(
     {
@@ -37,7 +38,7 @@ export default function AuthLayout(
                 {canRenderAuth ? (
                     children
                 ) : (
-                    <div className="min-h-[calc(100dvh-4rem)] w-full" />
+                    <AuthLoadingSkeleton />
                 )}
             </main>
         </div>

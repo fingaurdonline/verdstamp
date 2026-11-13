@@ -27,81 +27,81 @@ export default function Verification() {
                                 Personal Verification
                             </span>
                         </div>
-                        <div className="w-full h-auto bg-lnd-surface rounded-lg lg:bg-transparent space-y-4 lg:space-y-7 p-4 lg:p-0 dark:bg-lnd-surface">
-                            <div className="w-full h-[6.5rem] flex lg:rounded-[1.25rem] overflow-hidden lg:bg-linear-to-r lg:from-lnd-accent lg:to-lnd-accent-fill">
-                                <div className="w-auto h-auto flex flex-col justify-center lg:p-10 space-y-2">
-                                    <span className="w-auto h-auto flex space-x-2">
-                                        <Image src="/assets/icon-rights.webp" alt="icon-rights" width={100} height={100} className="w-6 h-6" />
-                                        <span className="lg:text-lnd-accent-fg text-[.95rem]">After passing the ID verification, you will be entitled to the below privileges:</span>
+                        <div className="flex h-auto w-full flex-col gap-4 rounded-lg bg-lnd-surface p-4 dark:bg-lnd-surface lg:space-y-3 lg:bg-transparent lg:p-0">
+                            <div className="flex min-h-[6.5rem] w-full flex-col justify-center overflow-hidden rounded-xl bg-lnd-accent/5 px-4 py-5 dark:bg-lnd-surface-2 lg:rounded-[1.25rem] lg:bg-linear-to-r lg:from-lnd-accent lg:to-lnd-accent-fill lg:p-10">
+                                <div className="flex h-auto w-auto flex-col justify-center space-y-2">
+                                    <span className="flex w-auto items-start gap-2">
+                                        <Image src="/assets/icon-rights.webp" alt="icon-rights" width={100} height={100} className="h-6 w-6 shrink-0" />
+                                        <span className="text-[.9rem] leading-relaxed text-lnd-fg dark:text-lnd-fg-muted lg:text-[.95rem] lg:text-lnd-accent-fg">After passing the ID verification, you will be entitled to the below privileges:</span>
                                     </span>
-                                    <span className="w-fit h-fit flex lg:items-center items-start space-x-2 lg:text-lnd-accent-fg">
-                                        <span className="w-2 h-2 rounded-full bg-black lg:bg-lnd-accent-fg translate-y-2.5 lg:translate-y-0 dark:bg-lnd-surface" />
-                                        <span className="text-[1.1rem] font-semibold font-Manrope">
+                                    <span className="flex w-fit items-start gap-2 lg:items-center lg:text-lnd-accent-fg">
+                                        <span className="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-lnd-accent lg:mt-0 lg:bg-lnd-accent-fg dark:bg-lnd-surface" />
+                                        <span className="font-Manrope text-lg font-semibold leading-snug text-lnd-fg dark:text-lnd-fg lg:text-[1.1rem] lg:text-lnd-accent-fg">
                                             24H withdrawal quota:<br className="lg:hidden" /> 1,000,000 USD
                                         </span>
                                     </span>
                                 </div>
-                                <div className="hidden lg:block relative -top-20 -right-20">
-                                    <IoMdStarOutline className="w-80 h-80 -rotate-12 text-lnd-accent-fg/10" />
+                                <div className="relative -right-20 -top-20 hidden lg:block">
+                                    <IoMdStarOutline className="h-80 w-80 -rotate-12 text-lnd-accent-fg/10" />
                                 </div>
                             </div>
-                            <div className="w-full h-auto flex flex-col lg:px-10 py-2 space-y-4">
-                                <div className="text-lg font-bold font-Manrope dark:text-lnd-fg">
+                            <div className="flex w-full flex-col space-y-4 py-2 lg:px-10">
+                                <div className="font-Manrope text-lg font-bold dark:text-lnd-fg">
                                     How to Verify
                                 </div>
-                                <div className="w-full h-auto flex items-center lg:space-x-4">
-                                    <div className="w-full min-w-0 h-auto px-6 py-1 flex flex-col lg:flex-row lg:items-center justify-center lg:border-2 border-dashed border-lnd-accent/55 rounded-lg lg:space-x-3 space-y-2 lg:space-y-0 dark:bg-lnd-surface">
-                                        <span className="w-10 h-10 lg:w-14 lg:h-14 rounded-full bg-lnd-accent/10" />
-                                        <span className="w-fit h-fit flex justify-center items-center text-lnd-accent text-xs lg:text-sm px-[.37rem] border border-lnd-accent/55 rounded-full">
+                                <div className="flex w-full flex-col gap-2 lg:flex-row lg:items-center lg:gap-4">
+                                    <div className="flex h-auto w-full min-w-0 flex-col justify-center gap-2 rounded-lg border border-dashed border-lnd-accent/55 px-4 py-4 dark:bg-lnd-surface lg:flex-row lg:items-center lg:border-2 lg:px-6 lg:py-1 lg:space-x-3">
+                                        <span className="h-10 w-10 shrink-0 rounded-full bg-lnd-accent/10 lg:h-14 lg:w-14" />
+                                        <span className="flex h-fit w-fit items-center justify-center rounded-full border border-lnd-accent/55 px-[.37rem] text-xs text-lnd-accent lg:text-sm">
                                             1
                                         </span>
-                                        <span className="text-base lg:text-[1.05rem] text-lnd-fg dark:text-lnd-fg">
+                                        <span className="text-base text-lnd-fg dark:text-lnd-fg lg:text-[1.05rem]">
                                             Basic Info
                                         </span>
                                     </div>
-                                    <span className="w-fit h-fit hidden lg:block p-1 rounded-full bg-lnd-surface-2 dark:bg-lnd-surface-2">
+                                    <span className="hidden h-fit w-fit rounded-full bg-lnd-surface-2 p-1 dark:bg-lnd-surface-2 lg:block">
                                         <ChevronRight className="text-lnd-fg-muted dark:text-lnd-fg-muted" />
                                     </span>
-                                    <div className="w-full min-w-0 h-auto px-6 py-1 flex flex-col lg:flex-row lg:items-center justify-center lg:border-2 border-dashed border-lnd-accent/55 rounded-lg lg:space-x-3 space-y-2 lg:space-y-0 dark:bg-lnd-surface">
-                                        <span className="w-10 h-10 lg:w-14 lg:h-14 rounded-full bg-lnd-accent/10" />
-                                        <span className="w-fit h-fit flex justify-center items-center text-lnd-accent text-xs lg:text-sm px-[.37rem] border border-lnd-accent/55 rounded-full">
+                                    <div className="flex h-auto w-full min-w-0 flex-col justify-center gap-2 rounded-lg border border-dashed border-lnd-accent/55 px-4 py-4 dark:bg-lnd-surface lg:flex-row lg:items-center lg:border-2 lg:px-6 lg:py-1 lg:space-x-3">
+                                        <span className="h-10 w-10 shrink-0 rounded-full bg-lnd-accent/10 lg:h-14 lg:w-14" />
+                                        <span className="flex h-fit w-fit items-center justify-center rounded-full border border-lnd-accent/55 px-[.37rem] text-xs text-lnd-accent lg:text-sm">
                                             2
                                         </span>
-                                        <span className="text-base lg:text-[1.05rem] text-lnd-fg dark:text-lnd-fg">
+                                        <span className="text-base text-lnd-fg dark:text-lnd-fg lg:text-[1.05rem]">
                                             Upload ID
                                         </span>
                                     </div>
-                                    <span className="w-fit h-fit hidden lg:block p-1 rounded-full bg-lnd-surface-2 dark:bg-lnd-surface-2">
+                                    <span className="hidden h-fit w-fit rounded-full bg-lnd-surface-2 p-1 dark:bg-lnd-surface-2 lg:block">
                                         <ChevronRight className="text-lnd-fg-muted dark:text-lnd-fg-muted" />
                                     </span>
-                                    <div className="w-full min-w-0 h-auto px-6 py-1 flex flex-col lg:flex-row lg:items-center justify-center lg:border-2 border-dashed border-lnd-accent/55 rounded-lg lg:space-x-3 space-y-2 lg:space-y-0 dark:bg-lnd-surface">
-                                        <span className="w-10 h-10 lg:w-14 lg:h-14 rounded-full bg-lnd-accent/10" />
-                                        <span className="w-fit h-fit flex justify-center items-center text-lnd-accent text-xs lg:text-sm px-[.37rem] border border-lnd-accent/55 rounded-full">
+                                    <div className="flex h-auto w-full min-w-0 flex-col justify-center gap-2 rounded-lg border border-dashed border-lnd-accent/55 px-4 py-4 dark:bg-lnd-surface lg:flex-row lg:items-center lg:border-2 lg:px-6 lg:py-1 lg:space-x-3">
+                                        <span className="h-10 w-10 shrink-0 rounded-full bg-lnd-accent/10 lg:h-14 lg:w-14" />
+                                        <span className="flex h-fit w-fit items-center justify-center rounded-full border border-lnd-accent/55 px-[.37rem] text-xs text-lnd-accent lg:text-sm">
                                             3
                                         </span>
-                                        <span className="text-base lg:text-[1.05rem] text-lnd-fg dark:text-lnd-fg">
+                                        <span className="text-base text-lnd-fg dark:text-lnd-fg lg:text-[1.05rem]">
                                             Face Recognition
                                         </span>
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-full h-auto flex flex-col lg:px-10 py-2 space-y-4">
-                                <div className="text-lg font-medium lg:text-base lg:font-normal dark:text-lnd-fg">
+                            <div className="flex w-full flex-col space-y-4 py-2 lg:px-10">
+                                <div className="text-lg font-medium dark:text-lnd-fg lg:text-base lg:font-normal">
                                     Reminder
                                 </div>
-                                <div className="text-[.91rem] dark:text-lnd-fg-muted">
+                                <ul className="list-disc space-y-2 pl-5 text-[.91rem] leading-relaxed dark:text-lnd-fg-muted">
                                     <li>Please make sure that the info provided is identical to your ID info, and these informations cannot be altered once the ID verification is approved.</li>
                                     <li>If the camera is not installed on the device, please use Verdstamp App for ID Verification.</li>
                                     <li>Currently, Verdstamp does not support ID Verification for users in China, Minor Outlying Islands, Hong Kong.</li>
                                     <li>The audit results will be sent to your Email in 1~3 working days. Please check your mailbox.</li>
-                                </div>
+                                </ul>
                             </div>
-                            <div className="w-full h-auto flex flex-col items-center space-y-4 mt-40!">
-                                <span className="w-fit h-fit text-center text-sm text-lnd-fg-muted flex items-center space-x-1 dark:text-lnd-fg-muted">
-                                    <Checkbox className="flex items-center justify-center w-3.5 h-3.5 bg-lnd-surface-2 border border-lnd-border hover:border-lnd-accent/55 -translate-y-2.5 lg:translate-y-0 dark:bg-lnd-surface-2 dark:border-lnd-border" />
-                                    <span>I promise that the information is my own, and there is no pirating of someone&apos;s information</span>
+                            <div className="mt-6 flex w-full flex-col items-center gap-4 lg:mt-16">
+                                <span className="flex w-fit max-w-full items-start gap-2 text-left text-sm text-lnd-fg-muted dark:text-lnd-fg-muted">
+                                    <Checkbox className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center border border-lnd-border bg-lnd-surface-2 hover:border-lnd-accent/55 dark:border-lnd-border dark:bg-lnd-surface-2" />
+                                    <span className="min-w-0">I promise that the information is my own, and there is no pirating of someone&apos;s information</span>
                                 </span>
-                                <Button onClick={() => setOpen(true)} className="h-auto py-3 px-10 text-base font-normal bg-lnd-surface-2 hover:bg-lnd-surface-2 text-lnd-fg-muted rounded-[1.25rem] -mt-3 dark:bg-lnd-surface-2 dark:hover:bg-lnd-surface-2 dark:text-lnd-fg-muted">
+                                <Button onClick={() => setOpen(true)} className="h-auto w-full rounded-[1.25rem] bg-lnd-surface-2 px-6 py-3 text-base font-normal text-lnd-fg-muted hover:bg-lnd-surface-2 dark:bg-lnd-surface-2 dark:text-lnd-fg-muted dark:hover:bg-lnd-surface-2 sm:w-auto sm:px-10">
                                     I&apos;m all set for ID Verification
                                 </Button>
                             </div>

@@ -27,8 +27,8 @@ export function PayWithdrawalFee() {
 
     return (
         <Select value={user?.withdraw_fee_asset} onValueChange={handleFeeChange}>
-            <SelectTrigger className="w-32 sm:w-40 lg:w-32 h-7 flex items-center lg:px-3 space-x-2 border hover:border-lnd-accent/55 transition-all duration-300">
-                <SelectValue placeholder="Select Asset" />
+            <SelectTrigger className="flex h-9 w-full items-center gap-2 rounded-md border px-2.5 text-sm transition-all duration-300 hover:border-lnd-accent/55 [&>span]:truncate sm:w-40 lg:w-32 lg:px-3">
+                <SelectValue placeholder="Asset" />
             </SelectTrigger>
             <SelectContent>
                 <SelectGroup>

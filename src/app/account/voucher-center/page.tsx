@@ -282,7 +282,7 @@ export default function VoucherCenter() {
                 className="h-9 w-full rounded-xl border-lnd-border bg-lnd-surface pl-9 text-[0.74rem] sm:w-[190px]"
               />
             </div>
-            <div className="flex items-center gap-2">
+            <div className="grid grid-cols-1 gap-2 sm:flex sm:items-center">
               <SelectType value={typeFilter} onChange={setTypeFilter} />
               {tab === "mine" ? (
                 <SelectStatus value={statusFilter} onChange={setStatusFilter} />

@@ -114,13 +114,13 @@ export default function VoucherCard({
   return (
     <article className="db-card flex flex-col gap-3.5 p-4">
       <div className="flex items-start justify-between gap-3">
-        <div className="flex items-start gap-3">
-          <span className={cn("db-icon-tile", meta.tile)}>
+        <div className="flex min-w-0 items-start gap-3">
+          <span className={cn("db-icon-tile shrink-0", meta.tile)}>
             <Icon className="h-5 w-5" />
           </span>
-          <div>
+          <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
-              <h3 className="font-Manrope text-[0.92rem] font-bold leading-tight text-lnd-fg">
+              <h3 className="min-w-0 break-words font-Manrope text-[0.92rem] font-bold leading-tight text-lnd-fg">
                 {source.title}
               </h3>
               {status ? (
@@ -139,7 +139,7 @@ export default function VoucherCard({
             </p>
           </div>
         </div>
-        <div className="text-right">
+        <div className="shrink-0 text-right">
           <p className="font-Manrope text-[1.3rem] font-extrabold leading-none text-lnd-fg">
             {valueLabel(source)}
           </p>

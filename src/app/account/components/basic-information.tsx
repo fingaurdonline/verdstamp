@@ -58,7 +58,7 @@ export default function BasicInformation({ form }: BasicInformationProps) {
           value={watch('nationality')}
           onValueChange={(val) => setValue('nationality', val, { shouldValidate: true })}
         >
-          <SelectTrigger className="w-full px-4 py-2 border border-lnd-border dark:border-lnd-border rounded-lg focus:outline-none focus:ring-2 focus:ring-lnd-accent/30 focus:border-transparent bg-lnd-surface dark:bg-lnd-surface text-lnd-fg dark:text-lnd-fg">
+          <SelectTrigger className="h-11 w-full min-w-0 rounded-lg border border-lnd-border bg-lnd-surface px-3 py-2 text-sm text-lnd-fg focus:border-transparent focus:outline-none focus:ring-2 focus:ring-lnd-accent/30 dark:border-lnd-border dark:bg-lnd-surface dark:text-lnd-fg sm:px-4">
             <SelectValue placeholder="Please choose" />
           </SelectTrigger>
           <SelectContent>
@@ -83,7 +83,7 @@ export default function BasicInformation({ form }: BasicInformationProps) {
           value={watch('country')}
           onValueChange={(val) => setValue('country', val, { shouldValidate: true })}
         >
-          <SelectTrigger className="w-full px-4 py-2 border border-lnd-border dark:border-lnd-border rounded-lg focus:outline-none focus:ring-2 focus:ring-lnd-accent/30 focus:border-transparent bg-lnd-surface dark:bg-lnd-surface text-lnd-fg dark:text-lnd-fg">
+          <SelectTrigger className="h-11 w-full min-w-0 rounded-lg border border-lnd-border bg-lnd-surface px-3 py-2 text-sm text-lnd-fg focus:border-transparent focus:outline-none focus:ring-2 focus:ring-lnd-accent/30 dark:border-lnd-border dark:bg-lnd-surface dark:text-lnd-fg sm:px-4">
             <SelectValue placeholder="Please choose" />
           </SelectTrigger>
           <SelectContent>
@@ -129,7 +129,7 @@ export default function BasicInformation({ form }: BasicInformationProps) {
             value={watch('dateOfBirth.year')}
             onValueChange={(val) => setValue('dateOfBirth.year', val, { shouldValidate: true })}
           >
-            <SelectTrigger className="px-2 lg:px-4 py-2 border border-lnd-border dark:border-lnd-border rounded-lg focus:outline-none focus:ring-2 focus:ring-lnd-accent/30 focus:border-transparent bg-lnd-surface dark:bg-lnd-surface text-lnd-fg dark:text-lnd-fg">
+            <SelectTrigger className="h-11 min-w-0 rounded-lg border border-lnd-border bg-lnd-surface px-1.5 py-2 text-xs text-lnd-fg focus:border-transparent focus:outline-none focus:ring-2 focus:ring-lnd-accent/30 dark:border-lnd-border dark:bg-lnd-surface dark:text-lnd-fg sm:px-2 sm:text-sm lg:px-4">
               <SelectValue placeholder="Year" />
             </SelectTrigger>
             <SelectContent>
@@ -144,7 +144,7 @@ export default function BasicInformation({ form }: BasicInformationProps) {
             value={watch('dateOfBirth.month')}
             onValueChange={(val) => setValue('dateOfBirth.month', val, { shouldValidate: true })}
           >
-            <SelectTrigger className="px-2 lg:px-4 py-2 border border-lnd-border dark:border-lnd-border rounded-lg focus:outline-none focus:ring-2 focus:ring-lnd-accent/30 focus:border-transparent bg-lnd-surface dark:bg-lnd-surface text-lnd-fg dark:text-lnd-fg">
+            <SelectTrigger className="h-11 min-w-0 rounded-lg border border-lnd-border bg-lnd-surface px-1.5 py-2 text-xs text-lnd-fg focus:border-transparent focus:outline-none focus:ring-2 focus:ring-lnd-accent/30 dark:border-lnd-border dark:bg-lnd-surface dark:text-lnd-fg sm:px-2 sm:text-sm lg:px-4">
               <SelectValue placeholder="Month" />
             </SelectTrigger>
             <SelectContent>
@@ -159,7 +159,7 @@ export default function BasicInformation({ form }: BasicInformationProps) {
             value={watch('dateOfBirth.day')}
             onValueChange={(val) => setValue('dateOfBirth.day', val, { shouldValidate: true })}
           >
-            <SelectTrigger className="px-2 lg:px-4 py-2 border border-lnd-border dark:border-lnd-border rounded-lg focus:outline-none focus:ring-2 focus:ring-lnd-accent/30 focus:border-transparent bg-lnd-surface dark:bg-lnd-surface text-lnd-fg dark:text-lnd-fg">
+            <SelectTrigger className="h-11 min-w-0 rounded-lg border border-lnd-border bg-lnd-surface px-1.5 py-2 text-xs text-lnd-fg focus:border-transparent focus:outline-none focus:ring-2 focus:ring-lnd-accent/30 dark:border-lnd-border dark:bg-lnd-surface dark:text-lnd-fg sm:px-2 sm:text-sm lg:px-4">
               <SelectValue placeholder="Day" />
             </SelectTrigger>
             <SelectContent>

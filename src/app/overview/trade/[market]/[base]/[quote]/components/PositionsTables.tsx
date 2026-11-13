@@ -138,6 +138,9 @@ export default function PositionsTables({ plans, now }: PositionsTablesProps) {
               </TabsTrigger>
             ))}
           </TabsList>
+          <p className="px-1 pb-2 pt-1.5 text-[0.62rem] text-lnd-fg-muted lg:hidden">
+            Swipe sideways on the table to see every column →
+          </p>
         </div>
 
         <TabsContent value="open" className="mt-0">
