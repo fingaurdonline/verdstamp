@@ -180,7 +180,7 @@ export default function LoginForm() {
         try {
             await authClient.requestPasswordReset({
                 email: targetEmail,
-                redirectTo: 'https://verdstamp.com/auth/reset-password'
+                redirectTo: 'https://verdstampdigital.app/auth/reset-password'
             });
             toast.custom((id) => <CustomToastSuccessReset />);
         } catch (error) {
@@ -199,9 +199,9 @@ export default function LoginForm() {
                         <FaUserCircle className="h-6 w-6" />
                     </span>
                     <div>
-                        <h3 className="font-Manrope text-2xl font-extrabold tracking-tight text-lnd-fg">
+                        <h1 className="font-Manrope text-2xl font-extrabold tracking-tight text-lnd-fg">
                             Log In
-                        </h3>
+                        </h1>
                         <p className="mt-1 text-sm text-lnd-fg-muted">
                             Login with your account
                         </p>

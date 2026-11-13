@@ -1,6 +1,5 @@
 import type { ReactNode } from "react"
-import LandingLogo from "@/app/(landing)/components/LandingLogo"
-import { BRAND } from "@/app/(landing)/components/LandingBrand"
+import LandingBrand from "@/app/(landing)/components/LandingBrand"
 
 type AuthShellProps = {
     highlight: string
@@ -27,17 +26,9 @@ export default function AuthShell({
                     <div className="lnd-dot-grid pointer-events-none absolute inset-0 opacity-70" />
                     <div className="lnd-glow pointer-events-none absolute -right-16 -top-16 h-72 w-72 rounded-full" />
 
-                    <div className="relative z-10 flex items-center gap-3">
-                        <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-lnd-surface shadow-sm">
-                            <LandingLogo className="h-11 w-11" />
-                        </span>
-                        <span className="flex flex-col leading-none">
-                            <span className="font-Manrope text-lg font-extrabold tracking-tight text-lnd-fg">
-                                {BRAND.name}
-                            </span>
-                            <span className="mt-1.5 font-Manrope text-[0.52rem] font-semibold uppercase tracking-[0.28em] text-lnd-fg-muted">
-                                {BRAND.tagline}
-                            </span>
+                    <div className="relative z-10">
+                        <span className="inline-flex items-center rounded-2xl bg-lnd-surface px-4 py-3 shadow-sm">
+                            <LandingBrand />
                         </span>
                     </div>
 
@@ -48,9 +39,9 @@ export default function AuthShell({
                         <p className="mt-2 text-xs font-semibold uppercase tracking-[0.22em] text-lnd-accent">
                             {highlightLabel}
                         </p>
-                        <h1 className="mt-8 max-w-xs font-Manrope text-2xl font-extrabold leading-tight text-lnd-fg">
+                        <p className="mt-8 max-w-xs font-Manrope text-2xl font-extrabold leading-tight text-lnd-fg">
                             {title}
-                        </h1>
+                        </p>
                         <p className="mt-3 max-w-xs text-sm leading-6 text-lnd-fg-muted">
                             {description}
                         </p>

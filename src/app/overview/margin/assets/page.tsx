@@ -361,16 +361,16 @@ export default function Assets() {
     ]
 
     return (
-        <div className="w-full lg:w-auto h-auto flex flex-col gap-4">
-            <div className="w-auto h-auto flex items-center space-x-2.5 mb-1">
+        <div className="flex w-full flex-col gap-5">
+            <div className="w-auto h-auto flex items-center gap-2.5">
                 <span className="w-fit h-6 bg-blend-overlay">
                     <Icon icon="stash:circle-dot-solid" className="w-4 h-4 text-lnd-accent/30 rotate-45 relative -top-1 left-1 z-50" />
                     <Icon icon="material-symbols:pen-size-3" className="w-8 h-8 text-lnd-accent/30 relative -top-4 z-10" />
                     <Icon icon="stash:circle-dot-solid" className="w-4 h-4 text-lnd-fg-muted/50 rotate-45 relative -top-8 left-3 z-50" />
                 </span>
-                <span className="db-title">
+                <h1 className="db-title">
                     Margin
-                </span>
+                </h1>
             </div>
             <div className="w-full h-auto">
                 <div className="w-full lg:w-auto h-auto py-5 px-5 flex flex-col bg-lnd-surface dark:bg-lnd-surface rounded-[1.25rem] space-y-4">

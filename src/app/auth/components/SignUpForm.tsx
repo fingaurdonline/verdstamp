@@ -165,9 +165,9 @@ export default function SignUpForm() {
                         <FaUserCircle className="h-6 w-6" />
                     </span>
                     <div>
-                        <h3 className="font-Manrope text-2xl font-extrabold tracking-tight text-lnd-fg">
+                        <h1 className="font-Manrope text-2xl font-extrabold tracking-tight text-lnd-fg">
                             Sign Up
-                        </h3>
+                        </h1>
                         <p className="mt-1 text-sm text-lnd-fg-muted">
                             Create your account
                         </p>

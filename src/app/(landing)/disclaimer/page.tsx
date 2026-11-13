@@ -43,7 +43,7 @@ export default function Disclaimer() {
                     <p className="text-[0.66rem] font-semibold uppercase tracking-[0.18em] text-lnd-accent">
                         Legal
                     </p>
-                    <h1 className="mt-2 font-Manrope text-3xl font-extrabold tracking-tight text-lnd-fg lg:text-4xl">
+                    <h1 className="mt-3 font-Manrope text-3xl font-extrabold leading-[1.12] tracking-tight text-lnd-fg lg:text-4xl">
                         Disclaimer
                     </h1>
                     <p className="mt-3 max-w-2xl text-sm leading-relaxed text-lnd-fg-muted">
@@ -152,7 +152,7 @@ export default function Disclaimer() {
                             >
                                 <h2 className="font-Manrope text-xl font-bold text-lnd-fg mb-4">7. Fees & Charges</h2>
                                 <p className="text-sm leading-relaxed text-lnd-fg-muted mb-4">
-                                    Our fees and charges are set out at <a href="https://www.CoinMaiden.com/fees" className="text-lnd-accent underline underline-offset-2" target="_blank" rel="noopener noreferrer">https://www.CoinMaiden.com/fees</a>. Verdstamp may, in its discretion, update the fees & charges from time to time. Please be aware of all costs and charges that apply to you, because such costs and charges will affect the gains you generate from using Verdstamp Services.
+                                    Our fees and charges are set out at <a href="https://verdstampdigital.app/fees-standard" className="text-lnd-accent underline underline-offset-2" target="_blank" rel="noopener noreferrer">verdstampdigital.app/fees-standard</a>. Verdstamp may, in its discretion, update the fees & charges from time to time. Please be aware of all costs and charges that apply to you, because such costs and charges will affect the gains you generate from using Verdstamp Services.
                                 </p>
                             </section>
                             <section

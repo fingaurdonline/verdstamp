@@ -27,8 +27,8 @@ export default function OTPEmail({ email, code }: OTPEmailProps) {
                     <Container className="mx-auto my-[40px] w-full max-w-[600px] bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                         
                         {/* Header */}
-                        <Section className="px-[40px] py-[32px] border-b border-gray-100 flex items-center justify-center text-center">
-                            <Logo className="w-12 h-12 inline-block mx-auto text-[#3E9B2F]" />
+                        <Section className="px-[40px] py-[32px] border-b border-gray-100 text-center">
+                            <Logo className="mx-auto w-[180px] h-auto" />
                         </Section>
 
                         {/* Content */}

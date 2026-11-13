@@ -1,3 +1,6 @@
+import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+
 import Link from "next/link";
 import {
     ArrowUpRight,
@@ -53,6 +56,14 @@ const ADVANTAGES = [
             "With a global presence, Verdstamp is committed to providing localized services to users worldwide, fostering a vibrant and inclusive crypto ecosystem.",
     },
 ];
+
+export const metadata: Metadata = pageMetadata({
+  title: "About Us",
+  description:
+    "Discover Verdstamp's mission, security-first infrastructure, multi-signature custody and global customer support.",
+  path: "/about-us",
+  keywords: ["about Verdstamp", "crypto platform", "digital asset security"],
+});
 
 export default function AboutUs() {
     return (

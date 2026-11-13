@@ -1,3 +1,6 @@
+import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+
 import Link from "next/link";
 import {
     ArrowUpRight,
@@ -31,54 +34,54 @@ const CONTACTS = [
         title: "Business Cooperation",
         description:
             "Fiat currency deposit & withdrawal, platform business cooperation.",
-        email: "bd@coinmaiden.com",
+        email: "bd@verdstampdigital.app",
     },
     {
         icon: Gem,
         title: "Key Account Services",
         description:
             "Services for institutional clients, market makers, brokers and VIPs.",
-        email: "vip@coinmaiden.com",
+        email: "vip@verdstampdigital.app",
     },
     {
         icon: HeartHandshake,
         title: "Charity & Public Welfare",
         description:
             "Charity program collaboration, donations and funding support, public welfare campaigns.",
-        email: "charity@coinmaiden.com",
+        email: "charity@verdstampdigital.app",
     },
     {
         icon: LifeBuoy,
         title: "Product Help",
         description:
             "Feedback on accounts, products, services, and other issues.",
-        email: "support@coinmaiden.com",
+        email: "support@verdstampdigital.app",
     },
     {
         icon: Megaphone,
         title: "External Cooperation",
         description:
             "Brand cooperation and sponsorship, media and content creation, social promotion, influencer and advertising cooperation, P2P trading.",
-        email: "PR@coinmaiden.com",
+        email: "pr@verdstampdigital.app",
     },
     {
         icon: Layers,
         title: "Listing Cooperation",
         description: "Project cooperation.",
-        email: "listing@coinmaiden.com",
+        email: "listing@verdstampdigital.app",
     },
     {
         icon: ShieldAlert,
         title: "Vulnerability Report",
         description: "Know more about the Verdstamp Security Bounty Program.",
-        email: "support@coinmaiden.com",
+        email: "support@verdstampdigital.app",
     },
     {
         icon: Scale,
         title: "Legal Advice",
         description:
             "Advice on legal, regulatory or enforcement issues.",
-        email: "compliance@coinmaiden.com",
+        email: "compliance@verdstampdigital.app",
     },
 ];
 
@@ -93,6 +96,14 @@ const SOCIALS = [
     { label: "YouTube", icon: FaYoutube },
     { label: "Discord", icon: FaDiscord },
 ];
+
+export const metadata: Metadata = pageMetadata({
+  title: "Contact Us",
+  description:
+    "Contact the Verdstamp team for customer support, partnerships, listings, compliance and media enquiries.",
+  path: "/contact-us",
+  keywords: ["contact Verdstamp", "crypto support", "Verdstamp partnerships"],
+});
 
 export default function ContactUs() {
     return (

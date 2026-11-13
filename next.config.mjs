@@ -8,11 +8,6 @@ const nextConfig = {
         hostname: "s2.coinmarketcap.com",
         pathname: "/**",
       },
-      {
-        protocol: "https",
-        hostname: "file.CoinMaidenstatic.com",
-        pathname: "/**",
-      },
     ],
   },
 };

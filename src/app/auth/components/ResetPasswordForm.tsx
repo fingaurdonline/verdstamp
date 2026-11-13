@@ -115,9 +115,9 @@ export default function ResetPasswordForm() {
                     <XIcon className="h-8 w-8" />
                 </div>
                 <div className="space-y-2 text-center">
-                    <h3 className="font-Manrope text-xl font-extrabold text-lnd-fg">
+                    <h1 className="font-Manrope text-xl font-extrabold text-lnd-fg">
                         Invalid Reset Link
-                    </h3>
+                    </h1>
                     <p className="max-w-xs text-sm text-lnd-fg-muted">
                         This password reset link is invalid or has expired. Please request a new one.
                     </p>
@@ -140,9 +140,9 @@ export default function ResetPasswordForm() {
                     <CheckIcon className="h-8 w-8" />
                 </div>
                 <div className="space-y-2 text-center">
-                    <h3 className="font-Manrope text-xl font-extrabold text-lnd-fg">
+                    <h1 className="font-Manrope text-xl font-extrabold text-lnd-fg">
                         Password Reset Successfully
-                    </h3>
+                    </h1>
                     <p className="max-w-xs text-sm text-lnd-fg-muted">
                         Your password has been updated. You can now log in with your new password.
                     </p>
@@ -174,9 +174,9 @@ export default function ResetPasswordForm() {
                         <ShieldCheck className="h-6 w-6" />
                     </span>
                     <div>
-                        <h3 className="font-Manrope text-2xl font-extrabold tracking-tight text-lnd-fg">
+                        <h1 className="font-Manrope text-2xl font-extrabold tracking-tight text-lnd-fg">
                             Reset Password
-                        </h3>
+                        </h1>
                         <p className="mt-1 text-sm text-lnd-fg-muted">
                             Enter your new password below
                         </p>

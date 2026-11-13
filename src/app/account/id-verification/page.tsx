@@ -18,14 +18,14 @@ export default function Verification() {
         <>
             {
                 user_id_verified?.verified == false || open == false ?
-                    (<div className="w-full h-auto flex flex-col pt-1 space-y-7">
-                        <div className="w-full h-auto flex items-center space-x-2">
+                    (<div className="flex w-full flex-col gap-5">
+                        <div className="flex w-full items-center gap-2">
                             <span className="w-auto h-auto">
                                 <ChevronLeft className="w-8 h-8 text-lnd-fg-muted mt-1" />
                             </span>
-                            <span className="text-2xl font-extrabold font-Manrope dark:text-lnd-fg">
+                            <h1 className="font-Manrope text-2xl font-extrabold dark:text-lnd-fg">
                                 Personal Verification
-                            </span>
+                            </h1>
                         </div>
                         <div className="flex h-auto w-full flex-col gap-4 rounded-lg bg-lnd-surface p-4 dark:bg-lnd-surface lg:space-y-3 lg:bg-transparent lg:p-0">
                             <div className="flex min-h-[6.5rem] w-full flex-col justify-center overflow-hidden rounded-xl bg-lnd-accent/5 px-4 py-5 dark:bg-lnd-surface-2 lg:rounded-[1.25rem] lg:bg-linear-to-r lg:from-lnd-accent lg:to-lnd-accent-fill lg:p-10">

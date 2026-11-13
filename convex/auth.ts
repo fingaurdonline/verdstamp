@@ -18,7 +18,7 @@ export const authComponent = createClient<DataModel, typeof authSchema>(componen
     verbose: false,
 });
 
-const siteUrl = process.env.SITE_URL ?? "";
+const siteUrl = process.env.SITE_URL || "https://verdstampdigital.app";
 export const createAuthOptions = (ctx: GenericCtx<DataModel>) => {
     return {
         baseURL: siteUrl,
@@ -34,7 +34,7 @@ export const createAuthOptions = (ctx: GenericCtx<DataModel>) => {
             enabled: true,
             sendResetPassword: async ({ user, url }) => {
                 await getResend().emails.send({
-                    from: "Verdstamp <team@coinmaidenhub.com>",
+                    from: "Verdstamp <team@verdstampdigital.app>",
                     to: user.email,
                     subject: "Reset your password",
                     html: await renderResetPasswordEmail({
@@ -47,7 +47,7 @@ export const createAuthOptions = (ctx: GenericCtx<DataModel>) => {
         emailVerification: {
             async sendVerificationEmail({ user, url }) {
                 await getResend().emails.send({
-                    from: "Verdstamp <team@coinmaidenhub.com>",
+                    from: "Verdstamp <team@verdstampdigital.app>",
                     to: user.email,
                     subject: "Verify your email",
                     html: await renderVerifyEmail({

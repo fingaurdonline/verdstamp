@@ -216,7 +216,7 @@ export default function TradeTerminalPage() {
             <div className="flex flex-wrap items-end justify-between gap-3">
               <div>
                 <p className="db-eyebrow">Active plans</p>
-                <h2 className="db-title mt-1">7-day cycle progress</h2>
+                <h2 className="db-section-title mt-1">7-day cycle progress</h2>
               </div>
               {activePlans.length > 0 ? (
                 <span className="flex items-center gap-1.5 rounded-full bg-lnd-accent/10 px-2.5 py-1 text-[0.66rem] font-semibold text-lnd-accent">

@@ -167,13 +167,13 @@ const minimal_deposit = crypto?.quote?.USD?.price && crypto.quote.USD.price > 0
         : 0;
 
     return (
-        <div className="flex w-full flex-col gap-4">
-            <div className="mb-1 flex items-center gap-2.5">
+        <div className="flex w-full flex-col gap-5">
+            <div className="flex items-center gap-2.5">
                 <span className="relative flex h-6 w-fit items-center bg-blend-darken">
                     <Icon icon="icon-park-solid:hexagon-one" className="relative left-3.5 top-3 z-10 h-4 w-4 text-lnd-fg-muted/50" />
                     <Icon icon="mdi:stop-circle" className="relative -top-4 z-50 h-6 w-6 rotate-45 text-lnd-accent/30" />
                 </span>
-                <span className="db-title">Deposit</span>
+                <h1 className="db-title">Deposit</h1>
             </div>
 
             <div className="flex w-full flex-col gap-6 rounded-[1.25rem] bg-lnd-surface px-4 py-5 pb-8 sm:p-6 lg:flex-row lg:justify-between lg:gap-8 lg:px-8">
@@ -237,9 +237,9 @@ const minimal_deposit = crypto?.quote?.USD?.price && crypto.quote.USD.price > 0
                                 showAddress === false ? (
                                     <>
                                         <div className="flex w-full flex-col items-center gap-3 rounded-md border border-dashed border-lnd-border px-4 py-4 dark:bg-lnd-surface sm:px-5 sm:py-5">
-                                            <h3 className="text-center text-[.96rem] font-bold dark:text-lnd-fg">
+                                            <h2 className="text-center text-[.96rem] font-bold dark:text-lnd-fg">
                                                 <span className="text-amber-600 dark:text-amber-400">{crypto?.symbol}-{crypto?.name}</span> Risk Reminder
-                                            </h3>
+                                            </h2>
                                             <p className="pb-1 text-center text-[.78rem] leading-relaxed text-lnd-fg-muted dark:text-lnd-fg-muted">
                                                 * The address is ONLY available for <span className="text-amber-500 dark:text-amber-400">{crypto?.symbol}-{crypto?.name}</span> deposit. Deposit of other assets will lead to permanent asset loss.
                                             </p>

@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import AuthShell from "../components/AuthShell";
 import SignUpForm from "../components/SignUpForm";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-    title: "Create account | Verdstamp",
-    description: "Create your Verdstamp account.",
-};
+export const metadata: Metadata = pageMetadata({
+    title: "Create account",
+    description: "Create a Verdstamp account to buy, swap, transfer and trade digital assets.",
+    path: "/auth/signup",
+    noIndex: true,
+});
 
 export default function SignUp() {
     return (

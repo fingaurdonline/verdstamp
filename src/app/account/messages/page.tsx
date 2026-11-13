@@ -55,16 +55,16 @@ export default function Messages() {
     }
 
     return (
-        <div className="flex h-auto w-full flex-col gap-5 pt-1">
+        <div className="flex w-full flex-col gap-5">
             <div className="flex w-full items-center justify-between gap-3">
                 <div className="flex min-w-0 items-center gap-2.5">
                     <span className="h-8 w-fit shrink-0 bg-blend-overlay">
                         <Icon icon="mingcute:rectangle-vertical-fill" className="relative left-1 top-[2px] z-10 h-4 w-4 rotate-90 text-lnd-fg-muted/50" />
                         <Icon icon="bxs:message-minus" className="relative -top-2.5 z-50 h-7 w-7 text-lnd-accent/30" />
                     </span>
-                    <span className="db-title min-w-0 break-words">
+                    <h1 className="db-title min-w-0 break-words">
                         Message Center
-                    </span>
+                    </h1>
                 </div>
                 <Button
                     onClick={markAllRead}

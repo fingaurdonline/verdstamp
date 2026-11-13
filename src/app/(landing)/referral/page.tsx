@@ -208,7 +208,7 @@ export default function Referral() {
         }
     };
 
-    const referralLink = `www.coinmaidenhub.com/auth/signup?c=${user?.referral_code}`;
+    const referralLink = `https://verdstampdigital.app/auth/signup?c=${user?.referral_code}`;
 
     if (!user) {
         return (

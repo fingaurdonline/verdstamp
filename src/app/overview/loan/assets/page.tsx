@@ -369,9 +369,9 @@ export default function Assets() {
                         <Icon icon="mdi:stop-circle" className="w-5 h-5 text-lnd-accent/30 rotate-45 relative left-1 z-50" />
                         <Icon icon="fa-solid:hand-holding" className="w-6 h-6 text-lnd-fg-muted/50 z-10 relative -top-5" />
                     </span>
-                    <span className="db-title">
+                    <h1 className="db-title">
                         Loan
-                    </span>
+                    </h1>
                 </div>
                 <div className="w-auto h-auto flex items-start space-x-3 dark:text-lnd-fg">
                     <Button className="flex items-center gap-1.5 bg-lnd-accent/10 hover:bg-lnd-accent/20 border border-lnd-accent/55 py-[.15rem] px-4 rounded-md dark:bg-lnd-accent/15 dark:hover:bg-lnd-accent/25">

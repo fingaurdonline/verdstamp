@@ -8,7 +8,6 @@ import {
     Html,
     Link,
     Preview,
-    Row,
     Section,
     Text,
 } from "@react-email/components"
@@ -25,14 +24,10 @@ export default function ResetPassword({ userName, resetUrl }: ResetPasswordProps
             <Preview>Reset your password for Verdstamp</Preview>
             <Body className="bg-gray-50 font-sans">
                 <Container className="mx-auto py-8 px-4 max-w-2xl">
-                    <Section className="bg-linear-to-r from-[#A0EA82] to-[#7ED957] rounded-t-lg p-8 flex items-center justify-between text-center">
-                        <Section className="w-24 h-24 rounded-full flex justify-center items-center overflow-hidden border-[6px] border-white shadow-md">
-                            <Logo className="w-20 h-20" />
-                        </Section>
-                        <Row className="flex flex-col items-center justify-center mr-4">
-                            <Heading className="text-black text-2xl font-bold m-0 mb-2">Welcome to Verdstamp</Heading>
-                            <Text className="text-black/80 text-sm m-0">Your trusted cryptocurrency platform</Text>
-                        </Row>
+                    <Section className="bg-linear-to-r from-[#A0EA82] to-[#7ED957] rounded-t-lg p-8 text-center">
+                        <Logo className="mx-auto mb-4 w-[180px] h-auto" />
+                        <Heading className="text-black text-2xl font-bold m-0 mb-2">Welcome to Verdstamp</Heading>
+                        <Text className="text-black/80 text-sm m-0">Your trusted cryptocurrency platform</Text>
                     </Section>
                     <Section className="bg-white px-8 py-6 rounded-b-lg shadow-sm">
                         <Text className="text-gray-700 text-base leading-relaxed mb-4">

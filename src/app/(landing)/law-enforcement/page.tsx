@@ -1,7 +1,18 @@
+import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+
 import ArticleShell from "../components/ArticleShell";
 
 const DISCLAIMER =
     "Disclaimer: The content on this website is for reference only and does not constitute investment advice. It is not a substitute for professional financial advice. Consult a qualified financial advisor before making investment decisions. The owners and authors disclaim liability for losses or damages arising from reliance on this information. All investments carry risks; past performance is not indicative of future results.";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Law Enforcement Requests",
+  description:
+    "Submit law enforcement requests to Verdstamp's compliance team and review our request guide.",
+  path: "/law-enforcement",
+  keywords: ["law enforcement", "compliance", "Verdstamp legal"],
+});
 
 export default function LawEnforcementPage() {
     return (
@@ -36,11 +47,11 @@ export default function LawEnforcementPage() {
                     To process law enforcement requests promptly, send an email
                     to{" "}
                     <a
-                        href="mailto:compliance@CoinMaiden.com"
+                        href="mailto:compliance@verdstampdigital.app"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        compliance@CoinMaiden.com
+                        compliance@verdstampdigital.app
                     </a>{" "}
                     and provide the information below:
                 </p>

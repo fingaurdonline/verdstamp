@@ -38,7 +38,7 @@ export default function PrivacyPolicy() {
                     <p className="text-[0.66rem] font-semibold uppercase tracking-[0.18em] text-lnd-accent">
                         Legal
                     </p>
-                    <h1 className="mt-2 font-Manrope text-3xl font-extrabold tracking-tight text-lnd-fg lg:text-4xl">
+                    <h1 className="mt-3 font-Manrope text-3xl font-extrabold leading-[1.12] tracking-tight text-lnd-fg lg:text-4xl">
                         Privacy Policy
                     </h1>
                     <p className="mt-3 max-w-2xl text-sm leading-relaxed text-lnd-fg-muted">
@@ -84,7 +84,7 @@ export default function PrivacyPolicy() {
                             >
                                 <h2 className="font-Manrope text-xl font-bold text-lnd-fg mb-4">1. Scope of Application</h2>
                                 <p className="text-sm leading-relaxed text-lnd-fg-muted mb-4">
-                                    Verdstamp (“Verdstamp”, “we”, or “us”) is committed to protecting the privacy of our customers, and we take our data protection responsibilities with the utmost seriousness. This Privacy Policy describes how Verdstamp collects and processes your personal information through the Verdstamp websites and applications that reference this Privacy Policy. Verdstamp refers to an ecosystem comprising Verdstamp websites (whose domain names include but are not limited to https://www.CoinMaiden.com/), mobile applications, clients, applets and other applications that are developed to offer Verdstamp Services, and includes independently-operated platforms, websites and clients within the ecosystem. “Verdstamp Operators” refer to all parties that run Verdstamp, including but not limited to legal persons, unincorporated organizations and teams that provide Verdstamp Services and are responsible for such services. “Verdstamp” as used in this Privacy Policy includes Verdstamp Operators.
+                                    Verdstamp (“Verdstamp”, “we”, or “us”) is committed to protecting the privacy of our customers, and we take our data protection responsibilities with the utmost seriousness. This Privacy Policy describes how Verdstamp collects and processes your personal information through the Verdstamp websites and applications that reference this Privacy Policy. Verdstamp refers to an ecosystem comprising Verdstamp websites (whose domain names include but are not limited to https://verdstampdigital.app/), mobile applications, clients, applets and other applications that are developed to offer Verdstamp Services, and includes independently-operated platforms, websites and clients within the ecosystem. “Verdstamp Operators” refer to all parties that run Verdstamp, including but not limited to legal persons, unincorporated organizations and teams that provide Verdstamp Services and are responsible for such services. “Verdstamp” as used in this Privacy Policy includes Verdstamp Operators.
                                 </p>
                                 <p className="text-sm leading-relaxed text-lnd-fg-muted mb-4">
                                     This Privacy Policy applies to all Personal Information processing activities carried out by us, across platforms, websites, and departments of Verdstamp and Verdstamp Operators.
@@ -93,7 +93,7 @@ export default function PrivacyPolicy() {
                                     To the extent that you are a customer or user of our services, this Privacy Policy applies together with any terms of business and other contractual documents, including but not limited to any agreements we may have with you. To the extent that you are not a relevant stakeholder, customer or user of our services, but are using our website, this Privacy Policy also applies to you together with our Use of Cookie (as defined below).
                                 </p>
                                 <p className="text-sm leading-relaxed text-lnd-fg-muted mb-4">
-                                    We may use or disclose your personal information in compliance with this Privacy Policy to provide better services to you. By using our products and services, you consent to the practices contained in this Privacy Policy. We may amend this Privacy Policy from time to time and strongly encourage you to review it whenever you access or use Verdstamp services to stay informed about our information practices and your privacy rights and choices. If you ever have any questions about changes made to the Privacy Policy, please reach out to support@CoinMaiden.com.
+                                    We may use or disclose your personal information in compliance with this Privacy Policy to provide better services to you. By using our products and services, you consent to the practices contained in this Privacy Policy. We may amend this Privacy Policy from time to time and strongly encourage you to review it whenever you access or use Verdstamp services to stay informed about our information practices and your privacy rights and choices. If you ever have any questions about changes made to the Privacy Policy, please reach out to support@verdstampdigital.app.
                                 </p>
                                 <p className="text-sm leading-relaxed text-lnd-fg-muted mb-4">
                                     This Privacy Policy applies to:
@@ -243,7 +243,7 @@ export default function PrivacyPolicy() {
                             >
                                 <h2 className="font-Manrope text-xl font-bold text-lnd-fg mb-4">9. Your Statutory Rights</h2>
                                 <p className="text-sm leading-relaxed text-lnd-fg-muted mb-4">
-                                    Depending on applicable law, you may have the rights as set out below, which you may exercise by contacting us at support@CoinMaiden.com.
+                                    Depending on applicable law, you may have the rights as set out below, which you may exercise by contacting us at support@verdstampdigital.app.
                                     <br className="mb-4" />
                                     A）Access: you are entitled to ask us if we are processing your information and, if we are, you can request access to your personal data. This enables you to receive a copy of the personal data we hold about you and certain other information about it to check that we are lawfully processing it. We process a large quantity of information, and can thus request that before the information is delivered, you specify the information or processing activities to which your request relates.
                                     <br className="mb-4" />
@@ -267,7 +267,7 @@ export default function PrivacyPolicy() {
                             >
                                 <h2 className="font-Manrope text-xl font-bold text-lnd-fg mb-4">10. Contact Us</h2>
                                 <p className="text-sm leading-relaxed text-lnd-fg-muted mb-4">
-                                    If you have any questions relating to our privacy policy and your rights and obligations arising from these policy terms, or if you intend to exercise your rights stated in this privacy policy, please contact support@CoinMaiden.com.
+                                    If you have any questions relating to our privacy policy and your rights and obligations arising from these policy terms, or if you intend to exercise your rights stated in this privacy policy, please contact support@verdstampdigital.app.
                                 </p>
                             </section>
                 </article>

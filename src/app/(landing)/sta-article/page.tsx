@@ -1,7 +1,21 @@
+import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+
 import ArticleShell from "../components/ArticleShell";
 
 const DISCLAIMER =
     "Disclaimer: The content on this website is for reference only and does not constitute investment advice. It is not a substitute for professional financial advice, consultation, or recommendations. We strongly recommend that users consult with a qualified financial advisor before making any investment decisions. The owners and authors of this website disclaim any liability for any losses or damages incurred as a result of reliance on the information provided. All investments carry risks, and past performance is not indicative of future results.";
+
+export const metadata: Metadata = pageMetadata({
+  title: "ST (Special Treatment) Warning Rules",
+  description:
+    "Read Verdstamp's ST warning rules for listed digital assets, risk labels and review procedures.",
+  path: "/sta-article",
+  type: "article",
+  publishedTime: "2022-07-29",
+  modifiedTime: "2023-08-18",
+  keywords: ["ST warning", "special treatment", "listed assets", "Verdstamp"],
+});
 
 export default function STWarningArticle() {
     return (
@@ -110,7 +124,7 @@ export default function STWarningArticle() {
             <p>
                 See{" "}
                 <a
-                    href="https://www.CoinMaiden.com/help/sections/articles/360034566714"
+                    href="https://verdstampdigital.app/support"
                     target="_blank"
                     rel="noopener noreferrer"
                 >

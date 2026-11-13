@@ -5,7 +5,7 @@ export async function POST(req: Request) {
   const { username, url, email } = await req.json();
   try {
     const { data, error } = await getResend().emails.send({
-      from: "Verdstamp <team@coinmaidenhub.com>",
+      from: "Verdstamp <team@verdstampdigital.app>",
       to: email,
       subject: "Email Verification",
       react: VerifyEmail({

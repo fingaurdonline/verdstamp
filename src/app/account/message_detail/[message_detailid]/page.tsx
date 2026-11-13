@@ -35,7 +35,7 @@ export default function MessageDetail() {
                     <div className="flex justify-center min-h-fit bg-lnd-surface-2 dark:bg-lnd-surface">
                         <Card className="w-full max-w-md bg-lnd-surface dark:bg-lnd-surface">
                             <CardHeader className="flex justify-center pb-2">
-                                <h2 className="text-xl font-semibold text-center mt-4 dark:text-lnd-fg">{message.title}</h2>
+                                <h1 className="text-xl font-semibold text-center mt-4 dark:text-lnd-fg">{message.title}</h1>
                             </CardHeader>
                             <CardContent>
                                 <div className="space-y-4">
@@ -79,7 +79,7 @@ export default function MessageDetail() {
                         <div className="flex justify-center min-h-fit bg-lnd-surface-2 dark:bg-lnd-surface">
                             <Card className="w-full max-w-md bg-lnd-surface dark:bg-lnd-surface">
                                 <CardHeader className="flex justify-center pb-2">
-                                    <h2 className="text-xl font-semibold text-center mt-4 dark:text-lnd-fg">{message.title}</h2>
+                                    <h1 className="text-xl font-semibold text-center mt-4 dark:text-lnd-fg">{message.title}</h1>
                                 </CardHeader>
                                 <CardContent>
                                     <div className="space-y-4">
@@ -124,7 +124,7 @@ export default function MessageDetail() {
                             <div className="flex justify-center min-h-fit bg-lnd-surface-2 dark:bg-lnd-surface">
                                 <Card className="w-full max-w-2xl bg-lnd-surface dark:bg-lnd-surface">
                                     <CardHeader className="flex justify-center pb-2">
-                                        <h2 className="text-xl font-semibold text-center mt-4 dark:text-lnd-fg">{message.title}</h2>
+                                        <h1 className="text-xl font-semibold text-center mt-4 dark:text-lnd-fg">{message.title}</h1>
                                     </CardHeader>
                                     <CardContent>
                                         <div className="space-y-4">
@@ -188,7 +188,7 @@ export default function MessageDetail() {
                                     <Card className="w-full max-w-md bg-lnd-surface dark:bg-lnd-surface mt-6 lg:mt-10">
                                         <CardHeader className="flex flex-col items-center pb-2">
                                             <div className="text-xs text-lnd-fg-muted mb-1 uppercase tracking-wider dark:text-lnd-fg-muted">{message.header}</div>
-                                            <h2 className="text-xl font-semibold text-center dark:text-lnd-fg">{message.title}</h2>
+                                            <h1 className="text-xl font-semibold text-center dark:text-lnd-fg">{message.title}</h1>
                                         </CardHeader>
                                         <CardContent>
                                             <div className="space-y-4">

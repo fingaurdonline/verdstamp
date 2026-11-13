@@ -32,24 +32,24 @@ export default function SecuritySettings() {
         return new Date(date).toLocaleString();
     }
     return (
-        <div className="w-full h-auto flex flex-col space-y-3 pt-2">
+        <div className="flex w-full flex-col gap-5">
             <div className="w-full h-auto flex items-center space-x-2.5">
                 <SecuritySettingsIcon className="w-8 h-8" />
-                <span className="db-title">
+                <h1 className="db-title">
                     Security Settings
-                </span>
+                </h1>
             </div>
             <div className="w-full h-auto flex flex-col space-y-7">
                 <div className="w-full h-auto flex flex-col space-y-4">
-                    <div className="font-Manrope font-extrabold dark:text-lnd-fg-muted">
+                    <h2 className="font-Manrope font-extrabold dark:text-lnd-fg-muted">
                         Basic Settings
-                    </div>
+                    </h2>
                     <div className="w-full h-auto flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-5">
                         <div className="w-full min-w-0 h-auto flex items-center justify-between pl-4 pr-4 py-5 sm:pl-6 sm:pr-7 sm:py-[1.72rem] space-x-1 lg:space-x-3.5 bg-lnd-surface rounded-2xl dark:bg-lnd-surface">
                             <div className="flex min-w-0 items-center space-x-3.5">
                                 <EmailIcon className="w-7 h-7" />
                                 <div className="min-w-0 flex-1 space-y-1 font-Manrope pl-1">
-                                    <h1 className="text-[.9rem] text-lnd-fg font-bold dark:text-lnd-fg">Email</h1>
+                                    <h3 className="text-[.9rem] text-lnd-fg font-bold dark:text-lnd-fg">Email</h3>
                                     <p className="truncate text-[.75rem] lg:text-[.87rem] text-lnd-fg font-medium dark:text-lnd-fg-muted">{maskEmail(user?.email)}</p>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@ export default function SecuritySettings() {
                             <div className="flex min-w-0 items-center space-x-3.5">
                                 <PasswordIcon className="w-7 h-7" />
                                 <div className="min-w-0 flex-1 space-y-1 font-Manrope pl-1">
-                                    <h1 className="text-[.9rem] text-lnd-fg font-bold dark:text-lnd-fg">Password</h1>
+                                    <h3 className="text-[.9rem] text-lnd-fg font-bold dark:text-lnd-fg">Password</h3>
                                     <p className="truncate text-[.87rem] text-lnd-fg-muted dark:text-lnd-fg-muted">Last change: {dateFormat(user?.updatedAt)}</p>
                                 </div>
                             </div>
@@ -74,15 +74,15 @@ export default function SecuritySettings() {
                     </div>
                 </div>
                 <div className="w-full h-auto flex flex-col space-y-4">
-                    <div className="font-Manrope font-extrabold dark:text-lnd-fg-muted">
+                    <h2 className="font-Manrope font-extrabold dark:text-lnd-fg-muted">
                         Two-factor Authentication (2FA)
-                    </div>
+                    </h2>
                     <div className="w-full h-auto flex flex-col bg-lnd-surface rounded-2xl dark:bg-lnd-surface">
                         <div className="w-full h-auto flex flex-col lg:flex-row lg:items-center lg:justify-between border-b border-lnd-border px-4 sm:px-7 py-4 space-y-2 lg:space-y-0 lg:space-x-3.5 dark:border-lnd-border">
                             <div className="flex items-center space-x-3.5">
                                 <PassKey className="h-[1.9rem] w-[1.9rem] shrink-0" />
                                 <div className="min-w-0 flex-1 space-y-1 font-Manrope pl-1">
-                                    <h1 className="text-[.89rem] text-lnd-fg font-bold dark:text-lnd-fg">Passkey</h1>
+                                    <h3 className="text-[.89rem] text-lnd-fg font-bold dark:text-lnd-fg">Passkey</h3>
                                     <p className="text-[.78rem] text-lnd-fg-muted dark:text-lnd-fg-muted">Use a security device to protect your account.</p>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@ export default function SecuritySettings() {
                             <div className="flex items-center space-x-3.5">
                                 <TOTP className="h-[1.9rem] w-[1.9rem] shrink-0" />
                                 <div className="min-w-0 flex-1 space-y-1 font-Manrope pl-1">
-                                    <h1 className="text-[.89rem] text-lnd-fg font-bold dark:text-lnd-fg">TOTP Verification</h1>
+                                    <h3 className="text-[.89rem] text-lnd-fg font-bold dark:text-lnd-fg">TOTP Verification</h3>
                                     <p className="text-[.78rem] text-lnd-fg-muted dark:text-lnd-fg-muted">Use TOTP authenticator to protect your account.</p>
                                 </div>
                             </div>
@@ -123,15 +123,15 @@ export default function SecuritySettings() {
                     </div>
                 </div>
                 <div className="w-full h-auto flex flex-col space-y-4">
-                    <div className="font-Manrope font-extrabold dark:text-lnd-fg-muted">
+                    <h2 className="font-Manrope font-extrabold dark:text-lnd-fg-muted">
                         Advanced Settings
-                    </div>
+                    </h2>
                     <div className="w-full h-auto flex flex-col bg-lnd-surface rounded-2xl dark:bg-lnd-surface">
                         <div className="w-full h-auto flex flex-col lg:flex-row lg:items-center lg:justify-between border-b border-lnd-border px-4 sm:px-7 py-4 space-y-2 lg:space-y-0 lg:space-x-3.5 dark:border-lnd-border">
                             <div className="flex items-center lg:space-x-3.5">
                                 <WithdrawPassword className="h-[1.9rem] w-[1.9rem] shrink-0" />
                                 <div className="min-w-0 flex-1 space-y-1 font-Manrope pl-1">
-                                    <h1 className="text-[.89rem] text-lnd-fg font-bold dark:text-lnd-fg">Withdrawal Password</h1>
+                                    <h3 className="text-[.89rem] text-lnd-fg font-bold dark:text-lnd-fg">Withdrawal Password</h3>
                                     <p className="text-[.78rem] text-lnd-fg-muted dark:text-lnd-fg-muted">Set withdrawal password to protect your assets</p>
                                 </div>
                             </div>
@@ -164,7 +164,7 @@ export default function SecuritySettings() {
                             <div className="flex items-center lg:space-x-3.5">
                                 <TradePassword className="h-[1.9rem] w-[1.9rem] shrink-0" />
                                 <div className="min-w-0 flex-1 space-y-1 font-Manrope pl-1">
-                                    <h1 className="text-[.89rem] text-lnd-fg font-bold dark:text-lnd-fg">Trading Password</h1>
+                                    <h3 className="text-[.89rem] text-lnd-fg font-bold dark:text-lnd-fg">Trading Password</h3>
                                     <p className="text-[.78rem] text-lnd-fg-muted dark:text-lnd-fg-muted">Set trading password to secure your transactions</p>
                                 </div>
                             </div>
@@ -185,7 +185,7 @@ export default function SecuritySettings() {
                             <div className="flex items-center lg:space-x-3.5">
                                 <SecuritySettingsIcon className="h-[1.9rem] w-[1.9rem] shrink-0" />
                                 <div className="min-w-0 flex-1 space-y-1 font-Manrope pl-1">
-                                    <h1 className="text-[.89rem] text-lnd-fg font-bold dark:text-lnd-fg">Anti-Phishing Code</h1>
+                                    <h3 className="text-[.89rem] text-lnd-fg font-bold dark:text-lnd-fg">Anti-Phishing Code</h3>
                                     <p className="text-[.78rem] text-lnd-fg-muted dark:text-lnd-fg-muted">For verifying official emails from Verdstamp</p>
                                 </div>
                             </div>
@@ -207,7 +207,7 @@ export default function SecuritySettings() {
                         <div className="flex items-center lg:space-x-3.5">
                             <AccountManagement className="h-[1.9rem] w-[1.9rem] shrink-0" />
                             <div className="min-w-0 flex-1 space-y-1 font-Manrope pl-1">
-                                <h1 className="text-[.89rem] text-lnd-fg font-bold dark:text-lnd-fg">Account Management</h1>
+                                <h3 className="text-[.89rem] text-lnd-fg font-bold dark:text-lnd-fg">Account Management</h3>
                                 <p className="text-[.78rem] text-lnd-fg-muted dark:text-lnd-fg-muted">Freeze or delete account</p>
                             </div>
                         </div>

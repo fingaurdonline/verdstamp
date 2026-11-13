@@ -337,14 +337,15 @@ export default function WithdrawClient() {
 
     return (
         <>
-            <div className="mb-1 flex items-center gap-2.5">
+            <div className="flex w-full flex-col gap-5">
+            <div className="flex items-center gap-2.5">
                 <span className="relative flex h-6 w-fit items-center bg-blend-darken">
                     <Icon icon="icon-park-solid:hexagon-one" className="relative left-3.5 top-3 z-10 h-4 w-4 text-lnd-fg-muted/50" />
                     <Icon icon="mdi:stop-circle" className="relative -top-4 z-50 h-6 w-6 rotate-45 text-lnd-accent/30" />
                 </span>
-                <span className="db-title">
+                <h1 className="db-title">
                     Withdraw
-                </span>
+                </h1>
             </div>
             <div className="flex w-full flex-col gap-6 rounded-[1.25rem] bg-lnd-surface px-4 py-5 pb-8 sm:p-6 lg:flex-row lg:justify-between lg:gap-8 lg:px-8">
                 <div className="flex w-full min-w-0 gap-3 lg:w-[57%]">
@@ -674,6 +675,7 @@ export default function WithdrawClient() {
             </div>
             <div className="w-full h-fit">
                 <WithdrawTable />
+            </div>
             </div>
             {/* OTP Verification Dialog */}
             <Dialog open={otpDialogOpen} onOpenChange={setOtpDialogOpen}>

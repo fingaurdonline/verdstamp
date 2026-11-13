@@ -1,3 +1,6 @@
+import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -84,6 +87,14 @@ const APPLY_STEPS = [
             "We review every application and get back to you with next steps.",
     },
 ];
+
+export const metadata: Metadata = pageMetadata({
+  title: "Ambassador Program",
+  description:
+    "Join the Verdstamp Ambassador Program to earn rewards, grow the community and unlock exclusive benefits.",
+  path: "/ambassador",
+  keywords: ["crypto ambassador", "ambassador program", "Verdstamp community"],
+});
 
 export default function Ambassador() {
     return (

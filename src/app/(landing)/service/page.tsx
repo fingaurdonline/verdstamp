@@ -43,7 +43,7 @@ export default function Service() {
                     <p className="text-[0.66rem] font-semibold uppercase tracking-[0.18em] text-lnd-accent">
                         Legal
                     </p>
-                    <h1 className="mt-2 font-Manrope text-3xl font-extrabold tracking-tight text-lnd-fg lg:text-4xl">
+                    <h1 className="mt-3 font-Manrope text-3xl font-extrabold leading-[1.12] tracking-tight text-lnd-fg lg:text-4xl">
                         Terms of Service
                     </h1>
                     <p className="mt-3 max-w-2xl text-sm leading-relaxed text-lnd-fg-muted">
@@ -84,7 +84,7 @@ export default function Service() {
                         onSelect={scrollToSection}
                     />
                             <p className="text-sm leading-relaxed text-lnd-fg-muted mb-6">
-                                These Verdstamp Terms of Use is entered into between you (hereinafter referred to as “you” or “your”) and Verdstamp operators (as defined below). By accessing, downloading, using or clicking on “I agree” to accept any Verdstamp Services (as defined below) provided by Verdstamp (as defined below), you agree that you have read, understood and accepted all of the terms and conditions stipulated in these Terms of Use (hereinafter referred to as “these Terms”) as well as our Privacy Policy at https://www.CoinMaiden.com/privacy. In addition, when using some features of the Services, you may be subject to specific additional terms and conditions applicable to those features.
+                                These Verdstamp Terms of Use is entered into between you (hereinafter referred to as “you” or “your”) and Verdstamp operators (as defined below). By accessing, downloading, using or clicking on “I agree” to accept any Verdstamp Services (as defined below) provided by Verdstamp (as defined below), you agree that you have read, understood and accepted all of the terms and conditions stipulated in these Terms of Use (hereinafter referred to as “these Terms”) as well as our Privacy Policy at https://verdstampdigital.app/privacy. In addition, when using some features of the Services, you may be subject to specific additional terms and conditions applicable to those features.
                             </p>
                             <p className="text-sm leading-relaxed text-lnd-fg-muted mb-6">
                                 By completing the registration as a user of our Platforms, you agree with and accept these Terms of Service (hereinafter referred to as the “Terms”) and all policies published on this website. IF YOU DO NOT ACCEPT THESE TERMS OF USE, DO NOT ACCESS THIS SITE AND DO NOT USE ANY OF Verdstamp&apos;s SERVICES, PRODUCTS AND CONTENT.
@@ -99,7 +99,7 @@ export default function Service() {
                                 }}>
                                 <h2 className="font-Manrope text-xl font-bold text-lnd-fg mb-4">1. Definitions</h2>
                                 <p className="text-sm leading-relaxed text-lnd-fg-muted mb-4">
-                                    1.1 Verdstamp refers to an ecosystem comprising Verdstamp websites (whose domain names include but are not limited to https://www.CoinMaiden.com), mobile applications, clients, applets and other applications that are developed to offer Verdstamp Services, and includes independently-operated platforms, websites and clients within the ecosystem. In case of any inconsistency between relevant terms of use of the above platforms and the contents of these Terms, the respective applicable terms of such platforms shall prevail.
+                                    1.1 Verdstamp refers to an ecosystem comprising Verdstamp websites (whose domain names include but are not limited to verdstampdigital.app), mobile applications, clients, applets and other applications that are developed to offer Verdstamp Services, and includes independently-operated platforms, websites and clients within the ecosystem. In case of any inconsistency between relevant terms of use of the above platforms and the contents of these Terms, the respective applicable terms of such platforms shall prevail.
                                 </p>
                                 <p className="text-sm leading-relaxed text-lnd-fg-muted mb-4">
                                     1.2 Verdstamp Operators refer to all parties that run Verdstamp, including but not limited to legal persons, unincorporated organizations and teams that provide Verdstamp Services and are responsible for such services. For convenience, unless otherwise stated, references to “Verdstamp” and “we” in these Terms specifically mean Verdstamp Operators. UNDER THESE TERMS, Verdstamp OPERATORS MAY CHANGE AS Verdstamp&apos;s BUSINESS ADJUSTS, IN WHICH CASE, THE CHANGED OPERATORS SHALL PERFORM THEIR OBLIGATIONS UNDER THESE TERMS WITH YOU AND PROVIDE SERVICES TO YOU, AND SUCH CHANGE DOES NOT AFFECT YOUR RIGHTS AND INTERESTS UNDER THESE TERMS. ADDITIONALLY, THE SCOPE OF Verdstamp OPERATORS MAY BE EXPANDED DUE TO THE PROVISION OF NEW Verdstamp SERVICES, IN WHICH CASE, IF YOU CONTINUE TO USE Verdstamp SERVICES, IT IS DEEMED THAT YOU HAVE AGREED TO JOINTLY EXECUTE THESE TERMS WITH THE NEWLY ADDED Verdstamp OPERATORS. IN CASE OF A DISPUTE, YOU SHALL DETERMINE THE ENTITIES BY WHICH THESE TERMS ARE PERFORMED WITH YOU AND THE COUNTERPARTIES OF THE DISPUTE, DEPENDING ON THE SPECIFIC SERVICES YOU USE AND THE PARTICULAR ACTIONS THAT AFFECT YOUR RIGHTS OR INTERESTS.
@@ -545,7 +545,7 @@ export default function Service() {
                                     8.4 Verdstamp is a trademark owned by the Company and allows no unauthorized use by any user or third parties.
                                 </p>
                                 <p className="text-sm leading-relaxed text-lnd-fg-muted mb-4">
-                                    8.5 Verdstamp supports the protection of intellectual property. If you wish to submit a trademark claim for violation of a registered trademark or service mark, or a copyright claim for material on which you hold a valid copyright, please email support@CoinMaiden.com.
+                                    8.5 Verdstamp supports the protection of intellectual property. If you wish to submit a trademark claim for violation of a registered trademark or service mark, or a copyright claim for material on which you hold a valid copyright, please email support@verdstampdigital.app.
                                 </p>
                             </section>
                             <section

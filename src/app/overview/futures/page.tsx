@@ -265,15 +265,15 @@ export default function Futures() {
         }
     ]
     return (
-        <div className="w-full lg:w-auto h-auto flex flex-col gap-4">
-            <div className="w-auto h-auto flex items-center space-x-2.5 mb-1">
+        <div className="flex w-full flex-col gap-5">
+            <div className="w-auto h-auto flex items-center gap-2.5">
                 <span className="w-fit h-6 bg-blend-overlay">
                     <Icon icon="eva:file-text-fill" className="w-6 h-6 text-lnd-accent/30 relative z-50" />
                     <Icon icon="heroicons:pencil-16-solid" className="w-4 h-4 text-lnd-fg-muted/50 relative -rotate-45 -top-4 left-3 z-10" />
                 </span>
-                <span className="db-title">
+                <h1 className="db-title">
                     Futures
-                </span>
+                </h1>
             </div>
             <div className="w-full h-auto">
                 <div className="w-full lg:w-auto h-auto py-5 px-5 flex flex-col bg-lnd-surface dark:bg-lnd-surface rounded-[1.25rem] space-y-4">

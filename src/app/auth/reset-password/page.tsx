@@ -2,11 +2,14 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import AuthShell from "../components/AuthShell";
 import ResetPasswordForm from "../components/ResetPasswordForm";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-    title: "Reset password | Verdstamp",
-    description: "Reset your Verdstamp account password.",
-};
+export const metadata: Metadata = pageMetadata({
+    title: "Reset password",
+    description: "Reset your Verdstamp account password securely and regain access to your account.",
+    path: "/auth/reset-password",
+    noIndex: true,
+});
 
 function ResetPasswordContent() {
     return (

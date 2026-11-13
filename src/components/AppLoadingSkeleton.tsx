@@ -2,6 +2,8 @@
  * Branded placeholder used while the auth session is resolving.
  * Keeps protected routes from flashing an empty viewport on slow connections.
  */
+import LandingLogo from "@/app/(landing)/components/LandingLogo";
+
 export default function AppLoadingSkeleton() {
     return (
         <div
@@ -10,12 +12,9 @@ export default function AppLoadingSkeleton() {
             aria-live="polite"
             aria-label="Loading your account"
         >
-            <div className="flex h-16 w-full shrink-0 items-center gap-3 border-b border-lnd-border bg-lnd-bg/85 px-3 sm:px-5 lg:px-7">
-                <span className="h-9 w-9 shrink-0 animate-pulse rounded-xl bg-lnd-accent/15" />
-                <span className="flex flex-col gap-1.5">
-                    <span className="h-3 w-24 animate-pulse rounded-full bg-lnd-fg/10" />
-                    <span className="h-1.5 w-16 animate-pulse rounded-full bg-lnd-fg/10" />
-                </span>
+            <div className="flex h-16 w-full shrink-0 items-center gap-2.5 border-b border-lnd-border bg-lnd-bg/85 px-3 sm:px-5 lg:px-7">
+                <LandingLogo className="h-8 w-8 shrink-0" />
+                <span className="h-2.5 w-24 animate-pulse rounded-full bg-lnd-fg/10" />
             </div>
 
             <div className="mx-auto flex w-full max-w-[1560px] flex-1 gap-5 px-3 py-5 sm:px-5 lg:px-7 lg:py-7">

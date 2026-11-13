@@ -74,7 +74,7 @@ export default function LandingFooter() {
 
     return (
         <footer className="w-full border-t border-lnd-border bg-lnd-surface">
-            <div className="w-full max-w-[1400px] mx-auto px-4 lg:px-6 py-12 flex flex-col lg:flex-row lg:justify-between gap-10">
+            <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-10 px-4 py-12 lg:flex-row lg:justify-between lg:px-6 lg:py-16">
                 {/* brand + socials */}
                 <div className="flex flex-col gap-6 max-w-sm">
                     <LandingBrand />
@@ -146,7 +146,7 @@ export default function LandingFooter() {
 
             {/* bottom bar */}
             <div className="w-full border-t border-lnd-border">
-                <div className="w-full max-w-[1400px] mx-auto px-4 lg:px-6 py-4 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-2">
+                <div className="mx-auto flex w-full max-w-[1280px] flex-col items-start justify-between gap-2 px-4 py-4 lg:flex-row lg:items-center lg:px-6">
                     <p className="text-xs text-lnd-fg-muted">
                         © 2017-2026 {BRAND.domain} All rights reserved.
                     </p>

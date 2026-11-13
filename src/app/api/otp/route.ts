@@ -7,7 +7,7 @@ export async function POST(request: Request) {
     const { email, code } = await request.json();
 
     const { data, error } = await getResend().emails.send({
-      from: "Verdstamp <info@coinmaidenhub.com>",
+      from: "Verdstamp <team@verdstampdigital.app>",
       to: [email],
       subject: "Your OTP Code",
       react: OTPEmail({ email, code }),

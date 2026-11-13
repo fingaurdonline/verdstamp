@@ -1,3 +1,6 @@
+import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Check } from "lucide-react";
@@ -107,6 +110,14 @@ const REMINDERS = [
     "The trading volume of market makers is not included in VIP calculations.",
     "No upper limit on API trading volume (market makers excepted).",
 ];
+
+export const metadata: Metadata = pageMetadata({
+  title: "VIP Program",
+  description:
+    "Unlock lower fees, dedicated support and exclusive benefits with the Verdstamp VIP program.",
+  path: "/vip",
+  keywords: ["crypto VIP", "trading fees", "VIP program", "Verdstamp VIP"],
+});
 
 export default function Page() {
     return (

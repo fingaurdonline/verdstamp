@@ -1,3 +1,4 @@
+import { homeMetadata } from "@/lib/seo";
 import { Globe2, Sparkles } from "lucide-react";
 import type { ReactNode } from "react";
 import CryptoCarousel from "./components/CryptoCarousel";
@@ -49,6 +50,8 @@ function Feature({ icon, title, text }: { icon: ReactNode; title: string; text: 
         </div>
     );
 }
+
+export const metadata = homeMetadata;
 
 export default function Home() {
     return (

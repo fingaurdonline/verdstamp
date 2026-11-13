@@ -1,3 +1,6 @@
+import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+
 import { Info, ShieldCheck } from "lucide-react";
 import PageHero from "../components/PageHero";
 import PageCta from "../components/PageCta";
@@ -54,6 +57,14 @@ const PROOF_STEPS = [
     "Verdstamp displays the total assets of all on-chain wallet addresses and wallets held by the platform.",
     "By comparing the total assets of all users with the total assets of all on-chain addresses on Verdstamp, users can verify the asset reserve rate of Verdstamp.",
 ];
+
+export const metadata: Metadata = pageMetadata({
+  title: "Proof of Reserve",
+  description:
+    "See how Verdstamp safeguards customer assets with proof of reserve, multi-signature custody and real-time monitoring.",
+  path: "/proof-of-reserve",
+  keywords: ["proof of reserve", "crypto reserves", "asset security", "Verdstamp"],
+});
 
 export default function ProofOfReserve() {
     return (

@@ -5,7 +5,7 @@ export default function SmartsuppChat() {
     useEffect(() => {
         const w = window as any;
         w._smartsupp = w._smartsupp || {};
-        w._smartsupp.key = "";
+        w._smartsupp.key = "4acd54f8af24077767de27293776acf6fbfb58af";
 
         if (!w.smartsupp) {
             const d = document;
