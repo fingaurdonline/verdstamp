@@ -14,7 +14,6 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Switch } from "@/components/ui/switch"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import { Check, ChevronDown, Globe, Menu, X } from "lucide-react"
 import LandingBrand from "./LandingBrand"
 import { ACCOUNT_LINKS, LANGUAGES, NAV_GROUPS, NEWS_HREF } from "./landingNav"
@@ -24,8 +23,6 @@ type Props = {
     onOpenChange: (open: boolean) => void
     loggedIn: boolean
     user?: any
-    emailVerified: boolean
-    convertedTotal: number
     currenciesRates: Record<string, number>
     onLogout: () => void
 }
@@ -70,8 +67,6 @@ export default function LandingMobileMenu({
     onOpenChange,
     loggedIn,
     user,
-    emailVerified,
-    convertedTotal,
     currenciesRates,
     onLogout,
 }: Props) {
@@ -88,6 +83,20 @@ export default function LandingMobileMenu({
     useEffect(() => {
         setMounted(true)
     }, [])
+
+    useEffect(() => {
+        if (!open) return
+        const originalOverflow = document.body.style.overflow
+        document.body.style.overflow = "hidden"
+        const handleKey = (event: KeyboardEvent) => {
+            if (event.key === "Escape") onOpenChange(false)
+        }
+        window.addEventListener("keydown", handleKey)
+        return () => {
+            document.body.style.overflow = originalOverflow
+            window.removeEventListener("keydown", handleKey)
+        }
+    }, [open, onOpenChange])
 
     const close = () => onOpenChange(false)
 
@@ -111,66 +120,26 @@ export default function LandingMobileMenu({
             {mounted &&
                 open &&
                 createPortal(
-                    <div className="lg:hidden fixed inset-0 z-[120] flex flex-col bg-lnd-bg text-lnd-fg">
-                    {/* drawer header */}
-                    <div className="flex items-center justify-between px-4 h-16 shrink-0 border-b border-lnd-border">
-                        <LandingBrand />
-                        <button
-                            onClick={close}
-                            aria-label="Close menu"
-                            className="flex items-center justify-center w-9 h-9 rounded-full border border-lnd-border transition-colors hover:bg-lnd-surface-2"
-                        >
-                            <X className="w-5 h-5" />
-                        </button>
-                    </div>
+                    <div
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label="Menu"
+                        className="fixed inset-x-0 top-0 z-[120] flex h-dvh flex-col bg-lnd-bg text-lnd-fg lg:hidden"
+                    >
+                        {/* drawer header */}
+                        <div className="flex items-center justify-between px-4 h-16 shrink-0 border-b border-lnd-border">
+                            <LandingBrand />
+                            <button
+                                onClick={close}
+                                aria-label="Close menu"
+                                className="flex items-center justify-center w-9 h-9 rounded-full border border-lnd-border transition-colors hover:bg-lnd-surface-2"
+                            >
+                                <X className="w-5 h-5" />
+                            </button>
+                        </div>
 
-                    <div className="flex-1 overflow-y-auto">
-                        <ScrollArea className="h-full">
-                            <div className="flex flex-col gap-6 px-4 py-6">
-                                {/* balance (logged in) */}
-                                {loggedIn && (
-                                    <div className="lnd-card p-4">
-                                        <div className="flex items-center justify-between">
-                                            <p className="text-[0.7rem] uppercase tracking-wider text-lnd-fg-muted">
-                                                Total Balance
-                                            </p>
-                                            <span
-                                                className={`rounded-full px-2 py-px text-[0.65rem] font-medium ${
-                                                    emailVerified
-                                                        ? "bg-lnd-accent/15 text-lnd-accent"
-                                                        : "bg-lnd-surface-2 text-lnd-fg-muted"
-                                                }`}
-                                            >
-                                                {emailVerified ? "Verified" : "Unverified"}
-                                            </span>
-                                        </div>
-                                        <p className="mt-1 flex items-baseline gap-1.5">
-                                            <span className="text-2xl font-Manrope font-extrabold">
-                                                {convertedTotal.toLocaleString()}
-                                            </span>
-                                            <span className="text-xs font-medium text-lnd-fg-muted">
-                                                {user?.currency ?? "USD"}
-                                            </span>
-                                        </p>
-                                        <div className="mt-3 flex gap-2">
-                                            <Link
-                                                href="/overview/spot/deposit"
-                                                onClick={close}
-                                                className="lnd-btn-accent flex-1 py-2 text-center text-[0.8rem]"
-                                            >
-                                                Deposit
-                                            </Link>
-                                            <Link
-                                                href="/overview/spot/withdraw"
-                                                onClick={close}
-                                                className="lnd-btn-ghost flex-1 py-2 text-center text-[0.8rem]"
-                                            >
-                                                Withdraw
-                                            </Link>
-                                        </div>
-                                    </div>
-                                )}
-
+                        <div className="min-h-0 flex-1 touch-pan-y overflow-y-auto overscroll-contain [-webkit-overflow-scrolling:touch]">
+                            <div className="flex flex-col gap-6 px-4 pb-[calc(2rem+env(safe-area-inset-bottom))] pt-6">
                                 {/* portfolio (logged in) */}
                                 {loggedIn && (
                                     <div className="flex flex-col gap-2">
@@ -395,9 +364,7 @@ export default function LandingMobileMenu({
                                     </div>
                                 )}
                             </div>
-                            <div className="h-8" />
-                        </ScrollArea>
-                    </div>
+                        </div>
                     </div>,
                     document.body,
                 )}

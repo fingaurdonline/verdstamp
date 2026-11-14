@@ -13,17 +13,14 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/components/lib/utils";
 import type { TradeDoc, TradePlanDoc } from "../types";
+import PositionsMobile, { type PositionRow } from "./PositionsMobile";
 
 type PositionsTablesProps = {
   plans: TradePlanDoc[];
   now: number;
 };
 
-type Row = {
-  plan: TradePlanDoc;
-  trade: TradeDoc;
-  mark: number;
-};
+type Row = PositionRow;
 
 function money(value?: number) {
   return (value ?? 0).toLocaleString("en-US", {
@@ -117,7 +114,13 @@ export default function PositionsTables({ plans, now }: PositionsTablesProps) {
         </span>
       </div>
 
-      <Tabs value={tab} onValueChange={setTab}>
+      <PositionsMobile
+        groups={{ open, pending, closed, canceled }}
+        tab={tab}
+        onTabChange={setTab}
+      />
+
+      <Tabs value={tab} onValueChange={setTab} className="hidden lg:block">
         <div className="overflow-x-auto px-3 pt-3 sm:px-4">
           <TabsList className="h-auto w-full justify-start gap-1 rounded-xl bg-lnd-surface-2 p-1 sm:w-fit">
             {[
@@ -138,8 +141,8 @@ export default function PositionsTables({ plans, now }: PositionsTablesProps) {
               </TabsTrigger>
             ))}
           </TabsList>
-          <p className="px-1 pb-2 pt-1.5 text-[0.62rem] text-lnd-fg-muted lg:hidden">
-            Swipe sideways on the table to see every column →
+          <p className="px-1 pb-2 pt-1.5 text-[0.62rem] text-lnd-fg-muted">
+            Scroll the table sideways to see every column →
           </p>
         </div>
 

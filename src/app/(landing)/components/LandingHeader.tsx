@@ -381,8 +381,6 @@ export default function LandingHeader() {
                         onOpenChange={setOpenMobile}
                         loggedIn={loggedIn}
                         user={userData}
-                        emailVerified={auth?.emailVerified === true}
-                        convertedTotal={round2(currencyConvertion(total))}
                         currenciesRates={currenciesRates}
                         onLogout={logout}
                     />

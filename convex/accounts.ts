@@ -106,7 +106,10 @@ export const ensure_user_accounts = mutation({
       .query("user")
       .withIndex("by_userId", (q) => q.eq("userId", userId))
       .first();
-    const email = userDoc?.email;
+    // `ensure_user_accounts` can run before the local user document is written
+    // (for example right after a social sign-in). Fall back to the identity
+    // email so new spot accounts always carry the owner's email.
+    const email = userDoc?.email ?? identity.email;
 
     const [spot, margin, making, futures, staking, preferences, loan] =
       await Promise.all([
@@ -190,6 +193,10 @@ export const ensure_user_accounts = mutation({
         user: userId,
         email,
       });
+    } else if (email && spot.email !== email) {
+      // Backfill accounts created before the email was available (or before it
+      // was captured on the spot record).
+      await ctx.db.patch(spot._id, { email });
     }
     if (!margin) {
       await ctx.db.insert("margin", {

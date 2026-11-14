@@ -1,24 +1,13 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import Link from "next/link"
-import { useRouter } from "nextjs-toploader/app"
-import { useQuery } from "convex/react"
-import { api } from "@convex/_generated/api"
-import { signOut, useSession } from "@/lib/auth-client"
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover"
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from "@/components/ui/accordion"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { HiBadgeCheck } from "react-icons/hi"
+import LandingBrand from "@/app/(landing)/components/LandingBrand";
+import { ACCOUNT_LINKS } from "@/app/(landing)/components/landingNav";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { signOut, useSession } from "@/lib/auth-client";
+import { api } from "@convex/_generated/api";
+import { useQuery } from "convex/react";
 import {
     BadgeCheck,
     CandlestickChart,
@@ -35,10 +24,11 @@ import {
     UserCircle,
     Wallet,
     X,
-} from "lucide-react"
-import { useState } from "react"
-import LandingBrand from "@/app/(landing)/components/LandingBrand"
-import { ACCOUNT_LINKS } from "@/app/(landing)/components/landingNav"
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "nextjs-toploader/app";
+import { useState } from "react";
 
 const PORTFOLIO = [
     {
@@ -81,53 +71,46 @@ const PORTFOLIO = [
             { label: "Loan", href: "/overview/history/loan" },
         ],
     },
-]
+];
 
-const ACCOUNT_ICONS = [
-    LayoutDashboard,
-    ShieldCheck,
-    BadgeCheck,
-    SlidersHorizontal,
-    MessageSquare,
-    Ticket,
-]
+const ACCOUNT_ICONS = [LayoutDashboard, ShieldCheck, BadgeCheck, SlidersHorizontal, MessageSquare, Ticket];
 
 function maskEmail(input: string | undefined) {
     try {
-        if (!input || input.length <= 11) return input ?? ""
-        return `${input.slice(0, 5)}***${input.slice(-5)}`
+        if (!input || input.length <= 11) return input ?? "";
+        return `${input.slice(0, 5)}***${input.slice(-5)}`;
     } catch {
-        return input ?? ""
+        return input ?? "";
     }
 }
 
 export default function DropDownAccountMobile() {
-    const { data: session } = useSession()
-    const user = useQuery(api.user.user)
-    const auth = useQuery(api.auth.getCurrentUser)
-    const allMessages = useQuery(api.messages.view_messages)
-    const spotAccounts = useQuery(api.accounts.view_all_spot_accounts)
-    const futuresAccount = useQuery(api.accounts.view_all_futures_accounts)
-    const marginAccount = useQuery(api.accounts.view_all_margin_accounts)
-    const router = useRouter()
-    const [openPopover, setOpenPopover] = useState(false)
+    const { data: session } = useSession();
+    const user = useQuery(api.user.user);
+    const auth = useQuery(api.auth.getCurrentUser);
+    const allMessages = useQuery(api.messages.view_messages);
+    const spotAccounts = useQuery(api.accounts.view_all_spot_accounts);
+    const futuresAccount = useQuery(api.accounts.view_all_futures_accounts);
+    const marginAccount = useQuery(api.accounts.view_all_margin_accounts);
+    const router = useRouter();
+    const [openPopover, setOpenPopover] = useState(false);
 
-    const userId = session?.user?.id
-    const userMessages = allMessages?.filter((message: any) => message?.userId === userId) ?? []
-    const unreadCount = userMessages.filter((message: any) => message?.read === false).length
+    const userId = session?.user?.id;
+    const userMessages = allMessages?.filter((message: any) => message?.userId === userId) ?? [];
+    const unreadCount = userMessages.filter((message: any) => message?.read === false).length;
 
-    const spot = (spotAccounts?.find((acc: any) => acc?.user === user?.userId)?.total_asset ?? 0) as number
-    const futures = (futuresAccount?.find((acc: any) => acc?.user === user?.userId)?.total_asset ?? 0) as number
-    const margin = (marginAccount?.find((acc: any) => acc?.user === user?.userId)?.total_asset ?? 0) as number
-    const total = spot + futures + margin
+    const spot = (spotAccounts?.find((acc: any) => acc?.user === user?.userId)?.total_asset ?? 0) as number;
+    const futures = (futuresAccount?.find((acc: any) => acc?.user === user?.userId)?.total_asset ?? 0) as number;
+    const margin = (marginAccount?.find((acc: any) => acc?.user === user?.userId)?.total_asset ?? 0) as number;
+    const total = spot + futures + margin;
 
-    const close = () => setOpenPopover(false)
+    const close = () => setOpenPopover(false);
     const logout = async () => {
-        await signOut()
-        close()
-        router.push("/")
-        router.refresh()
-    }
+        await signOut();
+        close();
+        router.push("/");
+        router.refresh();
+    };
 
     return (
         <Popover open={openPopover} onOpenChange={setOpenPopover}>
@@ -146,13 +129,7 @@ export default function DropDownAccountMobile() {
                         className="flex h-9 w-9 items-center justify-center rounded-full border border-lnd-border bg-lnd-surface-2 lg:hidden"
                         aria-label="Open account menu"
                     >
-                        <Image
-                            src="/assets/userlogo.svg"
-                            alt="Account"
-                            width={100}
-                            height={100}
-                            className="h-6 w-6"
-                        />
+                        <Image src="/assets/userlogo.svg" alt="Account" width={100} height={100} className="h-6 w-6" />
                     </button>
                 </PopoverTrigger>
             )}
@@ -176,36 +153,6 @@ export default function DropDownAccountMobile() {
                 <ScrollArea className="h-[calc(100dvh-4rem)]">
                     <div className="flex flex-col gap-5 px-4 py-5">
                         <div className="db-card p-4">
-                            <div className="flex items-center gap-3">
-                                <Image
-                                    src="/assets/userlogo.svg"
-                                    alt="Avatar"
-                                    width={100}
-                                    height={100}
-                                    className="h-12 w-12"
-                                />
-                                <div className="flex min-w-0 flex-col gap-1.5">
-                                    <span className="truncate font-Manrope text-base font-bold text-lnd-fg">
-                                        {maskEmail(user?.username ?? session?.user?.email)}
-                                    </span>
-                                    <span className="flex items-center gap-2">
-                                        <span className="rounded-full border border-lnd-border px-2 py-px text-[0.66rem] font-medium text-lnd-fg-muted">
-                                            VIP {user?.vip_status ?? 0}
-                                        </span>
-                                        <span
-                                            className={`flex items-center gap-1 rounded-full px-2 py-px text-[0.66rem] font-medium ${
-                                                auth?.emailVerified
-                                                    ? "bg-lnd-accent/15 text-lnd-accent"
-                                                    : "bg-lnd-surface-2 text-lnd-fg-muted"
-                                            }`}
-                                        >
-                                            <HiBadgeCheck />
-                                            {auth?.emailVerified ? "Verified" : "Unverified"}
-                                        </span>
-                                    </span>
-                                </div>
-                            </div>
-
                             <div className="mt-4 rounded-xl bg-lnd-surface-2 p-3.5">
                                 <p className="text-[0.65rem] uppercase tracking-[0.16em] text-lnd-fg-muted">
                                     Total Balance
@@ -239,19 +186,11 @@ export default function DropDownAccountMobile() {
 
                         <div className="flex flex-col gap-2">
                             <p className="db-eyebrow px-1">Portfolio</p>
-                            <Accordion
-                                type="multiple"
-                                defaultValue={["spot"]}
-                                className="db-card px-2 py-1"
-                            >
-                                {PORTFOLIO.map((section) => {
-                                    const Icon = section.icon
+                            <Accordion type="multiple" defaultValue={["spot"]} className="db-card px-2 py-1">
+                                {PORTFOLIO.map(section => {
+                                    const Icon = section.icon;
                                     return (
-                                        <AccordionItem
-                                            key={section.value}
-                                            value={section.value}
-                                            className="border-b-0"
-                                        >
+                                        <AccordionItem key={section.value} value={section.value} className="border-b-0">
                                             <AccordionTrigger className="py-3 text-[0.9rem] font-Manrope font-medium text-lnd-fg hover:no-underline [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-lnd-fg-muted">
                                                 <span className="flex items-center gap-3">
                                                     <Icon className="h-4 w-4 text-lnd-fg-muted" strokeWidth={1.7} />
@@ -259,7 +198,7 @@ export default function DropDownAccountMobile() {
                                                 </span>
                                             </AccordionTrigger>
                                             <AccordionContent className="pb-2">
-                                                {section.links.map((link) => (
+                                                {section.links.map(link => (
                                                     <Link
                                                         key={link.href}
                                                         href={link.href}
@@ -272,7 +211,7 @@ export default function DropDownAccountMobile() {
                                                 ))}
                                             </AccordionContent>
                                         </AccordionItem>
-                                    )
+                                    );
                                 })}
                                 <Link
                                     href="/overview/trade/spot/BTC/USDT"
@@ -297,7 +236,7 @@ export default function DropDownAccountMobile() {
                             <p className="db-eyebrow px-1">Account</p>
                             <div className="db-card flex flex-col gap-0.5 p-2">
                                 {ACCOUNT_LINKS.map((item, index) => {
-                                    const Icon = ACCOUNT_ICONS[index] ?? LayoutDashboard
+                                    const Icon = ACCOUNT_ICONS[index] ?? LayoutDashboard;
                                     return (
                                         <Link
                                             key={item.href}
@@ -314,7 +253,7 @@ export default function DropDownAccountMobile() {
                                             )}
                                             <ChevronRight className="h-3.5 w-3.5 text-lnd-fg-muted" />
                                         </Link>
-                                    )
+                                    );
                                 })}
                             </div>
                         </div>
@@ -331,5 +270,5 @@ export default function DropDownAccountMobile() {
                 </ScrollArea>
             </PopoverContent>
         </Popover>
-    )
+    );
 }

@@ -3,6 +3,7 @@ import OverviewLayoutClient from "./OverviewLayoutClient";
 
 export const metadata: Metadata = {
   title: "Portfolio Overview",
+  alternates: { canonical: "/overview" },
   description: "View your Verdstamp portfolio, balances and trading activity.",
   robots: {
     index: false,

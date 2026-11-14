@@ -125,13 +125,13 @@ export default function PlanCard({ plan, now, onCancel }: PlanCardProps) {
       className="db-card overflow-hidden"
       data-plan-id={plan.id}
     >
-      <div className="flex flex-wrap items-start justify-between gap-4 border-b border-lnd-border p-4 sm:p-5">
-        <div className="flex items-start gap-3">
+      <div className="flex flex-col gap-3 border-b border-lnd-border p-4 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between sm:gap-4 sm:p-5">
+        <div className="flex min-w-0 items-start gap-3">
           <span className="db-icon-tile">
             <TrendingUp className="h-5 w-5" />
           </span>
-          <div>
-            <div className="flex flex-wrap items-center gap-2">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
               <h3 className="font-Manrope text-[1.02rem] font-bold text-lnd-fg">
                 {plan.base}/{plan.quote}
               </h3>
@@ -162,37 +162,39 @@ export default function PlanCard({ plan, now, onCancel }: PlanCardProps) {
                 {plan.status}
               </span>
             </div>
-            <p className="mt-1 text-[0.72rem] text-lnd-fg-muted">
-              ${money(plan.principal)} principal · {plan.leverage}x ·{" "}
-              {plan.duration_days} days · started {formatDate(plan.started_at)}
+            <p className="mt-1.5 text-[0.68rem] leading-relaxed text-lnd-fg-muted sm:text-[0.72rem]">
+              <span className="font-semibold text-lnd-fg">${money(plan.principal)}</span>{" "}
+              principal · {plan.leverage}x · {plan.duration_days} days
+              <span className="hidden sm:inline"> · started {formatDate(plan.started_at)}</span>
+            </p>
+            <p className="mt-0.5 text-[0.64rem] text-lnd-fg-muted sm:hidden">
+              Started {formatDate(plan.started_at)}
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          {isActive && onCancel ? (
-            <button
-              type="button"
-              onClick={() => onCancel(plan)}
-              className="rounded-xl border border-red-500/30 px-3 py-2 text-[0.7rem] font-semibold text-red-500 transition-colors hover:bg-red-500/10"
-            >
-              Cancel plan
-            </button>
-          ) : null}
-        </div>
+        {isActive && onCancel ? (
+          <button
+            type="button"
+            onClick={() => onCancel(plan)}
+            className="w-full shrink-0 rounded-xl border border-red-500/30 px-3 py-2.5 text-[0.72rem] font-semibold text-red-500 transition-colors hover:bg-red-500/10 sm:w-auto sm:py-2"
+          >
+            Cancel plan
+          </button>
+        ) : null}
       </div>
 
       <div className="grid gap-4 p-4 sm:p-5 lg:grid-cols-[1.05fr_1fr]">
-        <div className="space-y-4">
-          <div className="flex flex-wrap items-end justify-between gap-3">
-            <div>
+        <div className="min-w-0 space-y-4">
+          <div className="grid grid-cols-2 items-end gap-3 sm:flex sm:flex-wrap sm:justify-between">
+            <div className="min-w-0">
               <p className="text-[0.64rem] font-medium uppercase tracking-[0.14em] text-lnd-fg-muted">
                 {isActive ? `Day ${currentDay} of 7` : plan.status === "completed" ? "Cycle complete" : "Cycle cancelled"}
               </p>
-              <p className="mt-1 font-Manrope text-[1.5rem] font-extrabold leading-none text-lnd-fg">
+              <p className="mt-1 break-words font-Manrope text-[clamp(1.15rem,5.5vw,1.5rem)] font-extrabold leading-none tabular-nums text-lnd-fg">
                 ${money(plan.realized_pnl)}
               </p>
-              <p className="mt-1 text-[0.68rem] text-lnd-fg-muted">
+              <p className="mt-1 text-[0.64rem] text-lnd-fg-muted sm:text-[0.68rem]">
                 Realized profit ·{" "}
                 <span className="text-lnd-accent">
                   {plan.principal > 0
@@ -203,21 +205,21 @@ export default function PlanCard({ plan, now, onCancel }: PlanCardProps) {
                 of principal
               </p>
             </div>
-            <div className="text-right">
+            <div className="min-w-0 text-right">
               <p className="text-[0.64rem] font-medium uppercase tracking-[0.14em] text-lnd-fg-muted">
                 Weekly target
               </p>
-              <p className="mt-1 font-mono text-[0.86rem] font-semibold text-lnd-fg">
+              <p className="mt-1 font-mono text-[0.8rem] font-semibold tabular-nums text-lnd-fg sm:text-[0.86rem]">
                 ${money(plan.weekly_target_profit)}
               </p>
-              <p className="mt-1 text-[0.68rem] text-lnd-fg-muted">
+              <p className="mt-1 text-[0.64rem] text-lnd-fg-muted sm:text-[0.68rem]">
                 {totalProgress > 0 ? `${(totalProgress * 100).toFixed(1)}% reached` : "Not started"}
               </p>
             </div>
           </div>
 
           <div>
-            <div className="flex items-center justify-between text-[0.66rem] text-lnd-fg-muted">
+            <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-0.5 text-[0.66rem] text-lnd-fg-muted">
               <span>7-day progress</span>
               <span className="text-right">
                 {plan.status === "active"
@@ -229,7 +231,7 @@ export default function PlanCard({ plan, now, onCancel }: PlanCardProps) {
                       : ""}
               </span>
             </div>
-            <div className="mt-2 grid grid-cols-7 gap-1 sm:gap-1.5">
+            <div className="mt-2 grid grid-cols-4 gap-1.5 sm:grid-cols-7">
               {dayStats.map((day) => {
                 const isPast = day.day < currentDay || plan.status !== "active";
                 const isCurrent = day.day === currentDay && plan.status === "active";
@@ -237,13 +239,13 @@ export default function PlanCard({ plan, now, onCancel }: PlanCardProps) {
                   <div
                     key={day.day}
                     className={cn(
-                      "min-w-0 rounded-lg border px-0.5 py-2 text-center transition-colors sm:px-1.5",
+                      "min-w-0 rounded-lg border px-1 py-2.5 text-center transition-colors sm:px-1.5 sm:py-2",
                       isCurrent
                         ? "border-lnd-accent/40 bg-lnd-accent/5"
                         : "border-lnd-border bg-lnd-surface-2/40",
                     )}
                   >
-                    <p className="text-[0.54rem] font-semibold uppercase tracking-wide text-lnd-fg-muted sm:text-[0.58rem]">
+                    <p className="text-[0.56rem] font-semibold uppercase tracking-wide text-lnd-fg-muted sm:text-[0.58rem]">
                       D{day.day}
                     </p>
                     <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-lnd-border">
@@ -261,7 +263,7 @@ export default function PlanCard({ plan, now, onCancel }: PlanCardProps) {
                         style={{ width: `${Math.max(day.progress * 100, day.trades.length ? 4 : 0)}%` }}
                       />
                     </div>
-                    <p className="mt-1.5 font-mono text-[0.54rem] font-semibold text-lnd-fg sm:text-[0.58rem]">
+                    <p className="mt-1.5 font-mono text-[0.6rem] font-semibold tabular-nums text-lnd-fg sm:text-[0.58rem]">
                       {(day.rate * 100).toFixed(1)}%
                     </p>
                   </div>
@@ -270,7 +272,39 @@ export default function PlanCard({ plan, now, onCancel }: PlanCardProps) {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+          <div className="overflow-hidden rounded-xl border border-lnd-border bg-lnd-surface-2/60 sm:hidden">
+            <div className="flex items-center justify-between gap-3 border-b border-lnd-border px-3 py-2.5">
+              <p className="text-[0.6rem] uppercase tracking-[0.12em] text-lnd-fg-muted">
+                Today's target
+              </p>
+              <p className="font-mono text-[0.78rem] font-semibold tabular-nums text-lnd-fg">
+                {isActive && today ? `$${money(today.profit)}` : "—"}
+              </p>
+            </div>
+            <div className="flex items-center justify-between gap-3 border-b border-lnd-border px-3 py-2.5">
+              <p className="text-[0.6rem] uppercase tracking-[0.12em] text-lnd-fg-muted">
+                Today realized
+              </p>
+              <p className="font-mono text-[0.78rem] font-semibold tabular-nums text-lnd-fg">
+                {isActive && today ? `$${money(today.realized)}` : "—"}
+              </p>
+            </div>
+            <div className="flex items-center justify-between gap-3 px-3 py-2.5">
+              <p className="text-[0.6rem] uppercase tracking-[0.12em] text-lnd-fg-muted">
+                Open mark
+              </p>
+              <p
+                className={cn(
+                  "font-mono text-[0.78rem] font-semibold tabular-nums",
+                  mark >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-red-500",
+                )}
+              >
+                {isActive ? `${mark >= 0 ? "+" : "−"}$${money(Math.abs(mark))}` : "—"}
+              </p>
+            </div>
+          </div>
+
+          <div className="hidden grid-cols-3 gap-2.5 sm:grid">
             <div className="rounded-xl bg-lnd-surface-2/60 px-3 py-2.5">
               <p className="text-[0.6rem] uppercase tracking-[0.12em] text-lnd-fg-muted">
                 Today's target
@@ -303,7 +337,7 @@ export default function PlanCard({ plan, now, onCancel }: PlanCardProps) {
           </div>
         </div>
 
-        <div className="space-y-3">
+        <div className="min-w-0 space-y-3">
           <div className="rounded-xl border border-lnd-border p-3.5">
             <p className="text-[0.64rem] font-medium uppercase tracking-[0.14em] text-lnd-fg-muted">
               Execution schedule
@@ -351,7 +385,7 @@ export default function PlanCard({ plan, now, onCancel }: PlanCardProps) {
             </div>
           </div>
 
-          <div className="rounded-xl bg-lnd-surface-2/60 px-3.5 py-3">
+          <div className="hidden rounded-xl bg-lnd-surface-2/60 px-3.5 py-3 sm:block">
             <p className="text-[0.64rem] font-medium uppercase tracking-[0.12em] text-lnd-fg-muted">
               Sampled daily rates
             </p>

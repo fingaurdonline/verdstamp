@@ -1,50 +1,39 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import Image from "next/image"
-import { useRouter } from "nextjs-toploader/app"
-import { useMutation, useQuery } from "convex/react"
-import { api } from "@convex/_generated/api"
-import { authClient } from "@/lib/auth-client"
-import useCurrencies from "@/hooks/useCurrency"
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
+import LandingBrand from "@/app/(landing)/components/LandingBrand";
+import { ACCOUNT_LINKS, ASSET_LINKS, LANGUAGES, ORDER_LINKS } from "@/app/(landing)/components/landingNav";
+import Loader from "@/app/(landing)/components/Loader";
 import {
     NavigationMenu,
     NavigationMenuContent,
     NavigationMenuItem,
     NavigationMenuList,
     NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu"
-import {
-    ArrowRight,
-    ChevronRight,
-    Globe,
-    MessageSquare,
-    Wallet,
-} from "lucide-react"
-import { HiBadgeCheck } from "react-icons/hi"
-import { BsCircleFill } from "react-icons/bs"
-import LandingBrand from "@/app/(landing)/components/LandingBrand"
-import Loader from "@/app/(landing)/components/Loader"
-import NoData from "./icons/NoData"
-import SwapTheme from "./ThemeSwap"
-import DropDownMobileMenu from "./DropDownMenuMobile"
-import DropDownAccountMobile from "./DropDownAccountMobile"
-import {
-    ACCOUNT_LINKS,
-    ASSET_LINKS,
-    LANGUAGES,
-    ORDER_LINKS,
-} from "@/app/(landing)/components/landingNav"
+} from "@/components/ui/navigation-menu";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import useCurrencies from "@/hooks/useCurrency";
+import { authClient } from "@/lib/auth-client";
+import { api } from "@convex/_generated/api";
+import { useMutation, useQuery } from "convex/react";
+import { ArrowRight, ChevronRight, Globe, MessageSquare, Wallet } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "nextjs-toploader/app";
+import { BsCircleFill } from "react-icons/bs";
+import { HiBadgeCheck } from "react-icons/hi";
+import DropDownAccountMobile from "./DropDownAccountMobile";
+import DropDownMobileMenu from "./DropDownMenuMobile";
+import NoData from "./icons/NoData";
+import SwapTheme from "./ThemeSwap";
 
 const triggerClass =
-    "h-9 rounded-full! bg-transparent px-3 text-[0.82rem] font-Manrope font-medium text-lnd-fg outline-none hover:bg-lnd-surface-2 focus:bg-lnd-surface-2 data-[state=open]:bg-lnd-surface-2"
+    "h-9 rounded-full! bg-transparent px-3 text-[0.82rem] font-Manrope font-medium text-lnd-fg outline-none hover:bg-lnd-surface-2 focus:bg-lnd-surface-2 data-[state=open]:bg-lnd-surface-2";
 
 const panelClass =
-    "w-80! rounded-2xl! border-lnd-border! bg-lnd-surface! p-2! text-lnd-fg! shadow-xl! shadow-black/10!"
+    "w-80! rounded-2xl! border-lnd-border! bg-lnd-surface! p-2! text-lnd-fg! shadow-xl! shadow-black/10!";
 
 const iconButtonClass =
-    "flex h-9 w-9 items-center justify-center rounded-full border border-lnd-border text-lnd-fg transition-colors hover:bg-lnd-surface-2"
+    "flex h-9 w-9 items-center justify-center rounded-full border border-lnd-border text-lnd-fg transition-colors hover:bg-lnd-surface-2";
 
 const FINANCE_LINKS = [
     {
@@ -67,7 +56,7 @@ const FINANCE_LINKS = [
         description: "Borrow against your crypto holdings",
         href: "/overview/loan/assets",
     },
-]
+];
 
 const MORE_LINKS = [
     {
@@ -90,14 +79,14 @@ const MORE_LINKS = [
         description: "Check out the latest platform notices",
         href: "/sta-article",
     },
-]
+];
 
 type PanelLinkProps = {
-    href: string
-    title: string
-    description?: string
-    onNavigate?: () => void
-}
+    href: string;
+    title: string;
+    description?: string;
+    onNavigate?: () => void;
+};
 
 function PanelLink({ href, title, description, onNavigate }: PanelLinkProps) {
     return (
@@ -107,87 +96,81 @@ function PanelLink({ href, title, description, onNavigate }: PanelLinkProps) {
             className="group flex items-center justify-between gap-4 rounded-xl px-3.5 py-3 transition-colors hover:bg-lnd-surface-2"
         >
             <span className="flex min-w-0 flex-col gap-0.5">
-                <span className="font-Manrope text-sm font-medium text-lnd-fg">
-                    {title}
-                </span>
-                {description && (
-                    <span className="text-xs leading-5 text-lnd-fg-muted">
-                        {description}
-                    </span>
-                )}
+                <span className="font-Manrope text-sm font-medium text-lnd-fg">{title}</span>
+                {description && <span className="text-xs leading-5 text-lnd-fg-muted">{description}</span>}
             </span>
             <ArrowRight className="h-3.5 w-3.5 shrink-0 text-lnd-accent opacity-0 transition-opacity group-hover:opacity-100" />
         </Link>
-    )
+    );
 }
 
 function maskEmail(input?: string) {
-    if (!input) return ""
-    if (input.length <= 13) return input
-    return `${input.slice(0, 5)}***${input.slice(-5)}`
+    if (!input) return "";
+    if (input.length <= 13) return input;
+    return `${input.slice(0, 5)}***${input.slice(-5)}`;
 }
 
 export default function Header() {
     type RawMessage = {
-        _id: string
-        read: boolean
-        title: string
-        description: string
-        createdAt: number
-    }
+        _id: string;
+        read: boolean;
+        title: string;
+        description: string;
+        createdAt: number;
+    };
     type HeaderMessageView = {
-        id: string
-        read: boolean
-        title: string
-        description: string
-        created: string
-    }
+        id: string;
+        read: boolean;
+        title: string;
+        description: string;
+        created: string;
+    };
 
-    const router = useRouter()
-    const userData = useQuery(api.user.user)
-    const auth = useQuery(api.auth.getCurrentUser)
-    const spotAccounts = useQuery(api.accounts.view_all_spot_accounts)
-    const futuresAccount = useQuery(api.accounts.view_all_futures_accounts)
-    const marginAccount = useQuery(api.accounts.view_all_margin_accounts)
-    const rawMessages = useQuery(api.messages.view_messages) as RawMessage[] | undefined
-    const { data: currencies } = useCurrencies()
+    const router = useRouter();
+    const userData = useQuery(api.user.user);
+    const auth = useQuery(api.auth.getCurrentUser);
+    const spotAccounts = useQuery(api.accounts.view_all_spot_accounts);
+    const futuresAccount = useQuery(api.accounts.view_all_futures_accounts);
+    const marginAccount = useQuery(api.accounts.view_all_margin_accounts);
+    const rawMessages = useQuery(api.messages.view_messages) as RawMessage[] | undefined;
+    const { data: currencies } = useCurrencies();
 
-    const updateCurrencyMutation = useMutation(api.user.update_currency)
-    const updateLanguageMutation = useMutation(api.user.update_language)
-    const updateMessageReadMutation = useMutation(api.messages.update_message_read)
+    const updateCurrencyMutation = useMutation(api.user.update_currency);
+    const updateLanguageMutation = useMutation(api.user.update_language);
+    const updateMessageReadMutation = useMutation(api.messages.update_message_read);
 
-    const userId = userData?.userId
-    const messages: HeaderMessageView[] | undefined = rawMessages?.map((message) => ({
+    const userId = userData?.userId;
+    const messages: HeaderMessageView[] | undefined = rawMessages?.map(message => ({
         id: String(message._id),
         read: message.read,
         title: message.title,
         description: message.description,
         created: new Date(message.createdAt).toLocaleString(),
-    }))
-    const unreadMessages = messages?.filter((message) => !message.read).slice(0, 4) ?? []
-    const isLoadingMessages = rawMessages === undefined
+    }));
+    const unreadMessages = messages?.filter(message => !message.read).slice(0, 4) ?? [];
+    const isLoadingMessages = rawMessages === undefined;
 
-    const spot = (spotAccounts?.find((acc: any) => acc?.user === userId)?.total_asset ?? 0) as number
-    const futures = (futuresAccount?.find((acc: any) => acc?.user === userId)?.total_asset ?? 0) as number
-    const margin = (marginAccount?.find((acc: any) => acc?.user === userId)?.total_asset ?? 0) as number
-    const total = spot + futures + margin
+    const spot = (spotAccounts?.find((acc: any) => acc?.user === userId)?.total_asset ?? 0) as number;
+    const futures = (futuresAccount?.find((acc: any) => acc?.user === userId)?.total_asset ?? 0) as number;
+    const margin = (marginAccount?.find((acc: any) => acc?.user === userId)?.total_asset ?? 0) as number;
+    const total = spot + futures + margin;
 
-    const conversionRates = (currencies?.data?.conversion_rates ?? {}) as Record<string, number>
+    const conversionRates = (currencies?.data?.conversion_rates ?? {}) as Record<string, number>;
 
     function currencyConvertion(amount: number) {
-        if (!userData?.currency || userData.currency === "USD") return amount
-        return amount * (conversionRates[userData.currency] ?? 1)
+        if (!userData?.currency || userData.currency === "USD") return amount;
+        return amount * (conversionRates[userData.currency] ?? 1);
     }
 
     const logout = async () => {
-        await authClient.signOut()
-        router.push("/auth/login")
-        router.refresh()
-    }
+        await authClient.signOut();
+        router.push("/auth/login");
+        router.refresh();
+    };
 
     const readMessage = (id: string) => {
-        updateMessageReadMutation({ id })
-    }
+        updateMessageReadMutation({ id });
+    };
 
     return (
         <header className="sticky top-0 z-90 w-full border-b border-lnd-border bg-lnd-bg/85 backdrop-blur-md">
@@ -199,9 +182,7 @@ export default function Header() {
                         <NavigationMenu viewport={false}>
                             <NavigationMenuList className="gap-0.5">
                                 <NavigationMenuItem>
-                                    <NavigationMenuTrigger className={triggerClass}>
-                                        Buy Crypto
-                                    </NavigationMenuTrigger>
+                                    <NavigationMenuTrigger className={triggerClass}>Buy Crypto</NavigationMenuTrigger>
                                     <NavigationMenuContent className={panelClass}>
                                         <div className="flex flex-col gap-0.5">
                                             <PanelLink
@@ -224,12 +205,10 @@ export default function Header() {
                                 </NavigationMenuItem>
 
                                 <NavigationMenuItem>
-                                    <NavigationMenuTrigger className={triggerClass}>
-                                        Finances
-                                    </NavigationMenuTrigger>
+                                    <NavigationMenuTrigger className={triggerClass}>Finances</NavigationMenuTrigger>
                                     <NavigationMenuContent className={panelClass}>
                                         <div className="flex flex-col gap-0.5">
-                                            {FINANCE_LINKS.map((item) => (
+                                            {FINANCE_LINKS.map(item => (
                                                 <PanelLink key={item.href} {...item} />
                                             ))}
                                         </div>
@@ -237,12 +216,10 @@ export default function Header() {
                                 </NavigationMenuItem>
 
                                 <NavigationMenuItem>
-                                    <NavigationMenuTrigger className={triggerClass}>
-                                        More
-                                    </NavigationMenuTrigger>
+                                    <NavigationMenuTrigger className={triggerClass}>More</NavigationMenuTrigger>
                                     <NavigationMenuContent className={panelClass}>
                                         <div className="flex flex-col gap-0.5">
-                                            {MORE_LINKS.map((item) => (
+                                            {MORE_LINKS.map(item => (
                                                 <PanelLink key={item.href} {...item} />
                                             ))}
                                         </div>
@@ -257,16 +234,10 @@ export default function Header() {
                     <div className="hidden items-center gap-1.5 lg:flex">
                         {!userData ? (
                             <>
-                                <Link
-                                    href="/auth/login"
-                                    className="lnd-btn-ghost px-4 py-2 text-[0.8rem]"
-                                >
+                                <Link href="/auth/login" className="lnd-btn-ghost px-4 py-2 text-[0.8rem]">
                                     Log In
                                 </Link>
-                                <Link
-                                    href="/auth/signup"
-                                    className="lnd-btn-accent px-4 py-2 text-[0.8rem]"
-                                >
+                                <Link href="/auth/signup" className="lnd-btn-accent px-4 py-2 text-[0.8rem]">
                                     Sign Up
                                 </Link>
                             </>
@@ -311,7 +282,7 @@ export default function Header() {
                                                         </div>
                                                     </div>
                                                     <div className="flex flex-col gap-0.5">
-                                                        {ASSET_LINKS.map((item) => (
+                                                        {ASSET_LINKS.map(item => (
                                                             <Link
                                                                 key={item.href}
                                                                 href={item.href}
@@ -335,7 +306,7 @@ export default function Header() {
                                             </NavigationMenuTrigger>
                                             <NavigationMenuContent className={panelClass}>
                                                 <div className="flex flex-col gap-0.5">
-                                                    {ORDER_LINKS.map((item) => (
+                                                    {ORDER_LINKS.map(item => (
                                                         <Link
                                                             key={item.href}
                                                             href={item.href}
@@ -353,98 +324,20 @@ export default function Header() {
                                 <NavigationMenu viewport={false}>
                                     <NavigationMenuList>
                                         <NavigationMenuItem>
-                                            <NavigationMenuTrigger className="h-9 w-9 rounded-full! bg-transparent p-0! hover:bg-lnd-surface-2 focus:bg-lnd-surface-2 data-[state=open]:bg-lnd-surface-2 [&>svg]:hidden">
-                                                <span className="relative flex items-center justify-center">
-                                                    <MessageSquare className="h-[1.1rem] w-[1.1rem]" />
-                                                    {unreadMessages.length > 0 && (
-                                                        <span className="absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-lnd-accent px-1 text-[0.6rem] font-bold text-lnd-accent-fg">
-                                                            {unreadMessages.length}
-                                                        </span>
-                                                    )}
-                                                </span>
-                                            </NavigationMenuTrigger>
-                                            <NavigationMenuContent className="w-90! rounded-2xl! border-lnd-border! bg-lnd-surface! p-2! text-lnd-fg! shadow-xl! shadow-black/10!">
-                                                <div className="flex flex-col gap-2">
-                                                    <div className="flex items-center justify-between rounded-xl bg-lnd-surface-2 px-3.5 py-2.5">
-                                                        <span className="text-sm font-medium text-lnd-fg">
-                                                            {unreadMessages.length} unread
-                                                        </span>
-                                                        <Link
-                                                            href="/account/messages"
-                                                            className="text-xs font-medium text-lnd-accent hover:underline"
-                                                        >
-                                                            View all
-                                                        </Link>
-                                                    </div>
-
-                                                    {isLoadingMessages ? (
-                                                        <div className="flex h-44 items-center justify-center">
-                                                            <Loader />
-                                                        </div>
-                                                    ) : unreadMessages.length === 0 ? (
-                                                        <div className="flex h-44 flex-col items-center justify-center gap-2 text-sm text-lnd-fg-muted">
-                                                            <NoData className="h-16 w-16" />
-                                                            No unread messages
-                                                        </div>
-                                                    ) : (
-                                                        <div className="flex flex-col">
-                                                            {unreadMessages.map((message) => (
-                                                                <button
-                                                                    key={message.id}
-                                                                    onClick={() => {
-                                                                        router.push(`/account/message_detail/${message.id}`)
-                                                                        readMessage(message.id)
-                                                                    }}
-                                                                    className="flex w-full items-start gap-3 rounded-xl p-3 text-left transition-colors hover:bg-lnd-surface-2"
-                                                                >
-                                                                    <BsCircleFill className="mt-1.5 h-2 w-2 shrink-0 text-lnd-accent" />
-                                                                    <span className="flex min-w-0 flex-col gap-1">
-                                                                        <span className="truncate font-Manrope text-sm font-semibold text-lnd-fg">
-                                                                            {message.title}
-                                                                        </span>
-                                                                        <span className="line-clamp-2 text-xs leading-5 text-lnd-fg-muted">
-                                                                            {message.description}
-                                                                        </span>
-                                                                        <span className="text-[0.65rem] text-lnd-fg-muted">
-                                                                            {message.created}
-                                                                        </span>
-                                                                    </span>
-                                                                </button>
-                                                            ))}
-                                                        </div>
-                                                    )}
-
-                                                    <Link
-                                                        href="/account/messages"
-                                                        className="lnd-btn-ghost py-2 text-center text-[0.78rem]"
-                                                    >
-                                                        Open message centre
-                                                    </Link>
-                                                </div>
-                                            </NavigationMenuContent>
-                                        </NavigationMenuItem>
-                                    </NavigationMenuList>
-                                </NavigationMenu>
-
-                                <span className={iconButtonClass}>
-                                    <SwapTheme />
-                                </span>
-
-                                <NavigationMenu viewport={false}>
-                                    <NavigationMenuList>
-                                        <NavigationMenuItem>
-                                            <NavigationMenuTrigger className="h-9 w-9 rounded-full! bg-transparent p-0! hover:bg-lnd-surface-2 focus:bg-lnd-surface-2 data-[state=open]:bg-lnd-surface-2 [&>svg]:hidden">
+                                            <NavigationMenuTrigger className="h-9 w-9 rounded-full! p-0! hover:bg-lnd-surface-2 focus:bg-lnd-surface-2 data-[state=open]:bg-lnd-surface-2 [&>svg]:hidden">
                                                 <Globe className="h-4 w-4" />
                                             </NavigationMenuTrigger>
-                                            <NavigationMenuContent className="w-[32rem]! rounded-2xl! border-lnd-border! bg-lnd-surface! p-5! text-lnd-fg! shadow-xl! shadow-black/10!">
+                                            <NavigationMenuContent className="w-lg! rounded-2xl! border-lnd-border! bg-lnd-surface! p-5! text-lnd-fg! shadow-xl! shadow-black/10!">
                                                 <div className="mb-5">
                                                     <h3 className="db-section-title mb-3">Language</h3>
                                                     <div className="grid grid-cols-3 gap-2">
-                                                        {LANGUAGES.map((language) => (
+                                                        {LANGUAGES.map(language => (
                                                             <button
                                                                 key={language.code}
                                                                 onClick={() => {
-                                                                    updateLanguageMutation({ language: language.code }).then(() => router.refresh())
+                                                                    updateLanguageMutation({
+                                                                        language: language.code,
+                                                                    }).then(() => router.refresh());
                                                                 }}
                                                                 className={`rounded-xl border px-3 py-2 text-left text-xs transition-colors ${
                                                                     userData.language === language.code
@@ -461,11 +354,13 @@ export default function Header() {
                                                     <h3 className="db-section-title mb-3">Currency</h3>
                                                     <ScrollArea className="h-48">
                                                         <div className="grid grid-cols-4 gap-2">
-                                                            {Object.keys(conversionRates).map((currencyCode) => (
+                                                            {Object.keys(conversionRates).map(currencyCode => (
                                                                 <button
                                                                     key={currencyCode}
                                                                     onClick={() => {
-                                                                        updateCurrencyMutation({ currency: currencyCode }).then(() => router.refresh())
+                                                                        updateCurrencyMutation({
+                                                                            currency: currencyCode,
+                                                                        }).then(() => router.refresh());
                                                                     }}
                                                                     className={`rounded-xl border px-3 py-2 text-xs transition-colors ${
                                                                         userData.currency === currencyCode
@@ -529,7 +424,7 @@ export default function Header() {
                                                 </div>
 
                                                 <div className="mt-2 flex flex-col gap-0.5">
-                                                    {ACCOUNT_LINKS.map((item) => (
+                                                    {ACCOUNT_LINKS.map(item => (
                                                         <Link
                                                             key={item.href}
                                                             href={item.href}
@@ -551,6 +446,88 @@ export default function Header() {
                                         </NavigationMenuItem>
                                     </NavigationMenuList>
                                 </NavigationMenu>
+
+                                <NavigationMenu viewport={false}>
+                                    <NavigationMenuList>
+                                        <NavigationMenuItem>
+                                            <NavigationMenuTrigger className="h-9 w-9 rounded-full! bg-transparent p-0! hover:bg-lnd-surface-2 focus:bg-lnd-surface-2 data-[state=open]:bg-lnd-surface-2 [&>svg]:hidden">
+                                                <span className="relative flex items-center justify-center">
+                                                    <MessageSquare className="h-[1.1rem] w-[1.1rem]" />
+                                                    {unreadMessages.length > 0 && (
+                                                        <span className="absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-lnd-accent px-1 text-[0.6rem] font-bold text-lnd-accent-fg">
+                                                            {unreadMessages.length}
+                                                        </span>
+                                                    )}
+                                                </span>
+                                            </NavigationMenuTrigger>
+                                            <NavigationMenuContent className="w-90! rounded-2xl! border-lnd-border! bg-lnd-surface! p-2! text-lnd-fg! shadow-xl! shadow-black/10!">
+                                                <div className="flex flex-col gap-2">
+                                                    <div className="flex items-center justify-between rounded-xl bg-lnd-surface-2 px-3.5 py-2.5">
+                                                        <span className="text-sm font-medium text-lnd-fg">
+                                                            {unreadMessages.length} unread
+                                                        </span>
+                                                        <Link
+                                                            href="/account/messages"
+                                                            className="text-xs font-medium text-lnd-accent hover:underline"
+                                                        >
+                                                            View all
+                                                        </Link>
+                                                    </div>
+
+                                                    {isLoadingMessages ? (
+                                                        <div className="flex h-44 items-center justify-center">
+                                                            <Loader />
+                                                        </div>
+                                                    ) : unreadMessages.length === 0 ? (
+                                                        <div className="flex h-44 flex-col items-center justify-center gap-2 text-sm text-lnd-fg-muted">
+                                                            <NoData className="h-16 w-16" />
+                                                            No unread messages
+                                                        </div>
+                                                    ) : (
+                                                        <div className="flex flex-col">
+                                                            {unreadMessages.map(message => (
+                                                                <button
+                                                                    key={message.id}
+                                                                    onClick={() => {
+                                                                        router.push(
+                                                                            `/account/message_detail/${message.id}`,
+                                                                        );
+                                                                        readMessage(message.id);
+                                                                    }}
+                                                                    className="flex w-full items-start gap-3 rounded-xl p-3 text-left transition-colors hover:bg-lnd-surface-2"
+                                                                >
+                                                                    <BsCircleFill className="mt-1.5 h-2 w-2 shrink-0 text-lnd-accent" />
+                                                                    <span className="flex min-w-0 flex-col gap-1">
+                                                                        <span className="truncate font-Manrope text-sm font-semibold text-lnd-fg">
+                                                                            {message.title}
+                                                                        </span>
+                                                                        <span className="line-clamp-2 text-xs leading-5 text-lnd-fg-muted">
+                                                                            {message.description}
+                                                                        </span>
+                                                                        <span className="text-[0.65rem] text-lnd-fg-muted">
+                                                                            {message.created}
+                                                                        </span>
+                                                                    </span>
+                                                                </button>
+                                                            ))}
+                                                        </div>
+                                                    )}
+
+                                                    <Link
+                                                        href="/account/messages"
+                                                        className="lnd-btn-ghost py-2 text-center text-[0.78rem]"
+                                                    >
+                                                        Open message centre
+                                                    </Link>
+                                                </div>
+                                            </NavigationMenuContent>
+                                        </NavigationMenuItem>
+                                    </NavigationMenuList>
+                                </NavigationMenu>
+
+                                <span className={iconButtonClass}>
+                                    <SwapTheme />
+                                </span>
                             </>
                         )}
                     </div>
@@ -562,5 +539,5 @@ export default function Header() {
                 </div>
             </div>
         </header>
-    )
+    );
 }

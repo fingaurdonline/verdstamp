@@ -1,68 +1,67 @@
-"use client"
+"use client";
 import ArchiveUp from "@/components/icons/ArchiveUp";
 import HandMoney from "@/components/icons/HandMoney";
-import { ArrowRight, CreditCard, Eye } from "lucide-react";
-import DropDown from "./components/DropDown";
+import { ChartConfig, ChartContainer } from "@/components/ui/chart";
+import useCryptoList from "@/hooks/useCryptoData";
+import useCurrencies from "@/hooks/useCurrency";
+import { CryptoCurrency } from "@/lib/types";
 import { api } from "@convex/_generated/api";
 import { useMutation, useQuery } from "convex/react";
-import { RxEyeClosed } from "react-icons/rx";
-import { Label, PolarAngleAxis, PolarRadiusAxis, RadialBar, RadialBarChart } from "recharts"
-import {
-    ChartConfig,
-    ChartContainer,
-} from "@/components/ui/chart"
-import { useRouter } from "nextjs-toploader/app";
-import { CryptoCurrency } from "@/lib/types";
-import useCryptoList from "@/hooks/useCryptoData";
+import { ArrowRight, CreditCard, Eye } from "lucide-react";
 import Link from "next/link";
-import useCurrencies from "@/hooks/useCurrency";
+import { useRouter } from "nextjs-toploader/app";
+import { RxEyeClosed } from "react-icons/rx";
+import { Label, PolarAngleAxis, PolarRadiusAxis, RadialBar, RadialBarChart } from "recharts";
+import DropDown from "./components/DropDown";
 
 export default function Overview() {
-    const user = useQuery(api.user.user)
-    const userId = user?.userId
-    const updateUser = useMutation(api.user.updateUser)
-    const spotAccounts = useQuery(api.accounts.view_user_spot_accounts) ?? []
-    const futuresAccount = useQuery(api.accounts.view_user_futures_accounts) ?? []
-    const marginAccount = useQuery(api.accounts.view_user_margin_accounts) ?? []
-    const { data: cryptoData } = useCryptoList()
-    const { data: currency } = useCurrencies()
-    const router = useRouter()
+    const user = useQuery(api.user.user);
+    const userId = user?.userId;
+    const updateUser = useMutation(api.user.updateUser);
+    const spotAccounts = useQuery(api.accounts.view_user_spot_accounts) ?? [];
+    const futuresAccount = useQuery(api.accounts.view_user_futures_accounts) ?? [];
+    const marginAccount = useQuery(api.accounts.view_user_margin_accounts) ?? [];
+    const { data: cryptoData } = useCryptoList();
+    const { data: currency } = useCurrencies();
+    const router = useRouter();
 
     const toggleBalanceVisibility = async () => {
-        if (!user) return
+        if (!user) return;
         try {
-            await updateUser({ balance_visibility: !user.balance_visibility })
+            await updateUser({ balance_visibility: !user.balance_visibility });
         } catch {
-            return
+            return;
         }
-    }
+    };
 
-    const rates = (currency?.data?.conversion_rates ?? {}) as Record<string, number>
+    const rates = (currency?.data?.conversion_rates ?? {}) as Record<string, number>;
     function currencyConvertion(amount: number) {
-        const rate = user?.currency ? rates[user.currency] : undefined
+        const rate = user?.currency ? rates[user.currency] : undefined;
         if (user?.currency == "USD") {
-            return amount
+            return amount;
         }
-        return rate ? amount * rate : amount
+        return rate ? amount * rate : amount;
     }
-    const spot = spotAccounts?.find((acc: any) => acc?.user === userId)
-    const futures = futuresAccount?.find((acc: any) => acc?.user === userId)
-    const margin = marginAccount?.find((acc: any) => acc?.user === userId)
+    const spot = spotAccounts?.find((acc: any) => acc?.user === userId);
+    const futures = futuresAccount?.find((acc: any) => acc?.user === userId);
+    const margin = marginAccount?.find((acc: any) => acc?.user === userId);
 
-    const spotTotal = (spot?.total_asset ?? 0) as number
-    const futuresTotal = (futures?.total_asset ?? 0) as number
-    const marginTotal = (margin?.total_asset ?? 0) as number
+    const spotTotal = (spot?.total_asset ?? 0) as number;
+    const futuresTotal = (futures?.total_asset ?? 0) as number;
+    const marginTotal = (margin?.total_asset ?? 0) as number;
     const total = spotTotal + futuresTotal + marginTotal;
 
     const getCoinPrice = (userCrypto?: string) => {
         if (!userCrypto) return 0;
-        const coin = cryptoData?.data?.data?.find((crypto: CryptoCurrency) => crypto?.name?.toLowerCase() === userCrypto?.toLowerCase());
+        const coin = cryptoData?.data?.data?.find(
+            (crypto: CryptoCurrency) => crypto?.name?.toLowerCase() === userCrypto?.toLowerCase(),
+        );
         const usdPrice = coin?.quote?.USD?.price;
         if (!usdPrice) return 0;
-        return total / usdPrice
+        return total / usdPrice;
     };
 
-    const chartData = [{ total, spot: spotTotal }]
+    const chartData = [{ total, spot: spotTotal }];
     const chartConfig = {
         desktop: {
             label: "total",
@@ -70,7 +69,7 @@ export default function Overview() {
         mobile: {
             label: "spot",
         },
-    } satisfies ChartConfig
+    } satisfies ChartConfig;
 
     const roundToTwoDecimalPlaces = (num: number): number => {
         return Math.round(num * 100) / 100;
@@ -79,12 +78,11 @@ export default function Overview() {
     const roundToFourDecimalPlaces = (num: number): number => {
         return Math.round(num * 10000) / 10000;
     };
-    const percentage = total > 0 ? roundToTwoDecimalPlaces((spotTotal / total) * 100) : 0
+    const percentage = total > 0 ? roundToTwoDecimalPlaces((spotTotal / total) * 100) : 0;
 
     return (
         <div className="flex w-full flex-col gap-5">
             <div>
-                <p className="db-eyebrow">Portfolio</p>
                 <h1 className="db-title mt-1">Overview</h1>
                 <p className="mt-1.5 text-[0.86rem] text-lnd-fg-muted">
                     A snapshot of your balances, allocation and quick actions.
@@ -95,7 +93,8 @@ export default function Overview() {
                 <section className="db-card flex flex-col gap-5 p-5 sm:p-6">
                     <div className="flex flex-wrap items-center gap-2.5">
                         <span className="text-[0.72rem] font-medium uppercase tracking-[0.14em] text-lnd-fg-muted">
-                            Est. Total Assets ({user?.crypto === "tether usdt" ? "USDT" : user?.crypto === "bitcoin" ? "BTC" : "ETH"})
+                            Est. Total Assets (
+                            {user?.crypto === "tether usdt" ? "USDT" : user?.crypto === "bitcoin" ? "BTC" : "ETH"})
                         </span>
                         {user?.balance_visibility === false ? <DropDown /> : null}
                         <button
@@ -150,13 +149,7 @@ export default function Overview() {
                 <section className="db-card hidden flex-col items-center gap-2 p-5 lg:flex">
                     <h2 className="db-section-title">Asset Portfolio</h2>
                     <ChartContainer config={chartConfig} className="h-40 w-full max-w-[15rem]">
-                        <RadialBarChart
-                            data={chartData}
-                            endAngle={180}
-                            innerRadius={65}
-                            outerRadius={115}
-                            cy={130}
-                        >
+                        <RadialBarChart data={chartData} endAngle={180} innerRadius={65} outerRadius={115} cy={130}>
                             <PolarAngleAxis
                                 type="number"
                                 scale="linear"
@@ -183,10 +176,12 @@ export default function Overview() {
                                                         y={(viewBox.cy || 0) - 10}
                                                         className="fill-lnd-fg font-Manrope text-3xl font-extrabold"
                                                     >
-                                                        {user?.balance_visibility === false ? `${percentage}%` : "********"}
+                                                        {user?.balance_visibility === false
+                                                            ? `${percentage}%`
+                                                            : "********"}
                                                     </tspan>
                                                 </text>
-                                            )
+                                            );
                                         }
                                     }}
                                 />
@@ -200,9 +195,7 @@ export default function Overview() {
                             />
                         </RadialBarChart>
                     </ChartContainer>
-                    <p className="text-[0.75rem] text-lnd-fg-muted">
-                        Spot share of total assets
-                    </p>
+                    <p className="text-[0.75rem] text-lnd-fg-muted">Spot share of total assets</p>
                 </section>
             </div>
 
@@ -244,5 +237,5 @@ export default function Overview() {
                 </Link>
             </div>
         </div>
-    )
+    );
 }

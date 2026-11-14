@@ -3,6 +3,7 @@ import AccountLayoutClient from "./AccountLayoutClient";
 
 export const metadata: Metadata = {
   title: "Account",
+  alternates: { canonical: "/account" },
   description: "Manage your Verdstamp account, security and verification settings.",
   robots: {
     index: false,

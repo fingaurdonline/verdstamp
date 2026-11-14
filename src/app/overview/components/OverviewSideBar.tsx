@@ -59,7 +59,6 @@ export default function OverViewSidebar() {
     return (
         <aside className="hidden w-60 shrink-0 lg:flex xl:w-64">
             <div className="db-card h-fit w-full p-2.5">
-                <p className="db-eyebrow px-3 pb-2 pt-2">Portfolio</p>
                 <nav className="flex flex-col gap-0.5" aria-label="Overview navigation">
                     <OverViewActivelink href="/overview">
                         <LayoutDashboard className="h-[1.05rem] w-[1.05rem] shrink-0" strokeWidth={1.7} />
