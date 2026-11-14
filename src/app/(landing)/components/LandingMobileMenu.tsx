@@ -1,31 +1,26 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { createPortal } from "react-dom"
-import Link from "next/link"
-import { useMutation } from "convex/react"
-import { api } from "@convex/_generated/api"
-import { useRouter } from "nextjs-toploader/app"
-import { useTheme } from "next-themes"
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from "@/components/ui/accordion"
-import { Switch } from "@/components/ui/switch"
-import { Check, ChevronDown, Globe, Menu, X } from "lucide-react"
-import LandingBrand from "./LandingBrand"
-import { ACCOUNT_LINKS, LANGUAGES, NAV_GROUPS, NEWS_HREF } from "./landingNav"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Switch } from "@/components/ui/switch";
+import { api } from "@convex/_generated/api";
+import { useMutation } from "convex/react";
+import { Check, ChevronDown, Globe, Menu, X } from "lucide-react";
+import { useTheme } from "next-themes";
+import Link from "next/link";
+import { useRouter } from "nextjs-toploader/app";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import LandingBrand from "./LandingBrand";
+import { ACCOUNT_LINKS, LANGUAGES, NAV_GROUPS, NEWS_HREF } from "./landingNav";
 
 type Props = {
-    open: boolean
-    onOpenChange: (open: boolean) => void
-    loggedIn: boolean
-    user?: any
-    currenciesRates: Record<string, number>
-    onLogout: () => void
-}
+    open: boolean;
+    onOpenChange: (open: boolean) => void;
+    loggedIn: boolean;
+    user?: any;
+    currenciesRates: Record<string, number>;
+    onLogout: () => void;
+};
 
 const PORTFOLIO = [
     {
@@ -60,52 +55,45 @@ const PORTFOLIO = [
             { label: "Loan", href: "/overview/history/loan" },
         ],
     },
-]
+];
 
-export default function LandingMobileMenu({
-    open,
-    onOpenChange,
-    loggedIn,
-    user,
-    currenciesRates,
-    onLogout,
-}: Props) {
-    const router = useRouter()
-    const { resolvedTheme, setTheme } = useTheme()
-    const updateLanguage = useMutation(api.user.update_language)
-    const updateCurrency = useMutation(api.user.update_currency)
-    const swapTheme = useMutation(api.user.swap_theme)
+export default function LandingMobileMenu({ open, onOpenChange, loggedIn, user, currenciesRates, onLogout }: Props) {
+    const router = useRouter();
+    const { resolvedTheme, setTheme } = useTheme();
+    const updateLanguage = useMutation(api.user.update_language);
+    const updateCurrency = useMutation(api.user.update_currency);
+    const swapTheme = useMutation(api.user.swap_theme);
 
-    const [langOpen, setLangOpen] = useState(false)
-    const [currencyOpen, setCurrencyOpen] = useState(false)
-    const [mounted, setMounted] = useState(false)
+    const [langOpen, setLangOpen] = useState(false);
+    const [currencyOpen, setCurrencyOpen] = useState(false);
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        setMounted(true)
-    }, [])
+        setMounted(true);
+    }, []);
 
     useEffect(() => {
-        if (!open) return
-        const originalOverflow = document.body.style.overflow
-        document.body.style.overflow = "hidden"
+        if (!open) return;
+        const originalOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
         const handleKey = (event: KeyboardEvent) => {
-            if (event.key === "Escape") onOpenChange(false)
-        }
-        window.addEventListener("keydown", handleKey)
+            if (event.key === "Escape") onOpenChange(false);
+        };
+        window.addEventListener("keydown", handleKey);
         return () => {
-            document.body.style.overflow = originalOverflow
-            window.removeEventListener("keydown", handleKey)
-        }
-    }, [open, onOpenChange])
+            document.body.style.overflow = originalOverflow;
+            window.removeEventListener("keydown", handleKey);
+        };
+    }, [open, onOpenChange]);
 
-    const close = () => onOpenChange(false)
+    const close = () => onOpenChange(false);
 
     const toggleTheme = () => {
-        const next = resolvedTheme === "light" ? "dark" : "light"
+        const next = resolvedTheme === "light" ? "dark" : "light";
         swapTheme({ theme: next })
             .catch(() => {})
-            .finally(() => setTheme(next))
-    }
+            .finally(() => setTheme(next));
+    };
 
     return (
         <>
@@ -143,9 +131,13 @@ export default function LandingMobileMenu({
                                 {/* portfolio (logged in) */}
                                 {loggedIn && (
                                     <div className="flex flex-col gap-2">
-                                        <p className="px-1 text-[0.7rem] uppercase tracking-wider text-lnd-fg-muted">
-                                            Portfolio
-                                        </p>
+                                        <Link
+                                            href="/overview"
+                                            onClick={close}
+                                            className="rounded-lg px-3 py-2.5 text-[0.95rem] text-lnd-fg transition-colors hover:bg-lnd-surface-2"
+                                        >
+                                            Overview
+                                        </Link>
                                         <Accordion type="multiple" className="w-full border-t border-lnd-border">
                                             {PORTFOLIO.map((section, i) => (
                                                 <AccordionItem
@@ -157,7 +149,7 @@ export default function LandingMobileMenu({
                                                         {section.label}
                                                     </AccordionTrigger>
                                                     <AccordionContent className="flex flex-col gap-1 pb-3 pl-2">
-                                                        {section.links.map((item) => (
+                                                        {section.links.map(item => (
                                                             <Link
                                                                 key={item.href}
                                                                 href={item.href}
@@ -202,7 +194,7 @@ export default function LandingMobileMenu({
                                                 {group.label}
                                             </AccordionTrigger>
                                             <AccordionContent className="flex flex-col gap-1 pb-3 pl-2">
-                                                {group.items.map((item) => (
+                                                {group.items.map(item => (
                                                     <Link
                                                         key={item.href}
                                                         href={item.href}
@@ -227,7 +219,7 @@ export default function LandingMobileMenu({
                                 {/* language */}
                                 <div className="flex flex-col gap-2">
                                     <button
-                                        onClick={() => setLangOpen((v) => !v)}
+                                        onClick={() => setLangOpen(v => !v)}
                                         className="flex items-center justify-between rounded-xl border border-lnd-border px-4 py-3"
                                     >
                                         <span className="flex items-center gap-2.5 text-[0.95rem]">
@@ -243,14 +235,14 @@ export default function LandingMobileMenu({
                                     </button>
                                     {langOpen && (
                                         <div className="grid grid-cols-2 gap-2 px-1">
-                                            {LANGUAGES.map((lang) => (
+                                            {LANGUAGES.map(lang => (
                                                 <button
                                                     key={lang.code}
                                                     onClick={() => {
                                                         updateLanguage({ language: lang.code }).then(() =>
                                                             router.refresh(),
-                                                        )
-                                                        setLangOpen(false)
+                                                        );
+                                                        setLangOpen(false);
                                                     }}
                                                     className={`rounded-xl border px-3 py-2 text-sm transition-colors ${
                                                         user?.language === lang.code
@@ -268,7 +260,7 @@ export default function LandingMobileMenu({
                                 {/* currency */}
                                 <div className="flex flex-col gap-2">
                                     <button
-                                        onClick={() => setCurrencyOpen((v) => !v)}
+                                        onClick={() => setCurrencyOpen(v => !v)}
                                         className="flex items-center justify-between rounded-xl border border-lnd-border px-4 py-3"
                                     >
                                         <span className="text-[0.95rem]">Currency</span>
@@ -281,14 +273,12 @@ export default function LandingMobileMenu({
                                     </button>
                                     {currencyOpen && (
                                         <div className="max-h-56 overflow-y-auto rounded-xl border border-lnd-border">
-                                            {Object.keys(currenciesRates ?? {}).map((code) => (
+                                            {Object.keys(currenciesRates ?? {}).map(code => (
                                                 <button
                                                     key={code}
                                                     onClick={() => {
-                                                        updateCurrency({ currency: code }).then(() =>
-                                                            router.refresh(),
-                                                        )
-                                                        setCurrencyOpen(false)
+                                                        updateCurrency({ currency: code }).then(() => router.refresh());
+                                                        setCurrencyOpen(false);
                                                     }}
                                                     className="flex w-full items-center justify-between border-b border-lnd-border px-4 py-2.5 text-sm last:border-b-0"
                                                 >
@@ -313,10 +303,7 @@ export default function LandingMobileMenu({
                                 {/* theme */}
                                 <div className="flex items-center justify-between rounded-xl border border-lnd-border px-4 py-3">
                                     <span className="text-[0.95rem]">Dark mode</span>
-                                    <Switch
-                                        checked={resolvedTheme === "dark"}
-                                        onCheckedChange={toggleTheme}
-                                    />
+                                    <Switch checked={resolvedTheme === "dark"} onCheckedChange={toggleTheme} />
                                 </div>
 
                                 {/* auth / account */}
@@ -325,7 +312,7 @@ export default function LandingMobileMenu({
                                         <p className="px-1 pb-1 text-[0.7rem] uppercase tracking-wider text-lnd-fg-muted">
                                             Account
                                         </p>
-                                        {ACCOUNT_LINKS.map((item) => (
+                                        {ACCOUNT_LINKS.map(item => (
                                             <Link
                                                 key={item.href}
                                                 href={item.href}
@@ -337,8 +324,8 @@ export default function LandingMobileMenu({
                                         ))}
                                         <button
                                             onClick={() => {
-                                                onLogout()
-                                                close()
+                                                onLogout();
+                                                close();
                                             }}
                                             className="mt-2 rounded-full border border-lnd-border px-4 py-3 text-[0.95rem] font-medium text-lnd-fg-muted transition-colors hover:bg-lnd-surface-2 hover:text-lnd-fg"
                                         >
@@ -369,5 +356,5 @@ export default function LandingMobileMenu({
                     document.body,
                 )}
         </>
-    )
+    );
 }
