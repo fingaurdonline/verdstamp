@@ -1,6 +1,5 @@
 "use client";
 
-import LandingBrand from "@/app/(landing)/components/LandingBrand";
 import { ACCOUNT_LINKS } from "@/app/(landing)/components/landingNav";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { signOut, useSession } from "@/lib/auth-client";
@@ -21,7 +20,6 @@ import {
     Ticket,
     UserCircle,
     Wallet,
-    X,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -159,17 +157,6 @@ export default function DropDownAccountMobile() {
                         aria-label="Account menu"
                         className="fixed inset-x-0 top-0 z-[120] flex h-dvh flex-col bg-lnd-bg text-lnd-fg lg:hidden"
                     >
-                        <div className="flex h-16 shrink-0 items-center justify-between border-b border-lnd-border px-4">
-                            <LandingBrand />
-                            <button
-                                onClick={close}
-                                aria-label="Close account menu"
-                                className="flex h-9 w-9 items-center justify-center rounded-full border border-lnd-border transition-colors hover:bg-lnd-surface-2"
-                            >
-                                <X className="h-5 w-5" />
-                            </button>
-                        </div>
-
                         <div className="min-h-0 flex-1 touch-pan-y overflow-y-auto overscroll-contain [-webkit-overflow-scrolling:touch]">
                             <div className="flex flex-col gap-5 px-4 pb-[calc(2rem+env(safe-area-inset-bottom))] pt-5">
                                 <div className="db-card p-4">
@@ -205,23 +192,29 @@ export default function DropDownAccountMobile() {
                                 </div>
 
                                 <div className="flex flex-col gap-2">
-                                    <p className="db-eyebrow px-1">Portfolio</p>
                                     <Accordion type="multiple" defaultValue={["spot"]} className="db-card px-2 py-1">
                                         <Link
-                                            href="/overview/trade/spot/BTC/USDT"
+                                            href="/overview"
                                             onClick={close}
                                             className="flex items-center gap-3 rounded-xl px-1 py-3 text-[0.9rem] font-Manrope font-medium text-lnd-fg-muted transition-colors hover:bg-lnd-surface-2 hover:text-lnd-fg"
                                         >
-                                            <CandlestickChart className="h-4 w-4" strokeWidth={1.7} />
-                                            Trade
+                                            <LayoutDashboard className="h-4 w-4" strokeWidth={1.7} />
+                                            Overview
                                         </Link>
                                         {PORTFOLIO.map(section => {
                                             const Icon = section.icon;
                                             return (
-                                                <AccordionItem key={section.value} value={section.value} className="border-b-0">
+                                                <AccordionItem
+                                                    key={section.value}
+                                                    value={section.value}
+                                                    className="border-b-0"
+                                                >
                                                     <AccordionTrigger className="py-3 text-[0.9rem] font-Manrope font-medium text-lnd-fg hover:no-underline [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-lnd-fg-muted">
                                                         <span className="flex items-center gap-3">
-                                                            <Icon className="h-4 w-4 text-lnd-fg-muted" strokeWidth={1.7} />
+                                                            <Icon
+                                                                className="h-4 w-4 text-lnd-fg-muted"
+                                                                strokeWidth={1.7}
+                                                            />
                                                             {section.label}
                                                         </span>
                                                     </AccordionTrigger>
