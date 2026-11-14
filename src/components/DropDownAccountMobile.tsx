@@ -96,7 +96,8 @@ export default function DropDownAccountMobile() {
     const [mounted, setMounted] = useState(false);
 
     const userId = session?.user?.id;
-    const userMessages = allMessages?.filter((message: any) => message?.userId === userId) ?? [];
+    // view_messages already scopes results to the signed-in user.
+    const userMessages = allMessages ?? [];
     const unreadCount = userMessages.filter((message: any) => message?.read === false).length;
 
     const spot = (spotAccounts?.find((acc: any) => acc?.user === user?.userId)?.total_asset ?? 0) as number;

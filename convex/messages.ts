@@ -1,5 +1,6 @@
 import { v } from "convex/values";
-import { mutation, query } from "./_generated/server";
+import type { Id } from "./_generated/dataModel";
+import { internalMutation, mutation, query } from "./_generated/server";
 import { requireUserId } from "./helpers";
 
 export const create_messages = mutation({
@@ -31,15 +32,29 @@ export const create_deposit_messages = mutation({
 
 export const view_messages = query({
   args: {},
-  handler: async (ctx) => await ctx.db.query("messages").collect(),
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) return [];
+
+    return await ctx.db
+      .query("messages")
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
+      .collect();
+  },
 });
 
 export const create_message_details = mutation({
   args: { messageid: v.string(), transactionid: v.string() },
   handler: async (ctx, args) => {
+    const userId = await requireUserId(ctx);
+    const message = await ctx.db.get(args.messageid as Id<"messages">);
+    if (!message || message.userId !== userId) {
+      throw new Error("Message not found");
+    }
+
     return await ctx.db.insert("message_details", {
-      userId: await requireUserId(ctx),
-      messageId: args.messageid as any,
+      userId,
+      messageId: message._id,
       referenceType: "transaction",
       referenceId: args.transactionid,
     });
@@ -49,13 +64,17 @@ export const create_message_details = mutation({
 export const view_message = query({
   args: { id: v.id("messages") },
   handler: async (ctx, args) => {
-    const message = await ctx.db.get(args.id);
-    if (!message) return null;
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) return null;
 
-    const detail = await ctx.db
+    const message = await ctx.db.get(args.id);
+    if (!message || message.userId !== identity.subject) return null;
+
+    const details = await ctx.db
       .query("message_details")
-      .withIndex("by_message", (q) => q.eq("messageId", message._id))
-      .first();
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
+      .collect();
+    const detail = details.find((entry) => entry.messageId === message._id);
 
     return {
       ...message,
@@ -67,18 +86,36 @@ export const view_message = query({
 
 export const view_all_message_detail = query({
   args: {},
-  handler: async (ctx) => await ctx.db.query("message_details").collect(),
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) return [];
+
+    return await ctx.db
+      .query("message_details")
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
+      .collect();
+  },
 });
 
 export const update_message_read = mutation({
   args: { id: v.string() },
   handler: async (ctx, args) => {
-    await ctx.db.patch(args.id as any, { read: true });
-    return await ctx.db.get(args.id as any);
+    const userId = await requireUserId(ctx);
+    const message = await ctx.db.get(args.id as Id<"messages">);
+    if (!message || message.userId !== userId) {
+      throw new Error("Message not found");
+    }
+
+    await ctx.db.patch(message._id, { read: true });
+    return await ctx.db.get(message._id);
   },
 });
 
-export const referral_reward_message = mutation({
+/**
+ * Internal-only: rewards are issued by the backend for a specific user, never
+ * created directly by clients.
+ */
+export const referral_reward_message = internalMutation({
   args: { referredUser: v.string(), referrerUserId: v.string() },
   handler: async (ctx, args) => {
     return await ctx.db.insert("messages", {
@@ -92,7 +129,10 @@ export const referral_reward_message = mutation({
   },
 });
 
-export const referral_rewarded_message = mutation({
+/**
+ * Internal-only: see referral_reward_message.
+ */
+export const referral_rewarded_message = internalMutation({
   args: { id: v.string() },
   handler: async (ctx, args) => {
     return await ctx.db.insert("messages", {
