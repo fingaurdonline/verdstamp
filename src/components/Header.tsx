@@ -32,6 +32,10 @@ const triggerClass =
 const panelClass =
     "w-80! rounded-2xl! border-lnd-border! bg-lnd-surface! p-2! text-lnd-fg! shadow-xl! shadow-black/10!";
 
+// Menus anchored to triggers on the right side must open inward so their
+// panels stay inside the viewport on laptop widths.
+const rightPanelClass = `${panelClass} left-auto! right-0! max-w-[calc(100vw-2rem)]!`;
+
 const iconButtonClass =
     "flex h-9 w-9 items-center justify-center rounded-full border border-lnd-border text-lnd-fg transition-colors hover:bg-lnd-surface-2";
 
@@ -230,8 +234,8 @@ export default function Header() {
                     </div>
                 </div>
 
-                <div className="ml-auto flex items-center gap-2">
-                    <div className="hidden items-center gap-1.5 lg:flex">
+                <div className="ml-auto flex shrink-0 items-center gap-2">
+                    <div className="hidden shrink-0 items-center gap-1.5 lg:flex">
                         {!userData ? (
                             <>
                                 <Link href="/auth/login" className="lnd-btn-ghost px-4 py-2 text-[0.8rem]">
@@ -252,7 +256,7 @@ export default function Header() {
                                                     Assets
                                                 </span>
                                             </NavigationMenuTrigger>
-                                            <NavigationMenuContent className={panelClass}>
+                                            <NavigationMenuContent className={rightPanelClass}>
                                                 <div className="flex flex-col gap-3">
                                                     <div className="rounded-xl border border-lnd-border bg-lnd-surface-2 p-3.5">
                                                         <p className="text-[0.65rem] uppercase tracking-[0.16em] text-lnd-fg-muted">
@@ -304,7 +308,7 @@ export default function Header() {
                                             <NavigationMenuTrigger className={triggerClass}>
                                                 Orders
                                             </NavigationMenuTrigger>
-                                            <NavigationMenuContent className={panelClass}>
+                                            <NavigationMenuContent className={rightPanelClass}>
                                                 <div className="flex flex-col gap-0.5">
                                                     {ORDER_LINKS.map(item => (
                                                         <Link
@@ -329,7 +333,7 @@ export default function Header() {
                                                     <Globe className="h-4 w-4" />
                                                 </span>
                                             </NavigationMenuTrigger>
-                                            <NavigationMenuContent className="w-lg! rounded-2xl! border-lnd-border! bg-lnd-surface! p-5! text-lnd-fg! shadow-xl! shadow-black/10!">
+                                            <NavigationMenuContent className="w-lg! left-auto! right-0! max-w-[calc(100vw-2rem)]! rounded-2xl! border-lnd-border! bg-lnd-surface! p-5! text-lnd-fg! shadow-xl! shadow-black/10!">
                                                 <div className="mb-5">
                                                     <h3 className="db-section-title mb-3">Language</h3>
                                                     <div className="grid grid-cols-3 gap-2">
@@ -394,7 +398,7 @@ export default function Header() {
                                                     className="h-7 w-7"
                                                 />
                                             </NavigationMenuTrigger>
-                                            <NavigationMenuContent className="w-76! rounded-2xl! border-lnd-border! bg-lnd-surface! p-2! text-lnd-fg! shadow-xl! shadow-black/10!">
+                                            <NavigationMenuContent className="w-76! left-auto! right-0! max-w-[calc(100vw-2rem)]! rounded-2xl! border-lnd-border! bg-lnd-surface! p-2! text-lnd-fg! shadow-xl! shadow-black/10!">
                                                 <div className="flex items-center gap-3 rounded-xl bg-lnd-surface-2 p-3">
                                                     <Image
                                                         src="/assets/userlogo.svg"
@@ -462,7 +466,7 @@ export default function Header() {
                                                     )}
                                                 </span>
                                             </NavigationMenuTrigger>
-                                            <NavigationMenuContent className="w-90! rounded-2xl! border-lnd-border! bg-lnd-surface! p-2! text-lnd-fg! shadow-xl! shadow-black/10!">
+                                            <NavigationMenuContent className="w-90! left-auto! right-0! max-w-[calc(100vw-2rem)]! rounded-2xl! border-lnd-border! bg-lnd-surface! p-2! text-lnd-fg! shadow-xl! shadow-black/10!">
                                                 <div className="flex flex-col gap-2">
                                                     <div className="flex items-center justify-between rounded-xl bg-lnd-surface-2 px-3.5 py-2.5">
                                                         <span className="text-sm font-medium text-lnd-fg">
