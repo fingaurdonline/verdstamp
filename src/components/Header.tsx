@@ -325,7 +325,9 @@ export default function Header() {
                                     <NavigationMenuList>
                                         <NavigationMenuItem>
                                             <NavigationMenuTrigger className="h-9 w-9 rounded-full! p-0! hover:bg-lnd-surface-2 focus:bg-lnd-surface-2 data-[state=open]:bg-lnd-surface-2 [&>svg]:hidden">
-                                                <Globe className="h-4 w-4" />
+                                                <span className="flex items-center justify-center">
+                                                    <Globe className="h-4 w-4" />
+                                                </span>
                                             </NavigationMenuTrigger>
                                             <NavigationMenuContent className="w-lg! rounded-2xl! border-lnd-border! bg-lnd-surface! p-5! text-lnd-fg! shadow-xl! shadow-black/10!">
                                                 <div className="mb-5">
