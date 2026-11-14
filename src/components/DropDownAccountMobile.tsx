@@ -1,5 +1,6 @@
 "use client";
 
+import LandingBrand from "@/app/(landing)/components/LandingBrand";
 import { ACCOUNT_LINKS } from "@/app/(landing)/components/landingNav";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { signOut, useSession } from "@/lib/auth-client";
@@ -20,6 +21,7 @@ import {
     Ticket,
     UserCircle,
     Wallet,
+    X,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -157,6 +159,16 @@ export default function DropDownAccountMobile() {
                         aria-label="Account menu"
                         className="fixed inset-x-0 top-0 z-[120] flex h-dvh flex-col bg-lnd-bg text-lnd-fg lg:hidden"
                     >
+                        <div className="flex h-16 shrink-0 items-center justify-between border-b border-lnd-border px-4">
+                            <LandingBrand />
+                            <button
+                                onClick={close}
+                                aria-label="Close account menu"
+                                className="flex h-9 w-9 items-center justify-center rounded-full border border-lnd-border transition-colors hover:bg-lnd-surface-2"
+                            >
+                                <X className="h-5 w-5" />
+                            </button>
+                        </div>
                         <div className="min-h-0 flex-1 touch-pan-y overflow-y-auto overscroll-contain [-webkit-overflow-scrolling:touch]">
                             <div className="flex flex-col gap-5 px-4 pb-[calc(2rem+env(safe-area-inset-bottom))] pt-5">
                                 <div className="db-card p-4">
