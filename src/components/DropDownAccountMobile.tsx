@@ -28,6 +28,7 @@ import Link from "next/link";
 import { useRouter } from "nextjs-toploader/app";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import { HiBadgeCheck } from "react-icons/hi";
 
 const PORTFOLIO = [
     {
@@ -172,6 +173,35 @@ export default function DropDownAccountMobile() {
                         </div>
                         <div className="min-h-0 flex-1 touch-pan-y overflow-y-auto overscroll-contain [-webkit-overflow-scrolling:touch]">
                             <div className="flex flex-col gap-5 px-4 pb-[calc(2rem+env(safe-area-inset-bottom))] pt-5">
+                                <div className="flex items-center gap-3 rounded-xl bg-lnd-surface-2 p-3">
+                                    <Image
+                                        src="/assets/userlogo.svg"
+                                        alt="Avatar"
+                                        width={100}
+                                        height={100}
+                                        className="h-11 w-11"
+                                    />
+                                    <div className="flex min-w-0 flex-col gap-1">
+                                        <span className="truncate font-Manrope text-sm font-semibold text-lnd-fg">
+                                            {maskEmail(user?.email ?? user?.username)}
+                                        </span>
+                                        <span className="flex items-center gap-1.5">
+                                            <span className="rounded-full border border-lnd-border px-2 py-px text-[0.63rem] font-medium text-lnd-fg-muted">
+                                                VIP {user?.vip_status ?? 0}
+                                            </span>
+                                            <span
+                                                className={`flex items-center gap-1 rounded-full px-2 py-px text-[0.63rem] font-medium ${
+                                                    auth?.emailVerified
+                                                        ? "bg-lnd-accent/15 text-lnd-accent"
+                                                        : "bg-lnd-surface text-lnd-fg-muted"
+                                                }`}
+                                            >
+                                                <HiBadgeCheck />
+                                                {auth?.emailVerified ? "Verified" : "Unverified"}
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
                                 <div className="db-card p-4">
                                     <div className="mt-4 rounded-xl bg-lnd-surface-2 p-3.5">
                                         <p className="text-[0.65rem] uppercase tracking-[0.16em] text-lnd-fg-muted">
