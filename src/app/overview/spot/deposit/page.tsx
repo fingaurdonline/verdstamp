@@ -1,59 +1,51 @@
-"use client"
-import { Label } from "@/components/ui/label";
-import { CryptoSelector } from "../components/CryptoSelector";
-import { PiWarningCircleThin } from "react-icons/pi";
+"use client";
 import { Button } from "@/components/ui/button";
-import TotalAsset from "../components/TotalAsset";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import useCryptoList from "@/hooks/useCryptoData";
+import cryptoNetworks, { CryptoNetwork } from "@/lib/cryptoNetworks";
+import { CryptoCurrency } from "@/lib/types";
+import { api } from "@convex/_generated/api";
+import { Icon } from "@iconify/react";
+import { useQuery } from "convex/react";
+import { Check, Copy, QrCode } from "lucide-react";
+import * as React from "react";
 import { BiChevronRight } from "react-icons/bi";
 import { BsQuestionCircleFill } from "react-icons/bs";
-import { Checkbox } from "@/components/ui/checkbox";
-import DepositTable from "../components/DepositTable";
-import { Icon } from "@iconify/react"
-import * as React from "react"
-import { CryptoCurrency } from "@/lib/types";
-import useCryptoList from "@/hooks/useCryptoData";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import cryptoNetworks, { CryptoNetwork } from "@/lib/cryptoNetworks"
-import { Check, Copy, QrCode } from "lucide-react";
-import { useQuery } from "convex/react";
-import { api } from "@convex/_generated/api";
-import { toast } from "sonner";
+import { PiWarningCircleThin } from "react-icons/pi";
 import QRCode from "react-qr-code";
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-} from "@/components/ui/dialog";
+import { toast } from "sonner";
+import { CryptoSelector } from "../components/CryptoSelector";
+import DepositTable from "../components/DepositTable";
+import TotalAsset from "../components/TotalAsset";
 
 export default function Deposit() {
-    const [open, setOpen] = React.useState(false)
-    const [value, setValue] = React.useState("Bitcoin")
-    const [checked, setChecked] = React.useState(false)
-    const [showAddress, setShowAddress] = React.useState(false)
-    const [qrOpen, setQrOpen] = React.useState(false)
-    const [copied, setCopied] = React.useState(false)
-    const { data: cryptoData } = useCryptoList()
-    const crypto = cryptoData?.data?.data?.find((crypto: CryptoCurrency) => crypto?.name === value) as CryptoCurrency
-    const btc = useQuery(api.wallet.myWalletAddressByChain, { chain: "bitcoin" })
-    const eth = useQuery(api.wallet.myWalletAddressByChain, { chain: "ethereum" })
-    const xrp = useQuery(api.wallet.myWalletAddressByChain, { chain: "xrp" })
-    const sol = useQuery(api.wallet.myWalletAddressByChain, { chain: "solana" })
-    const trx = useQuery(api.wallet.myWalletAddressByChain, { chain: "tron" })
-    const bitcoin_wallet = btc ? [btc] : undefined
-    const ethereum_wallet = eth ? [eth] : undefined
-    const ripple_wallet = xrp ? [xrp] : undefined
-    const solana_wallet = sol ? [sol] : undefined
-    const tron_wallet = trx ? [trx] : undefined
+    const [open, setOpen] = React.useState(false);
+    const [value, setValue] = React.useState("Bitcoin");
+    const [checked, setChecked] = React.useState(false);
+    const [showAddress, setShowAddress] = React.useState(false);
+    const [qrOpen, setQrOpen] = React.useState(false);
+    const [copied, setCopied] = React.useState(false);
+    const { data: cryptoData } = useCryptoList();
+    const crypto = cryptoData?.data?.data?.find((crypto: CryptoCurrency) => crypto?.name === value) as CryptoCurrency;
+    const btc = useQuery(api.wallet.myWalletAddressByChain, { chain: "bitcoin" });
+    const eth = useQuery(api.wallet.myWalletAddressByChain, { chain: "ethereum" });
+    const xrp = useQuery(api.wallet.myWalletAddressByChain, { chain: "xrp" });
+    const sol = useQuery(api.wallet.myWalletAddressByChain, { chain: "solana" });
+    const trx = useQuery(api.wallet.myWalletAddressByChain, { chain: "tron" });
+    const bitcoin_wallet = btc ? [btc] : undefined;
+    const ethereum_wallet = eth ? [eth] : undefined;
+    const ripple_wallet = xrp ? [xrp] : undefined;
+    const solana_wallet = sol ? [sol] : undefined;
+    const tron_wallet = trx ? [trx] : undefined;
 
     let cryptoName = "";
     let selectedNetwork: CryptoNetwork[] = [];
 
     // Check if value exists in cryptoNetworks
-    const exists = Object.keys(cryptoNetworks).some(
-        coin => coin.toLocaleLowerCase() === value.toLocaleLowerCase()
-    );
+    const exists = Object.keys(cryptoNetworks).some(coin => coin.toLocaleLowerCase() === value.toLocaleLowerCase());
     if (!exists) {
         selectedNetwork = [{ name: value, token_standard: "", contract_address: "-" }];
     } else {
@@ -62,16 +54,16 @@ export default function Deposit() {
                 cryptoName = coin;
                 // If Bitcoin, set contract_address to bitcoin_wallet[0].address
                 if (coin.toLocaleLowerCase() === "bitcoin" && bitcoin_wallet && bitcoin_wallet[0]?.address) {
-                    selectedNetwork =
-                        [{
+                    selectedNetwork = [
+                        {
                             name: "Bitcoin",
                             type: "Mainnet",
                             symbol: "BTC",
                             token_standard: "",
                             contract_address: bitcoin_wallet[0].address,
-                        }]
-                }
-                else if (coin.toLocaleLowerCase() === "ethereum" && ethereum_wallet && ethereum_wallet[0]?.address) {
+                        },
+                    ];
+                } else if (coin.toLocaleLowerCase() === "ethereum" && ethereum_wallet && ethereum_wallet[0]?.address) {
                     selectedNetwork = [
                         {
                             name: "Ethereum",
@@ -80,9 +72,8 @@ export default function Deposit() {
                             token_standard: "ERC-20",
                             contract_address: ethereum_wallet[0]?.address,
                         },
-                    ]
-                }
-                else if (coin.toLocaleLowerCase() === "xrp" && ripple_wallet && ripple_wallet[0]?.address) {
+                    ];
+                } else if (coin.toLocaleLowerCase() === "xrp" && ripple_wallet && ripple_wallet[0]?.address) {
                     selectedNetwork = [
                         {
                             name: "XRP",
@@ -91,7 +82,7 @@ export default function Deposit() {
                             token_standard: "Ledger",
                             contract_address: ripple_wallet[0]?.address,
                         },
-                    ]
+                    ];
                 } else if (coin.toLocaleLowerCase() === "solana" && solana_wallet && solana_wallet[0]?.address) {
                     selectedNetwork = [
                         {
@@ -100,8 +91,8 @@ export default function Deposit() {
                             symbol: "SOL",
                             token_standard: "SPL",
                             contract_address: solana_wallet[0]?.address,
-                        }
-                    ]
+                        },
+                    ];
                 } else if (coin.toLocaleLowerCase() === "tron" && tron_wallet && tron_wallet[0]?.address) {
                     selectedNetwork = [
                         {
@@ -111,9 +102,12 @@ export default function Deposit() {
                             token_standard: "TRC-20",
                             contract_address: tron_wallet[0]?.address,
                         },
-                    ]
-                }
-                else if (coin.toLocaleLowerCase() === "tether usdt" && ethereum_wallet && ethereum_wallet[0]?.address) {
+                    ];
+                } else if (
+                    coin.toLocaleLowerCase() === "tether usdt" &&
+                    ethereum_wallet &&
+                    ethereum_wallet[0]?.address
+                ) {
                     selectedNetwork = [
                         { name: "Ethereum", token_standard: "ERC-20", contract_address: ethereum_wallet[0]?.address },
                         {
@@ -131,9 +125,8 @@ export default function Deposit() {
                             token_standard: "ERC-20",
                             contract_address: "0x13860bc00cced338ecb27e2a62177e531e317b3f",
                         },
-                    ]
-                }
-                else {
+                    ];
+                } else {
                     selectedNetwork = networks;
                 }
                 break;
@@ -151,9 +144,9 @@ export default function Deposit() {
         } catch {
             toast.error("Could not copy the address. Select it manually.");
         }
-    }
-    const [network, setNetwork] = React.useState<string | undefined>('');
-    const [address, setAddress] = React.useState<string | undefined>('');
+    };
+    const [network, setNetwork] = React.useState<string | undefined>("");
+    const [address, setAddress] = React.useState<string | undefined>("");
 
     React.useEffect(() => {
         const defaultNetwork = selectedNetwork && selectedNetwork.length > 0 ? selectedNetwork[0] : undefined;
@@ -162,16 +155,21 @@ export default function Deposit() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [value]);
 
-const minimal_deposit = crypto?.quote?.USD?.price && crypto.quote.USD.price > 0
-        ? Number((10 / crypto.quote.USD.price).toFixed(8))
-        : 0;
+    const minimal_deposit =
+        crypto?.quote?.USD?.price && crypto.quote.USD.price > 0 ? Number((10 / crypto.quote.USD.price).toFixed(8)) : 0;
 
     return (
         <div className="flex w-full flex-col gap-5">
             <div className="flex items-center gap-2.5">
-                <span className="relative flex h-6 w-fit items-center bg-blend-darken">
-                    <Icon icon="icon-park-solid:hexagon-one" className="relative left-3.5 top-3 z-10 h-4 w-4 text-lnd-fg-muted/50" />
-                    <Icon icon="mdi:stop-circle" className="relative -top-4 z-50 h-6 w-6 rotate-45 text-lnd-accent/30" />
+                <span className="w-fit h-6 bg-blend-darken">
+                    <Icon
+                        icon="icon-park-solid:hexagon-one"
+                        className="w-4 h-4 text-lnd-fg-muted/50 relative left-3.5 top-3 z-10"
+                    />
+                    <Icon
+                        icon="mdi:stop-circle"
+                        className="w-6 h-6 text-lnd-accent/30 rotate-45 relative  -top-4 z-50"
+                    />
                 </span>
                 <h1 className="db-title">Deposit</h1>
             </div>
@@ -189,12 +187,7 @@ const minimal_deposit = crypto?.quote?.USD?.price && crypto.quote.USD.price > 0
                     </div>
 
                     <div className="flex min-w-0 flex-1 flex-col justify-start gap-6">
-                        <CryptoSelector
-                            value={value}
-                            setValue={setValue}
-                            open={open}
-                            setOpen={setOpen}
-                        />
+                        <CryptoSelector value={value} setValue={setValue} open={open} setOpen={setOpen} />
 
                         <div className="flex min-w-0 flex-col gap-3">
                             <Label className="flex items-center gap-2 font-Manrope text-[.87rem] font-bold text-lnd-fg lg:gap-0">
@@ -204,99 +197,120 @@ const minimal_deposit = crypto?.quote?.USD?.price && crypto.quote.USD.price > 0
                                 Generate Deposit Address
                             </Label>
                             <div className="flex items-center gap-1.5">
-                                <span className="font-Manrope text-[.89rem] text-lnd-fg-muted">
-                                    Select Network
-                                </span>
+                                <span className="font-Manrope text-[.89rem] text-lnd-fg-muted">Select Network</span>
                                 <PiWarningCircleThin className="mt-[2px] h-4 w-4 shrink-0 text-lnd-fg-muted" />
                             </div>
                             <RadioGroup
                                 value={network}
-                                onValueChange={(name) => {
+                                onValueChange={name => {
                                     setNetwork(name);
-                                    const selected = selectedNetwork.find((item) => item.name === name);
+                                    const selected = selectedNetwork.find(item => item.name === name);
                                     setAddress(selected?.contract_address);
                                 }}
-                                className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                                className="grid grid-cols-1 gap-2 sm:grid-cols-2"
+                            >
                                 {selectedNetwork?.map((network: CryptoNetwork) => (
-                                    <Label key={network.name} className="flex min-w-0 cursor-pointer items-center gap-2.5 rounded-md border border-muted bg-lnd-surface-2 px-3 py-2.5 text-sm font-semibold transition-all duration-300 hover:border-lnd-accent/55 hover:bg-lnd-accent/10 dark:border-lnd-border dark:bg-lnd-surface dark:text-lnd-fg dark:hover:border-lnd-accent/55 dark:hover:bg-lnd-accent/15 [&:has([data-state=checked])]:border-lnd-accent/55 [&:has([data-state=checked])]:bg-lnd-accent/10 dark:[&:has([data-state=checked])]:border-lnd-accent/55 dark:[&:has([data-state=checked])]:bg-lnd-accent/20">
+                                    <Label
+                                        key={network.name}
+                                        className="flex min-w-0 cursor-pointer items-center gap-2.5 rounded-md border border-muted bg-lnd-surface-2 px-3 py-2.5 text-sm font-semibold transition-all duration-300 hover:border-lnd-accent/55 hover:bg-lnd-accent/10 dark:border-lnd-border dark:bg-lnd-surface dark:text-lnd-fg dark:hover:border-lnd-accent/55 dark:hover:bg-lnd-accent/15 [&:has([data-state=checked])]:border-lnd-accent/55 [&:has([data-state=checked])]:bg-lnd-accent/10 dark:[&:has([data-state=checked])]:border-lnd-accent/55 dark:[&:has([data-state=checked])]:bg-lnd-accent/20"
+                                    >
                                         <RadioGroupItem value={network.name} className="sr-only" />
-                                        <span className="min-w-0 break-words">
-                                            {network.name}
-                                        </span>
-                                        {network?.token_standard !== "" &&
-                                            <span className="text-lnd-fg-muted">
-                                                ({network?.token_standard})
-                                            </span>}
+                                        <span className="min-w-0 break-words">{network.name}</span>
+                                        {network?.token_standard !== "" && (
+                                            <span className="text-lnd-fg-muted">({network?.token_standard})</span>
+                                        )}
                                     </Label>
                                 ))}
                             </RadioGroup>
                         </div>
 
                         <div className="w-full min-w-0 space-y-4">
-                            {
-                                showAddress === false ? (
-                                    <>
-                                        <div className="flex w-full flex-col items-center gap-3 rounded-md border border-dashed border-lnd-border px-4 py-4 dark:bg-lnd-surface sm:px-5 sm:py-5">
-                                            <h2 className="text-center text-[.96rem] font-bold dark:text-lnd-fg">
-                                                <span className="text-amber-600 dark:text-amber-400">{crypto?.symbol}-{crypto?.name}</span> Risk Reminder
-                                            </h2>
-                                            <p className="pb-1 text-center text-[.78rem] leading-relaxed text-lnd-fg-muted dark:text-lnd-fg-muted">
-                                                * The address is ONLY available for <span className="text-amber-500 dark:text-amber-400">{crypto?.symbol}-{crypto?.name}</span> deposit. Deposit of other assets will lead to permanent asset loss.
-                                            </p>
-                                            <span className="flex max-w-full items-start gap-1.5 text-left text-[.782rem] dark:text-lnd-fg-muted">
-                                                <Checkbox
-                                                    checked={checked}
-                                                    onCheckedChange={checked => setChecked(checked === true)}
-                                                    className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center border border-lnd-border hover:border-lnd-accent/55 dark:border-lnd-border dark:hover:border-lnd-accent/55"
-                                                />
-                                                <span className="min-w-0">I&apos;m aware of the risk and would like to proceed</span>
+                            {showAddress === false ? (
+                                <>
+                                    <div className="flex w-full flex-col items-center gap-3 rounded-md border border-dashed border-lnd-border px-4 py-4 dark:bg-lnd-surface sm:px-5 sm:py-5">
+                                        <h2 className="text-center text-[.96rem] font-bold dark:text-lnd-fg">
+                                            <span className="text-amber-600 dark:text-amber-400">
+                                                {crypto?.symbol}-{crypto?.name}
+                                            </span>{" "}
+                                            Risk Reminder
+                                        </h2>
+                                        <p className="pb-1 text-center text-[.78rem] leading-relaxed text-lnd-fg-muted dark:text-lnd-fg-muted">
+                                            * The address is ONLY available for{" "}
+                                            <span className="text-amber-500 dark:text-amber-400">
+                                                {crypto?.symbol}-{crypto?.name}
+                                            </span>{" "}
+                                            deposit. Deposit of other assets will lead to permanent asset loss.
+                                        </p>
+                                        <span className="flex max-w-full items-start gap-1.5 text-left text-[.782rem] dark:text-lnd-fg-muted">
+                                            <Checkbox
+                                                checked={checked}
+                                                onCheckedChange={checked => setChecked(checked === true)}
+                                                className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center border border-lnd-border hover:border-lnd-accent/55 dark:border-lnd-border dark:hover:border-lnd-accent/55"
+                                            />
+                                            <span className="min-w-0">
+                                                I&apos;m aware of the risk and would like to proceed
                                             </span>
-                                        </div>
-                                        <Button onClick={() => setShowAddress(true)} className={checked === true ? "h-auto w-full rounded-[1.25rem] bg-lnd-accent py-3 text-base font-normal text-lnd-accent-fg hover:bg-lnd-accent/90" : "h-auto w-full rounded-[1.25rem] bg-lnd-surface-2 py-3 text-base font-normal text-lnd-fg-muted hover:bg-lnd-surface-2 dark:bg-lnd-surface-2 dark:text-lnd-fg-muted dark:hover:bg-lnd-surface-2"} disabled={checked === false}>
-                                            Confirm
-                                        </Button>
-                                    </>
-                                ) : (
-                                    <div className="space-y-3">
-                                        <span className="text-sm font-medium dark:text-lnd-fg">Deposit To</span>
-                                        <div className="w-full rounded-xl bg-lnd-surface-2 p-3 dark:bg-lnd-surface">
-                                            <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-                                                <p className="min-w-0 flex-1 select-all break-all font-mono text-[0.72rem] leading-relaxed text-lnd-fg-muted dark:text-lnd-fg sm:text-[0.82rem]">
-                                                    {address}
-                                                </p>
-                                                <div className="flex shrink-0 items-center gap-1 self-end sm:self-auto">
-                                                    <Button
-                                                        onClick={() => handleCopy(address)}
-                                                        aria-label="Copy deposit address"
-                                                        className="h-auto w-auto rounded-md bg-lnd-surface-2 p-2 text-lnd-fg-muted hover:bg-lnd-surface-2 dark:bg-lnd-surface-2 dark:text-lnd-fg-muted dark:hover:bg-lnd-surface-2"
-                                                    >
-                                                        {copied ? <Check className="h-4 w-4 text-emerald-500" /> : <Copy className="h-4 w-4" />}
-                                                    </Button>
-                                                    <Button
-                                                        onClick={() => setQrOpen(true)}
-                                                        aria-label="Show deposit address QR code"
-                                                        className="h-auto w-auto rounded-md bg-lnd-surface-2 p-2 text-lnd-fg-muted hover:bg-lnd-surface-2 dark:bg-lnd-surface-2 dark:text-lnd-fg-muted dark:hover:bg-lnd-surface-2"
-                                                    >
-                                                        <QrCode className="h-4 w-4" />
-                                                    </Button>
-                                                </div>
+                                        </span>
+                                    </div>
+                                    <Button
+                                        onClick={() => setShowAddress(true)}
+                                        className={
+                                            checked === true
+                                                ? "h-auto w-full rounded-[1.25rem] bg-lnd-accent py-3 text-base font-normal text-lnd-accent-fg hover:bg-lnd-accent/90"
+                                                : "h-auto w-full rounded-[1.25rem] bg-lnd-surface-2 py-3 text-base font-normal text-lnd-fg-muted hover:bg-lnd-surface-2 dark:bg-lnd-surface-2 dark:text-lnd-fg-muted dark:hover:bg-lnd-surface-2"
+                                        }
+                                        disabled={checked === false}
+                                    >
+                                        Confirm
+                                    </Button>
+                                </>
+                            ) : (
+                                <div className="space-y-3">
+                                    <span className="text-sm font-medium dark:text-lnd-fg">Deposit To</span>
+                                    <div className="w-full rounded-xl bg-lnd-surface-2 p-3 dark:bg-lnd-surface">
+                                        <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+                                            <p className="min-w-0 flex-1 select-all break-all font-mono text-[0.72rem] leading-relaxed text-lnd-fg-muted dark:text-lnd-fg sm:text-[0.82rem]">
+                                                {address}
+                                            </p>
+                                            <div className="flex shrink-0 items-center gap-1 self-end sm:self-auto">
+                                                <Button
+                                                    onClick={() => handleCopy(address)}
+                                                    aria-label="Copy deposit address"
+                                                    className="h-auto w-auto rounded-md bg-lnd-surface-2 p-2 text-lnd-fg-muted hover:bg-lnd-surface-2 dark:bg-lnd-surface-2 dark:text-lnd-fg-muted dark:hover:bg-lnd-surface-2"
+                                                >
+                                                    {copied ? (
+                                                        <Check className="h-4 w-4 text-emerald-500" />
+                                                    ) : (
+                                                        <Copy className="h-4 w-4" />
+                                                    )}
+                                                </Button>
+                                                <Button
+                                                    onClick={() => setQrOpen(true)}
+                                                    aria-label="Show deposit address QR code"
+                                                    className="h-auto w-auto rounded-md bg-lnd-surface-2 p-2 text-lnd-fg-muted hover:bg-lnd-surface-2 dark:bg-lnd-surface-2 dark:text-lnd-fg-muted dark:hover:bg-lnd-surface-2"
+                                                >
+                                                    <QrCode className="h-4 w-4" />
+                                                </Button>
                                             </div>
-                                        </div>
-                                        <div className="flex w-full flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
-                                            <div className="flex min-w-0 items-start gap-2 sm:w-1/2">
-                                                <PiWarningCircleThin className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
-                                                <span className="text-[.78rem] leading-relaxed text-lnd-fg-muted dark:text-lnd-fg-muted">
-                                                    Only send {crypto?.symbol} to this address.
-                                                </span>
-                                            </div>
-                                            <a href="#deposit-records" className="flex items-center gap-1 self-start text-[.78rem] text-lnd-accent hover:text-lnd-accent sm:self-auto">
-                                                <span>Deposit History</span>
-                                                <BiChevronRight className="h-4 w-4" />
-                                            </a>
                                         </div>
                                     </div>
-                                )
-                            }
+                                    <div className="flex w-full flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
+                                        <div className="flex min-w-0 items-start gap-2 sm:w-1/2">
+                                            <PiWarningCircleThin className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
+                                            <span className="text-[.78rem] leading-relaxed text-lnd-fg-muted dark:text-lnd-fg-muted">
+                                                Only send {crypto?.symbol} to this address.
+                                            </span>
+                                        </div>
+                                        <a
+                                            href="#deposit-records"
+                                            className="flex items-center gap-1 self-start text-[.78rem] text-lnd-accent hover:text-lnd-accent sm:self-auto"
+                                        >
+                                            <span>Deposit History</span>
+                                            <BiChevronRight className="h-4 w-4" />
+                                        </a>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -373,5 +387,5 @@ const minimal_deposit = crypto?.quote?.USD?.price && crypto.quote.USD.price > 0
                 </DialogContent>
             </Dialog>
         </div>
-    )
+    );
 }
