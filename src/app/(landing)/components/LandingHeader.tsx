@@ -1,86 +1,80 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import Image from "next/image"
-import { useState } from "react"
-import { useMutation, useQuery } from "convex/react"
-import { api } from "@convex/_generated/api"
-import { useRouter } from "nextjs-toploader/app"
-import { authClient } from "@/lib/auth-client"
-import useCurrencies from "@/hooks/useCurrency"
-import { ExchangeRate } from "@/lib/types"
+import DropDownAccountMobile from "@/components/DropDownAccountMobile";
+import SwapTheme from "@/components/ThemeSwap";
 import {
     NavigationMenu,
     NavigationMenuContent,
     NavigationMenuItem,
     NavigationMenuList,
     NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu"
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
-import { Check, Globe } from "lucide-react"
-import { HiBadgeCheck } from "react-icons/hi"
-import LandingBrand from "./LandingBrand"
-import LandingMobileMenu from "./LandingMobileMenu"
-import SwapTheme from "@/components/ThemeSwap"
-import {
-    ACCOUNT_LINKS,
-    ASSET_LINKS,
-    LANGUAGES,
-    NAV_GROUPS,
-    NEWS_HREF,
-    ORDER_LINKS,
-} from "./landingNav"
+} from "@/components/ui/navigation-menu";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import useCurrencies from "@/hooks/useCurrency";
+import { authClient } from "@/lib/auth-client";
+import { ExchangeRate } from "@/lib/types";
+import { api } from "@convex/_generated/api";
+import { useMutation, useQuery } from "convex/react";
+import { Check, Globe } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "nextjs-toploader/app";
+import { useState } from "react";
+import { HiBadgeCheck } from "react-icons/hi";
+import LandingBrand from "./LandingBrand";
+import LandingMobileMenu from "./LandingMobileMenu";
+import { ACCOUNT_LINKS, ASSET_LINKS, LANGUAGES, NAV_GROUPS, NEWS_HREF, ORDER_LINKS } from "./landingNav";
 
 const panelClass =
-    "w-72! bg-lnd-surface! text-lnd-fg! border-lnd-border! rounded-2xl! shadow-xl! shadow-black/10! p-2!"
+    "w-72! bg-lnd-surface! text-lnd-fg! border-lnd-border! rounded-2xl! shadow-xl! shadow-black/10! p-2!";
 
 function maskEmail(input?: string) {
     try {
-        if (!input || input.length <= 13) return input
-        return `${input.slice(0, 5)}***${input.slice(-5)}`
+        if (!input || input.length <= 13) return input;
+        return `${input.slice(0, 5)}***${input.slice(-5)}`;
     } catch {
-        return input
+        return input;
     }
 }
 
 function round2(num: number) {
-    return Math.round(num * 100) / 100
+    return Math.round(num * 100) / 100;
 }
 
 export default function LandingHeader() {
-    const userData = useQuery(api.user.user)
-    const auth = useQuery(api.auth.getCurrentUser)
-    const spotAccounts = useQuery(api.accounts.view_all_spot_accounts)
-    const futuresAccount = useQuery(api.accounts.view_all_futures_accounts)
-    const marginAccount = useQuery(api.accounts.view_all_margin_accounts)
-    const updateCurrencyMutation = useMutation(api.user.update_currency)
-    const updateLanguageMutation = useMutation(api.user.update_language)
-    const { data: currencies } = useCurrencies()
-    const router = useRouter()
-    const [openMobile, setOpenMobile] = useState(false)
+    const userData = useQuery(api.user.user);
+    const auth = useQuery(api.auth.getCurrentUser);
+    const spotAccounts = useQuery(api.accounts.view_all_spot_accounts);
+    const futuresAccount = useQuery(api.accounts.view_all_futures_accounts);
+    const marginAccount = useQuery(api.accounts.view_all_margin_accounts);
+    const updateCurrencyMutation = useMutation(api.user.update_currency);
+    const updateLanguageMutation = useMutation(api.user.update_language);
+    const { data: currencies } = useCurrencies();
+    const router = useRouter();
+    const [openMobile, setOpenMobile] = useState(false);
 
-    const loggedIn = !!userData
-    const userId = userData?.userId
-    const currenciesRates = (currencies?.data?.conversion_rates ?? {}) as Record<string, number>
+    const loggedIn = !!userData;
+    const userId = userData?.userId;
+    const currenciesRates = (currencies?.data?.conversion_rates ?? {}) as Record<string, number>;
 
-    const spot = (spotAccounts?.find((acc: any) => acc?.user === userId)?.total_asset ?? 0) as number
-    const futures = (futuresAccount?.find((acc: any) => acc?.user === userId)?.total_asset ?? 0) as number
-    const margin = (marginAccount?.find((acc: any) => acc?.user === userId)?.total_asset ?? 0) as number
-    const total = spot + futures + margin
+    const spot = (spotAccounts?.find((acc: any) => acc?.user === userId)?.total_asset ?? 0) as number;
+    const futures = (futuresAccount?.find((acc: any) => acc?.user === userId)?.total_asset ?? 0) as number;
+    const margin = (marginAccount?.find((acc: any) => acc?.user === userId)?.total_asset ?? 0) as number;
+    const total = spot + futures + margin;
 
     function currencyConvertion(amount: number) {
-        if (userData?.currency === "USD" || !userData?.currency) return amount
-        const rate = currenciesRates[userData.currency]
-        return rate ? amount * rate : amount
+        if (userData?.currency === "USD" || !userData?.currency) return amount;
+        const rate = currenciesRates[userData.currency];
+        return rate ? amount * rate : amount;
     }
 
     const logout = async () => {
-        await authClient.signOut()
-        router.push("/auth/login")
-        router.refresh()
-    }
+        await authClient.signOut();
+        router.push("/auth/login");
+        router.refresh();
+    };
 
-    const CURRENCIES: ExchangeRate[] = currencies?.data?.conversion_rates
+    const CURRENCIES: ExchangeRate[] = currencies?.data?.conversion_rates;
 
     return (
         <header className="w-full sticky top-0 z-90 lnd-blur border-b border-lnd-border">
@@ -89,14 +83,14 @@ export default function LandingHeader() {
                 <div className="hidden lg:flex items-center">
                     <NavigationMenu viewport={false} className="justify-start">
                         <NavigationMenuList className="justify-start gap-1">
-                            {NAV_GROUPS.map((group) => (
+                            {NAV_GROUPS.map(group => (
                                 <NavigationMenuItem key={group.label}>
                                     <NavigationMenuTrigger className="h-9 rounded-full! px-3.5 text-[0.85rem] font-Manrope font-medium text-lnd-fg bg-transparent hover:bg-lnd-surface-2 focus:bg-lnd-surface-2 data-[state=open]:bg-lnd-surface-2 outline-none">
                                         {group.label}
                                     </NavigationMenuTrigger>
                                     <NavigationMenuContent className={panelClass}>
                                         <div className="flex flex-col gap-0.5">
-                                            {group.items.map((item) => (
+                                            {group.items.map(item => (
                                                 <Link
                                                     key={item.href}
                                                     href={item.href}
@@ -174,7 +168,7 @@ export default function LandingHeader() {
                                                     </div>
                                                 </div>
                                                 <div className="flex flex-col gap-0.5 px-1">
-                                                    {ASSET_LINKS.map((item) => (
+                                                    {ASSET_LINKS.map(item => (
                                                         <Link
                                                             key={item.href}
                                                             href={item.href}
@@ -199,7 +193,7 @@ export default function LandingHeader() {
                                         </NavigationMenuTrigger>
                                         <NavigationMenuContent className={panelClass}>
                                             <div className="flex flex-col gap-0.5">
-                                                {ORDER_LINKS.map((item) => (
+                                                {ORDER_LINKS.map(item => (
                                                     <Link
                                                         key={item.href}
                                                         href={item.href}
@@ -259,7 +253,7 @@ export default function LandingHeader() {
                                                     </div>
                                                 </div>
                                                 <div className="flex flex-col gap-0.5 px-1">
-                                                    {ACCOUNT_LINKS.map((item) => (
+                                                    {ACCOUNT_LINKS.map(item => (
                                                         <Link
                                                             key={item.href}
                                                             href={item.href}
@@ -283,16 +277,10 @@ export default function LandingHeader() {
                         </div>
                     ) : (
                         <div className="hidden lg:flex items-center gap-2">
-                            <Link
-                                href="/auth/login"
-                                className="lnd-btn-ghost px-5 py-2 text-[0.85rem]"
-                            >
+                            <Link href="/auth/login" className="lnd-btn-ghost px-5 py-2 text-[0.85rem]">
                                 Log In
                             </Link>
-                            <Link
-                                href="/auth/signup"
-                                className="lnd-btn-accent px-5 py-2 text-[0.85rem]"
-                            >
+                            <Link href="/auth/signup" className="lnd-btn-accent px-5 py-2 text-[0.85rem]">
                                 Sign Up
                             </Link>
                         </div>
@@ -311,17 +299,15 @@ export default function LandingHeader() {
                                 <NavigationMenuContent className="w-[560px]! left-auto! right-0! bg-lnd-surface! text-lnd-fg! border-lnd-border! rounded-2xl! shadow-xl! shadow-black/10! p-5!">
                                     <div className="flex flex-col gap-5">
                                         <div>
-                                            <h3 className="text-sm font-Manrope font-semibold text-lnd-fg">
-                                                Language
-                                            </h3>
+                                            <h3 className="text-sm font-Manrope font-semibold text-lnd-fg">Language</h3>
                                             <div className="mt-3 grid grid-cols-4 gap-2">
-                                                {LANGUAGES.map((lang) => (
+                                                {LANGUAGES.map(lang => (
                                                     <button
                                                         key={lang.code}
                                                         onClick={() => {
                                                             updateLanguageMutation({ language: lang.code }).then(() =>
                                                                 router.refresh(),
-                                                            )
+                                                            );
                                                         }}
                                                         className={`rounded-xl border px-3 py-2 text-sm transition-colors ${
                                                             userData?.language === lang.code
@@ -335,9 +321,7 @@ export default function LandingHeader() {
                                             </div>
                                         </div>
                                         <div>
-                                            <h3 className="text-sm font-Manrope font-semibold text-lnd-fg">
-                                                Currency
-                                            </h3>
+                                            <h3 className="text-sm font-Manrope font-semibold text-lnd-fg">Currency</h3>
                                             <ScrollArea className="mt-3 h-40">
                                                 <div className="grid grid-cols-5 gap-2 pb-4">
                                                     {Object.entries(CURRENCIES ?? {})?.map(([currencyCode]) => (
@@ -346,7 +330,7 @@ export default function LandingHeader() {
                                                             onClick={() => {
                                                                 updateCurrencyMutation({
                                                                     currency: currencyCode,
-                                                                }).then(() => router.refresh())
+                                                                }).then(() => router.refresh());
                                                             }}
                                                             className={`flex items-center justify-center gap-1 rounded-xl border px-3 py-2 text-sm transition-colors ${
                                                                 userData?.currency === currencyCode
@@ -375,6 +359,8 @@ export default function LandingHeader() {
                         <SwapTheme />
                     </span>
 
+                    <DropDownAccountMobile />
+
                     {/* Mobile menu trigger + drawer */}
                     <LandingMobileMenu
                         open={openMobile}
@@ -387,5 +373,5 @@ export default function LandingHeader() {
                 </div>
             </div>
         </header>
-    )
+    );
 }

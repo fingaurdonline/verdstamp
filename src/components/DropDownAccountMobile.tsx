@@ -159,7 +159,7 @@ export default function DropDownAccountMobile() {
                         role="dialog"
                         aria-modal="true"
                         aria-label="Account menu"
-                        className="fixed inset-x-0 top-0 z-[120] flex h-dvh flex-col bg-lnd-bg text-lnd-fg lg:hidden"
+                        className="fixed inset-x-0 top-0 z-120 flex h-dvh flex-col bg-lnd-bg text-lnd-fg lg:hidden"
                     >
                         <div className="flex h-16 shrink-0 items-center justify-between border-b border-lnd-border px-4">
                             <LandingBrand />
